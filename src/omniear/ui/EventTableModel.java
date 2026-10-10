@@ -10,7 +10,7 @@ import omniear.model.*;
 /** Encapsulates the bounded dashboard history; CSV itself is never truncated. */
 public final class EventTableModel extends AbstractTableModel {
     private static final long serialVersionUID = 1L;
-    private static final String[] COLUMNS = {"Timestamp (UTC)", "Source", "Audio time (s)", "Detected category", "Priority", "Severity", "Vote share", "RMS", "Outcome"};
+    private static final String[] COLUMNS = {"Timestamp (UTC)", "Source", "Audio time (s)", "Detected category", "Priority", "Severity", "Vote share", "RMS", "Outcome", "Distance"};
     private static final DateTimeFormatter TIME = DateTimeFormatter.ofPattern("uuuu-MM-dd HH:mm:ss.SSS").withZone(ZoneOffset.UTC);
     private final transient List<SoundEvent> events = new ArrayList<>();
     public EventTableModel(List<SoundEvent> initial) { events.addAll(initial); }
@@ -24,7 +24,7 @@ public final class EventTableModel extends AbstractTableModel {
     @Override public int getRowCount() { return events.size(); }
     @Override public int getColumnCount() { return COLUMNS.length; }
     @Override public String getColumnName(int column) { return COLUMNS[column]; }
-    @Override public Class<?> getColumnClass(int column) { return column == 2 || column == 6 || column == 7 ? Double.class : String.class; }
+    @Override public Class<?> getColumnClass(int column) { return column == 2 || column == 6 || column == 7 || column == 9 ? Double.class : String.class; }
     @Override public Object getValueAt(int row, int column) {
         SoundEvent event = events.get(row);
         return switch (column) {
@@ -36,9 +36,11 @@ public final class EventTableModel extends AbstractTableModel {
             case 5 -> event.priority().severity();
             case 6 -> event.category() == null ? null : event.voteShare();
             case 7 -> event.rms();
+            case 9 -> event.category() == null ? null : event.nearestDistance();
             default -> event.status().name().replace('_', ' ');
         };
     }
+    public long count(omniear.alerts.Priority priority) { return events.stream().filter(e -> e.priority() == priority).count(); }
     public String statistics() {
         long alerts = events.stream().filter(SoundEvent::isAlert).count();
         StringBuilder text = new StringBuilder("<html>History (last ≤1,000): " + events.size() + " events · " + alerts + " alerts");

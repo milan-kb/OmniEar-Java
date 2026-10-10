@@ -17,6 +17,13 @@ Install a full **JDK 21** and make `java` available on PATH. A graphical desktop
 and OS microphone permission are needed for live capture; headless WAV analysis
 and training also work. No Maven, Gradle, downloads or dependencies are required.
 
+On CachyOS/Arch with fish, install a permanent JDK (do not use a `/tmp` JDK):
+
+```fish
+sudo pacman -S --needed jdk21-openjdk
+fish_add_path /usr/lib/jvm/java-21-openjdk/bin
+```
+
 Run these commands **inside `OmniEar-Java/`**, on Linux, macOS or Windows:
 
 ```sh
@@ -45,6 +52,8 @@ java Build.java run --data /path/to/runtime-data --training /path/to/labeled-wav
 java -cp build/classes omniear.Main --train /path/to/labeled-wavs
 java -cp build/classes omniear.Main --analyze /path/to/recording.wav --training /path/to/labeled-wavs
 java -cp build/classes omniear.Main --classify /path/to/clip.wav --training /path/to/labeled-wavs
+java -cp build/classes omniear.Main --evaluate /path/to/held-out --training /path/to/labeled-wavs
+java -cp build/classes omniear.Main --mic-test
 java -jar build/OmniEar.jar --help
 ```
 
@@ -54,19 +63,32 @@ invalid input, missing required training coverage or an I/O error.
 
 ## Dashboard workflow
 
+The dark Swing interface has four tabs: **Dashboard**, **WAV Testing**,
+**Training**, and **Alert History** (Alt+1 through Alt+4). The Dashboard's
+signal/event divider can be dragged; long training content and tables scroll.
+The design uses a flat charcoal palette, readable standard fonts, teal readiness
+indicators, and text plus severity colors. No third-party UI library is used.
+
 1. **Train first** for classification, or start without training to inspect RMS
    anomalies. The missing-model state and per-category WAV counts are visible.
-2. **Start microphone** opens the laptop's OS default input. Stay quiet for the
+2. **Start monitoring** opens the laptop's OS default input. Stay quiet for the
    first two seconds. RMS, rolling baseline, threshold, elapsed audio time and
    the actual last 100 ms waveform update live. **Stop** closes the microphone.
-3. **Import WAV** runs the same gated detector as the microphone. Files are
+   **Test microphone · 5 s** checks input RMS/peak and reports quiet/clipped audio;
+   it stops automatically and saves no audio or events. Stop also cancels it.
+3. In **WAV Testing**, **Analyze WAV** runs the same gated detector as the microphone. Files are
    analyzed faster than real time, not played back; timing uses sample offsets.
    The first two seconds calibrate. A very short or constantly loud file may
    correctly produce no Stage 1 event.
-4. **Classify WAV clip** explicitly bypasses Stage 1 and uses the loudest 2.5 s
+4. **Classify WAV** explicitly bypasses Stage 1 and uses the loudest 2.5 s
    window. Use this for short isolated sounds without a quiet calibration prelude.
    Its source is marked `[clip; Stage 1 bypass]`; baseline/threshold are zero,
-   rather than fabricated calibration values. It is enabled only when trained.
+    rather than fabricated calibration values. It is enabled only when trained.
+   The result includes vote share, nearest standardized feature distance, duration,
+   short-clip padding and exact-match diagnostics. Lower distance means closer
+   training features, not a calibrated similarity probability.
+   **Evaluate held-out folder** tests separate labeled recordings and reports
+   overlap exclusions, per-file predictions and a confusion matrix; see [DATASETS.md](DATASETS.md).
 5. **Detected events** includes alerts, suppressed background/low-vote outcomes
    and unclassified anomalies. **Alert history** filters to emitted P0/P1/P4
    alerts. Tables show UTC timestamps, audio offsets, category, severity, RMS,
@@ -84,7 +106,10 @@ at once. Java validates staged copies, extracts features and rebuilds k-NN in a
 background worker. Original files are never changed. The copies persist in the
 **active training folder**, named by SHA-256 to avoid repeated imports. A byte-
 identical WAV already imported under another category is rejected as conflicting.
-Silent, malformed or unsupported examples are reported, not replaced.
+Silent, malformed or unsupported examples are reported, not replaced. Five
+per-class readiness rows, an import/reload log and progress indicator explain
+what is missing. Reload also deduplicates manually named WAVs and refuses
+conflicting byte-identical labels rather than silently biasing k-NN votes.
 
 At least one usable, non-silent recording is required for **every category**,
 including background, before predictions are enabled. One per class is only a
@@ -115,8 +140,8 @@ training and inference always use the same extractor.
 The upstream Keras head expects 3,072 YAMNet embedding features, not these Java
 features. Its HDF5 weights, TensorFlow semantic-fusion logic and upstream
 evaluation numbers **cannot be reused as a Java k-NN model or evaluation**.
-Upstream references ESC-50, SESA and NIGENS; obtain any datasets separately,
-check their licenses and curate labels. This application downloads none.
+Verified public download links, licenses, label mappings and split preparation
+for FSD50K, ESC-50 and NIGENS are in [DATASETS.md](DATASETS.md).
 
 ## Detection and classification
 
@@ -168,7 +193,7 @@ same split; do not treat training-set matches as classification accuracy.
 
 ```text
 omniear.Main
-  ui.Dashboard / TrainingPanel / WaveformPanel / EventTableModel
+  ui.Dashboard / TrainingPanel / WavTestingPanel / WaveformPanel / EventTableModel
         │                           │
   detection.MonitorService    model.TrainingRepository
         │                           │
@@ -197,6 +222,8 @@ there is no unbounded inference queue. The microphone line has a half-second
 buffer. Large workloads or slow disks can overrun that buffer; separate bounded
 inference/storage workers would be the next step if measured latency requires it.
 Training is disabled during monitoring so model changes cannot race a session.
+`HeldOutEvaluation` owns leakage checks and evaluation; `DarkTheme` owns Swing
+colors/typography. Neither changes the detector, FFT/MFCC or k-NN algorithms.
 
 ## Audio, persistence and cleanup
 
@@ -241,19 +268,23 @@ blocking-source stop, actual WAV→features→k-NN→CSV integration and Swing r
 on the EDT. No third-party test framework is used.
 
 `ui-test` displays an actual Swing window, loads mechanical test fixtures, analyzes
-a WAV, checks event-table updates, disposes the window and verifies persisted
-history/lock release. It saves a component render to `build/ui-smoke.png`; it does
+a WAV, classifies an unseen mechanical recording, checks error recovery, priority
+alerts, keyboard tab navigation, event-table updates and persisted history/lock
+release. It saves four component renders to `build/ui-tab-0.png` through
+`build/ui-tab-3.png`; it does
 not capture other desktop windows or require a screen-sharing permission portal.
 Test tones/feature vectors are temporary **algorithm-mechanics fixtures only**:
 they are not real acoustic training data, are not bundled with the application,
 and do not measure classification accuracy.
 
-Verified here with Temurin JDK 21 on Linux: warning-free compilation, executable
-regression/integration suite and real-display Swing smoke test. Live microphone
-quality and real-world recognition still require a manual laptop rehearsal:
+Verified here with OpenJDK 21 on Linux: warning-free compilation, **208 regression
+checks**, real-display Swing smoke test and an actual five-second Java Sound input
+test. The input test detected clipping; lower OS input gain and rehearse on the
+intended laptop. Real-world recognition still requires a labeled evaluation:
 check OS input/permissions, calibrate quietly, play safe licensed test recordings,
 verify Stop/restart and CSV reload. There is no claim of verified semantic
 recognition without a real, held-out dataset.
+See [TEST_RESULTS.md](TEST_RESULTS.md) for exact verification scope.
 
 ## Limitations
 

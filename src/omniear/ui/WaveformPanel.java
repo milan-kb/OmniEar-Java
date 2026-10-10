@@ -8,9 +8,9 @@ public final class WaveformPanel extends JPanel {
     private static final long serialVersionUID = 1L;
     private float[] samples = new float[0];
     public WaveformPanel() {
-        setPreferredSize(new Dimension(900, 160));
+        setPreferredSize(new Dimension(900, 85));
         setBackground(new Color(16, 24, 38));
-        getAccessibleContext().setAccessibleName("Live waveform, last 100 milliseconds, normalized full-scale amplitude");
+        getAccessibleContext().setAccessibleName("Audio waveform, normalized full-scale amplitude");
     }
     public void setSamples(float[] samples) {
         if (!SwingUtilities.isEventDispatchThread()) throw new IllegalStateException("Waveform updates require EDT");
@@ -28,7 +28,7 @@ public final class WaveformPanel extends JPanel {
             g.drawString("+1.0", 8, middle - amplitude + 5);
             g.drawString("0", 24, middle + 5);
             g.drawString("−1.0", 8, middle + amplitude + 5);
-            g.drawString("100 ms · actual PCM samples", left, getHeight() - 6);
+            g.drawString(String.format(java.util.Locale.ROOT, "%.3f s · actual PCM samples · full-scale amplitude", samples.length / 16000.0), left, getHeight() - 6);
             if (samples.length == 0) { g.drawString("Start the microphone or import a WAV", left + 16, middle - 12); return; }
             g.setColor(new Color(63, 224, 197));
             for (int x = 0; x < width; x++) {

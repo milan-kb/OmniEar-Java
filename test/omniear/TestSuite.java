@@ -26,6 +26,7 @@ public final class TestSuite {
         audio();
         featuresAndClassifier();
         trainingAndPersistence();
+        heldOutEvaluation();
         pipelineAndThreading();
         integration();
         System.out.println("PASS: " + checks + " checks");
@@ -185,6 +186,15 @@ public final class TestSuite {
             check(repository.importWav(wave, Category.BACKGROUND).equals(imported), "content deduplication");
             expect(IOException.class, () -> repository.importWav(wave, Category.EXPLOSION), "conflicting labels");
             check(repository.load().counts().get(Category.BACKGROUND) == 1, "real file feature extraction");
+            Files.copy(imported, imported.resolveSibling("renamed-copy.wav"));
+            check(repository.load().counts().get(Category.BACKGROUND) == 1, "manually copied WAV does not bias votes");
+            Path conflict = root.resolve("training/explosion/conflicting.wav");
+            Files.createDirectories(conflict.getParent()); Files.copy(imported, conflict);
+            expect(IOException.class, repository::load, "manually labeled conflicting duplicates reject model");
+            Files.delete(conflict);
+            Files.delete(imported);
+            check(repository.importWav(wave, Category.BACKGROUND).getFileName().toString().equals("renamed-copy.wav"), "import recognizes manually named duplicate");
+            expect(IOException.class, () -> repository.importWav(wave, Category.EXPLOSION), "import rejects conflicting manual label");
             var reading = new AdaptiveDetector.Reading(.2, .01, .06, true, true);
             var policy = new AlertPolicy();
             var background = policy.event(Instant.now(), "mic", 2, reading, new SoundClassifier.Prediction(Category.BACKGROUND, 1, 0));
@@ -321,6 +331,25 @@ public final class TestSuite {
             writeWav(directory.resolve("mechanics-only.wav"), new AudioFormat(16000, 16, 1, true, false),
                     2.5, 300 + 700 * category.ordinal(), .3);
         }
+    }
+
+    private static void heldOutEvaluation() throws Exception {
+        Path root = Files.createTempDirectory("omniear-holdout-");
+        try {
+            Path training = root.resolve("training"), testing = root.resolve("testing");
+            createMechanicalTrainingFixtures(training);
+            Files.createDirectories(testing.resolve(Category.BACKGROUND.id()));
+            Path unseen = testing.resolve(Category.BACKGROUND.id()).resolve("unseen-mechanics.wav");
+            writeWav(unseen, new AudioFormat(44100, 16, 1, true, false), .4, 730, .17);
+            Path copied = testing.resolve(Category.BACKGROUND.id()).resolve("renamed-training.wav");
+            Files.copy(training.resolve(Category.BACKGROUND.id()).resolve("mechanics-only.wav"), copied);
+            String result = HeldOutEvaluation.evaluate(training, testing);
+            check(result.contains("Evaluated: 1") && result.contains("skipped: 1"), "only unseen WAV evaluated");
+            check(result.contains("Training overlap") && result.contains("Confusion matrix"), "leakage diagnostics and matrix");
+            expect(IOException.class, () -> HeldOutEvaluation.evaluate(training, training), "reject same train/test root");
+            Files.delete(unseen);
+            check(HeldOutEvaluation.evaluate(training, testing).contains("No accuracy calculated"), "no score without eligible test samples");
+        } finally { deleteTree(root); }
     }
 
     private static void cli(Path root, Path training, Path input) throws Exception {
