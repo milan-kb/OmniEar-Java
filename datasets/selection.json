@@ -1,0 +1,1762 @@
+[
+  {
+    "id": 353285,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:J.Zazvurek",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 353286,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:J.Zazvurek",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 353287,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:J.Zazvurek",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 353288,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:J.Zazvurek",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 270446,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:LittleRobotSoundFactory",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 180341,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 180344,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 180348,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 131709,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:oldedgar",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220289,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220291,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220293,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 270474,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:LittleRobotSoundFactory",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220302,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220818,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:EricSueiro",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 336537,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:chrillz3r",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 391362,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:guamorims",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220665,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 219858,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 384213,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Vidrik",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 219871,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 9435,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:thanvannispen",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 139086,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:arjanvanhoorn0181",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 42849,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:FreqMan",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 241515,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 343930,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 343954,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 343974,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 381895,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220619,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 395736,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "uploader:Splushionsindasky",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 221150,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 221152,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 221153,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220649,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220655,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220657,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220658,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220660,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 220663,
+    "source_split": "dev",
+    "split": "training",
+    "category": "scream_distress",
+    "group": "session:UPF-movie-scream-workshop",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 264918,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:AderuMoro",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 415354,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:prucanada",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 355741,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:Supercolio",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 386055,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:busymaxvictor",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 118521,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:HubOfTheUniverseProd",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 249745,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:samvanzoest",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 406088,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:Yin_Yang_Jake007",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 321230,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:UniqueMAX",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 178313,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:EagleClaw",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 48052,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "scream_distress",
+    "group": "uploader:JohnnyDiamond",
+    "rationale": "Recorded human fear/pain/panic or acted horror scream; not evidence of real emergency."
+  },
+  {
+    "id": 67458,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67468,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67469,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67470,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67473,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67474,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67475,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67477,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67479,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67480,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 67482,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 174281,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 189778,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 182797,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 162261,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 162265,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:qubodup",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 35643,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:sandyrb",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 344686,
+    "source_split": "dev",
+    "split": "training",
+    "category": "explosion",
+    "group": "uploader:klankbeeld",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 426163,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:Nanashi",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 426164,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:Nanashi",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 426165,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:Nanashi",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 426167,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:Nanashi",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 256295,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:YleArkisto",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 256296,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:YleArkisto",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 256300,
+    "source_split": "dev",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:YleArkisto",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 108641,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:juskiddink",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 108640,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:juskiddink",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 195181,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "explosion",
+    "group": "uploader:insanity54",
+    "rationale": "Uploader-described physical blast/detonation or military explosive impact; no synthesized booms or substitute gunshots/fireworks."
+  },
+  {
+    "id": 344272,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:InspectorJ",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 216279,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:RSilveira_88",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 216280,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:RSilveira_88",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 204115,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Craxic",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 204119,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Craxic",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 204121,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Craxic",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 204123,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Craxic",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 245167,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:deleted_user_4401185",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 368330,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:JohanDeecke",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 368352,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:JohanDeecke",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 383978,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:ChrisReierson",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 254993,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:klankbeeld",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179227,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179228,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179229,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179230,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179231,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179232,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179233,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179234,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 322603,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Natty23",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 68654,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:mikaelfernstrom",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179249,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179250,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 179251,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 349240,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Natty23",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 85107,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:cmusounddesign",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 194682,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:kingsrow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 194683,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:kingsrow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 194684,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:kingsrow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 194685,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:kingsrow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 145558,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Black Snow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 145559,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Black Snow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 145562,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:Black Snow",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 85168,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:cmusounddesign",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 85184,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:cmusounddesign",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 344265,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:InspectorJ",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 344266,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:InspectorJ",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 344267,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:InspectorJ",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 344268,
+    "source_split": "dev",
+    "split": "training",
+    "category": "impact_crash",
+    "group": "uploader:InspectorJ",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 98650,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:Tomlija",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 320167,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:joshs",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 232176,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:nick121087",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 343756,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:Brokenphono",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 330800,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:Czarcazas",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 378568,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:ToxicFilmzSRsounds",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 204185,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:reg7783",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 341070,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:hifijohn",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 112213,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:m1a2t3z4",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 155620,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "impact_crash",
+    "group": "uploader:samueljustice00",
+    "rationale": "Recorded object impact with glass/ceramic breakage; narrow crash coverage, not a labeled vehicle collision."
+  },
+  {
+    "id": 159745,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 159750,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 159753,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 268809,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:hyderpotter",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 159754,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 159755,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 89682,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:dobroide",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 89683,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:dobroide",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 421017,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:GirlWithSoundRecorder",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 65152,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:IFartInUrGeneralDirection",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 322205,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:freesoundjon01",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 108192,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:paubg_pou",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 168621,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:MrAuralization",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 23750,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:dobroide",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 31482,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:dobroide",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 320767,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:wittte",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 319751,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:davidmenke",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 28426,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:Corsica_S",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 165166,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:goose278",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 184623,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:LanDub",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 388972,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:clapclapcinoeil",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 315758,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:contramundum",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 159743,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:conleec",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 65929,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:dobroide",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 162719,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:synthetic-oz",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 116664,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:fenniless",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 393662,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:chripei",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 393665,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:chripei",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 393667,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:chripei",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 203720,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:bwav",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 128459,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:saphe",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 277508,
+    "source_split": "dev",
+    "split": "training",
+    "category": "siren_traffic",
+    "group": "uploader:kwahmah_02",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 378257,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:13GPanska_Kubinova_Karolina",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 238228,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:eaglechopper",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 431651,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:blukotek",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 135718,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:ikbenraar",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 117181,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:drewkelly",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 123085,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:extrafonia",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 321753,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:Skjor1",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 133473,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:cognito perceptu",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 188004,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:Motion_S",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 30823,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "siren_traffic",
+    "group": "uploader:Heigh-hoo",
+    "rationale": "FSD50K Siren plus uploader-described road/emergency-vehicle recording; excludes synthesized sirens and building alarms."
+  },
+  {
+    "id": 392668,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:corkob",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 84673,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:tomc1985",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 341802,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:TiesWijnen",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 84671,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:tomc1985",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 101676,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:nialldoran",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 336416,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:moai15",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 167828,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:cwhite841",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 333441,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:noisesounds",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 208862,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Insestanyricarda",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 351503,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:elliotrambach",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 182908,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:toiletrolltube",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 182910,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:toiletrolltube",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 188501,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:manthadavies",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 420293,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:tonik-95",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 38646,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:digifishmusic",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 409727,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:las98",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 280204,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:memuse",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 101239,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:paubg_pou",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 244807,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Meepalicious",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 420482,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:isaacpauls",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 101241,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:paubg_pou",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 101868,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:thebigracket",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 164948,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:DinoKid",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 101243,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:paubg_pou",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 416642,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:FunWithSound",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 93921,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Corsica_S",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 236394,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:bcimmet",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 63340,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:reinsamba",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 95677,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Corsica_S",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 236363,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:bcimmet",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 93379,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Corsica_S",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 241550,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 146942,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:MBaer_Studios",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 169801,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:missozzy",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 241502,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:Reitanna",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 145101,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:bankfraudd",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 160137,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 161587,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:jorickhoofd",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 180765,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:toiletrolltube",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 361717,
+    "source_split": "dev",
+    "split": "training",
+    "category": "background",
+    "group": "uploader:lafashion",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 110612,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:soundscalpel.com",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 215178,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:john9",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 114503,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:juskiddink",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 381853,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:sqeeeek",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 58548,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:Gvido",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 147844,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:clt008",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 338169,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:edranil",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 90416,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:uair01",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 136991,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:milton.",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  },
+  {
+    "id": 251931,
+    "source_split": "eval",
+    "split": "held-out",
+    "category": "background",
+    "group": "uploader:pan14",
+    "rationale": "Recorded ordinary ambience, speech, laughter or handclaps; no target-event label."
+  }
+]

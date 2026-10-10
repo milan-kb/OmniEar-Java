@@ -1,3 +1,11 @@
 build/
 data/
 *.class
+__pycache__/
+*.pyc
+.env
+.env.*
+*.pem
+*.key
+# Only datasets/{training,held-out} and their provenance are redistributable.
+downloads/

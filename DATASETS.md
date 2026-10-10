@@ -1,9 +1,117 @@
 # Real recordings and honest evaluation
 
-The local `data/` directory was inspected: it contained event metadata, **no
-training WAVs**. No five-class acoustic model or accuracy result is bundled.
-The sources below were checked online during this revision. Download audio
-separately; the application itself works offline and never downloads recordings.
+## Bundled subset (2026-10-10)
+
+**220 real FSD50K recordings are included: 170 training, 50 held out.** They are
+full-length source clips converted to mono 16 kHz PCM16 WAV, with no gain
+normalization, event synthesis, cropping or training augmentation. Approximately
+55 MiB total (40 MiB training); each file is under 1 MiB. Build/runtime is JDK-only.
+
+| Class | Training clips | Training groups | Held-out clips | Held-out groups |
+|---|---:|---:|---:|---:|
+| Distress scream | 40 | 14 | 10 | 10 |
+| Explosion | 18 | 3 | 10 | 4 |
+| Impact/crash | 40 | 13 | 10 | 10 |
+| Traffic siren | 32 | 21 | 10 | 10 |
+| Background | 40 | 30 | 10 | 10 |
+
+Counts are **recordings, not independent sessions**. There are 75 training groups
+and 43 held-out groups across classes; some groups span multiple classes. No
+uploader or identified source/session group appears in both splits.
+
+### Provenance and permission
+
+- Source: [FSD50K v1.0, DOI 10.5281/zenodo.4060432](https://zenodo.org/records/4060432),
+  Eduardo Fonseca, Xavier Favory, Jordi Pons, Frederic Font and Xavier Serra.
+  Cite: *FSD50K: an open dataset of human-labeled sound events*, IEEE/ACM TASLP
+  30, 829–852 (2022).
+- Collection/annotations: [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/),
+  retained in [datasets/LICENSE-DATASET](datasets/LICENSE-DATASET).
+- Selected audio only: **128 CC BY 3.0; 92 CC0 1.0**. No NC, ND, Sampling+, or
+  unknown-license audio is included. See [datasets/ATTRIBUTION.md](datasets/ATTRIBUTION.md)
+  for every author/title/source/license. Format conversion is our only change.
+- [datasets/manifest.json](datasets/manifest.json) records original labels,
+  original descriptions, label rationale, original source ID, uploader, source
+  split, project split/group, duration, URL, license, source SHA-256, converted
+  WAV SHA-256 and decoded PCM SHA-256 for **every recording**.
+- [datasets/selection.json](datasets/selection.json) is the frozen curated ID
+  list. [datasets/groups.tsv](datasets/groups.tsv) is the Java development-check
+  input. Raw downloads and larger archives stay in ignored `data/downloads/`.
+
+### Semantic curation and exclusions
+
+FSD50K human annotations were cross-checked with uploader descriptions. This is
+metadata-based curation, **not an independent listening-panel validation**.
+Broad parent labels alone were insufficient: `Explosion` includes gunshots,
+fireworks, balloon pops and synthesized effects; `Screaming` includes cheering.
+
+- **Scream:** recorded human fear/pain/panic or acted horror screams. Most are
+  performances, not documented emergencies; screaming does not establish distress.
+  Excluded crowd excitement, metal singing, monsters and ambiguous vocalizations.
+- **Explosion:** documented physical detonations, grenades, military explosive
+  impacts and one water-dynamite recording. Excluded gunfire, fireworks,
+  balloon/bag pops, thunder, synthesized booms and ambiguous film/game composites.
+- **Impact/crash:** actual glass/ceramic impacts and breakage. These are legitimate
+  impacts, but **not a vehicle-crash corpus**; no collision-recognition claim.
+- **Siren:** recorded road/emergency-vehicle sirens. Excluded building/car alarms,
+  musical or synthesized sirens and ambiguous loops.
+- **Background:** rain/wind/traffic, ordinary speech, laughter and handclaps;
+  target-event labels excluded. Includes hard negatives rather than just silence.
+
+The >=40 training target was met for three classes. The reviewed, clearly
+documented redistributable selection yielded only **18 explosions and 32 sirens**.
+We kept this deficit rather than counting crops, duplicates, synthetic effects
+or vaguely similar sounds as genuine recordings. ESC-50/UrbanSound8K cannot fill
+all five semantic classes; NIGENS has NC-ND restrictions. Alternative explosion
+sources inspected included USC Red Library (film effects with uncertain physical
+source for many clips) and BigSoundBank (agricultural bird-scarer blasts); neither
+was silently substituted for genuine explosive-event coverage.
+
+### Split and deduplication
+
+Selection and source-group assignment preceded the final test evaluation.
+Mostly FSD50K dev → training and eval → held-out, with seven dev explosions
+from **Nanashi and YleArkisto reserved entirely for testing**. This is a custom
+subset, not the official FSD50K benchmark. All qubodup recordings stay in training;
+their referenced military videos and edited variants cannot cross the split.
+Known same-source variants were omitted. The UPF scream workshop is grouped
+across uploaders; possible workshop clip 220306 was excluded from the holdout
+before evaluation. Held-out replacement 321230 is a different uploader/session.
+
+`prepare_data.py --verify-only` checks frozen selection, WAV inventory, hashes,
+decoded PCM uniqueness, uploader separation and source/session group separation.
+The application additionally excludes byte-identical train/test overlap and
+duplicate tests. Unknown cross-uploader copies/re-encodings cannot be ruled out
+solely by weak metadata: this limitation is not claimed solved by a hash.
+
+### Reproduce without manual downloading
+
+A fresh clone already includes all required WAVs. To reacquire missing files:
+
+```sh
+# One-time preparation only: Python 3.10+ standard library and ffmpeg on PATH.
+python scripts/prepare_data.py
+python scripts/prepare_data.py --verify-only
+java Build.java test
+java -cp build/classes scripts/DevelopmentCheck.java
+java -cp build/classes omniear.Main --evaluate datasets/held-out --training datasets/training
+```
+
+The script automatically downloads/checks the published metadata ZIP checksums,
+reads the split-audio ZIP central directories using verified HTTP byte ranges,
+fetches only selected members, validates ZIP CRC/size, converts with ffmpeg and
+organizes the WAVs. It retries network failures and refuses a server that ignores
+Range instead of downloading the entire ~25 GB collection. Existing modified
+assets are rejected rather than overwritten. Full acquisition was executed here;
+no Freesound account, API key or paid access was needed.
+
+The final model uses training-only standardization and class-balanced inverse-
+distance k=7 voting, selected with training-group-out validation before opening
+the 50-file test results. No test-driven threshold changes were made. Full direct
+and pipeline metrics are in [TEST_RESULTS.md](TEST_RESULTS.md) and
+[evaluation/held-out.txt](evaluation/held-out.txt).
+
+## Other public sources / manual expansion
 
 ## Verified public sources
 
@@ -58,16 +166,18 @@ alarms and baby crying are not automatic substitutes for the requested labels.
    java -cp build/classes omniear.Main --evaluate data/held-out --training data/training
    ```
 
-The report includes per-file predicted labels, vote shares, feature distances,
-confusion matrix, missing test classes, evaluated/skipped counts and an observed
-accuracy only when eligible test files exist. Evaluation bypasses Stage 1 and
-does not generate alerts or CSV events. Copied/renamed training WAVs and duplicate
+The report includes direct and gated confusion matrices, per-class precision/recall,
+false positives, per-file predictions, vote shares, distances and eligible/skipped
+counts. It replays both stages in memory and does not persist evaluation events.
+It also reports a clearly separate diagnostic with three seconds of digital
+silence before each real clip; that artificial context is not live performance.
+Copied/renamed training WAVs and duplicate
 test files are excluded using SHA-256. This **cannot detect re-encoding or related
 excerpts**, so the source-group split is still required. Do not tune on the final
 held-out set. These are results for your chosen subset, not published benchmark
 results or evidence of emergency-response reliability.
 
-## Real-file check performed
+## Historical pre-training real-file check
 
 Downloaded and processed [ESC-50 `1-31482-A-42.wav`](https://raw.githubusercontent.com/karolpiczak/ESC-50/master/audio/1-31482-A-42.wav),
 a `siren` recording derived from **dobroide's `20070224.siren.flac`**,
@@ -76,6 +186,6 @@ credit CC BY; ESC-50 collection CC BY-NC 3.0).
 The unmodified file remained in `/tmp/opencode/`, outside this repository.
 Java decoded/resampled it to 80,000 samples (5 s), RMS 0.239526, and extracted
 the 60-feature vector successfully. Gated analysis completed with no RMS event.
-It was never used for training. This verifies a real WAV/DSP path, **not semantic
-classification accuracy**; a complete curated five-class training/holdout set
-is still needed for that evaluation.
+This initial check verified only WAV/DSP plumbing. The new model uses the full
+FSD50K source 31482 in training, not the earlier ESC-50 excerpt, and no related
+source is in the held-out set.
