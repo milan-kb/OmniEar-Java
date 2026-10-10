@@ -65,11 +65,23 @@ public final class UiSmokeTest {
                 });
                 ImageIO.write(render.get(), "png", Path.of("build/ui-tab-" + tab + ".png").toFile());
             }
-            SwingUtilities.invokeAndWait(() -> { reference.get().toFront(); reference.get().requestFocus(); });
+            // KDE/Wayland may deny programmatic focus stealing. A real click is
+            // required before Robot keyboard input, even after requestFocus().
+            var focusPoint = new AtomicReference<Point>();
+            SwingUtilities.invokeAndWait(() -> {
+                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront();
+                Point point = frame.getContentPane().getLocationOnScreen(); point.translate(120, 30); focusPoint.set(point);
+            });
+            Point pointer = MouseInfo.getPointerInfo().getLocation();
+            robot.mouseMove(focusPoint.get().x, focusPoint.get().y);
+            robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK); robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+            robot.waitForIdle();
             waitFor(() -> reference.get().isActive(), "desktop grants keyboard focus to test window");
+            SwingUtilities.invokeAndWait(() -> reference.get().setAlwaysOnTop(false));
             robot.keyPress(java.awt.event.KeyEvent.VK_ALT); robot.keyPress(java.awt.event.KeyEvent.VK_2);
             robot.keyRelease(java.awt.event.KeyEvent.VK_2); robot.keyRelease(java.awt.event.KeyEvent.VK_ALT); robot.waitForIdle();
             waitFor(() -> findTabs(reference.get()).getSelectedIndex() == 1, "keyboard tab navigation");
+            robot.mouseMove(pointer.x, pointer.y);
             SwingUtilities.invokeAndWait(() -> {
                 Dashboard frame = reference.get(); frame.setSize(frame.getMinimumSize());
                 findTabs(frame).setSelectedIndex(0); frame.validate();

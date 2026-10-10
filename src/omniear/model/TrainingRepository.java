@@ -21,6 +21,33 @@ public final class TrainingRepository {
     public TrainingRepository(Path root) { this.root = root.toAbsolutePath().normalize(); }
     public Path root() { return root; }
 
+    /** Seed only a missing default root. Existing user datasets are never merged or replaced. */
+    public static void installBundled(Path root) throws IOException {
+        root = root.toAbsolutePath().normalize();
+        if (Files.exists(root)) return;
+        try (InputStream resource = TrainingRepository.class.getResourceAsStream("/omniear/bundled-training.zip")) {
+            if (resource == null) return;
+            Files.createDirectories(root.getParent());
+            Path staged = Files.createTempDirectory(root.getParent(), ".bundled-training-");
+            try {
+                try (var zip = new java.util.zip.ZipInputStream(resource)) {
+                    java.util.zip.ZipEntry entry;
+                    while ((entry = zip.getNextEntry()) != null) {
+                        Path target = staged.resolve(entry.getName()).normalize();
+                        if (!target.startsWith(staged) || entry.isDirectory()) throw new IOException("Invalid bundled training entry");
+                        Files.createDirectories(target.getParent());
+                        Files.copy(zip, target);
+                    }
+                }
+                Files.move(staged, root);
+            } finally {
+                if (Files.exists(staged)) try (var paths = Files.walk(staged)) {
+                    for (Path path : paths.sorted(Comparator.reverseOrder()).toList()) Files.delete(path);
+                }
+            }
+        }
+    }
+
     public Report load() throws IOException {
         var examples = new ArrayList<TrainingExample>();
         var counts = new EnumMap<Category, Integer>(Category.class);
@@ -51,7 +78,7 @@ public final class TrainingRepository {
             }
         }
         Optional<KnnClassifier> model = counts.values().stream().allMatch(n -> n > 0)
-                ? Optional.of(new KnnClassifier(examples, 3)) : Optional.empty();
+                ? Optional.of(new KnnClassifier(examples, KnnClassifier.DEFAULT_K)) : Optional.empty();
         return new Report(model, counts, problems);
     }
 

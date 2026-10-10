@@ -40,7 +40,10 @@ public final class Main {
                 default -> { if (!mode.equals("gui")) throw new IllegalArgumentException("Select only one action"); mode = flag.substring(2); input = value; }
             }
         }
-        if (training == null) training = data.resolve("training");
+        if (training == null) {
+            training = data.resolve("training");
+            if (!mode.equals("mic-test")) TrainingRepository.installBundled(training);
+        }
         if (mode.equals("evaluate")) { System.out.print(HeldOutEvaluation.evaluate(training, input)); return true; }
         if (mode.equals("gui")) {
             if (GraphicsEnvironment.isHeadless()) throw new IOException("A graphical desktop is required. Headless mode supports --train, --analyze and --classify.");

@@ -39,7 +39,7 @@ public final class TrainingPanel extends JPanel implements AutoCloseable {
         JPanel top = new JPanel(new BorderLayout(12, 12));
         top.add(new JLabel("<html>2. Add real recordings for each class. WAV decoding converts supported PCM to 16 kHz mono in memory.<br>Keep separate recording sessions for testing. One WAV per class unlocks k-NN; it does not demonstrate accuracy.</html>"), BorderLayout.NORTH);
         top.add(actions, BorderLayout.CENTER); top.add(location, BorderLayout.SOUTH);
-        add(DarkTheme.section("BUILD YOUR TRAINING SET · real labels, no bundled model", top), BorderLayout.NORTH);
+        add(DarkTheme.section("TRAINING SET · bundled real recordings or your own labeled WAVs", top), BorderLayout.NORTH);
         JPanel coverage = new JPanel(new BorderLayout(12, 12));
         JPanel rows = new JPanel(new GridLayout(5, 1, 0, 4));
         for (Category value : Category.values()) {

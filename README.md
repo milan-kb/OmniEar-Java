@@ -6,10 +6,13 @@ I/O and Java-implemented DSP replace the upstream Python/React/TensorFlow stack.
 The upstream repository is untouched. See [INSPECTION.md](INSPECTION.md) for the
 inspected commit, repository inventory and preserved/replaced behavior.
 
-**This is not YAMNet and is not a validated emergency-response system.** No
-pretrained model or real training audio is bundled. No classification accuracy,
-precision, recall or evaluation score is claimed. Missing training data produces
-**unclassified anomalies**, not made-up categories or background predictions.
+**A real, trained Java FFT/MFCC + k-NN classifier is bundled.** The repository
+contains 170 licensed FSD50K training recordings and 50 source-group-disjoint
+held-out recordings. Direct WAV accuracy on this subset is **72% (36/50)**.
+**This is not YAMNet or a validated emergency-response system:** the unchanged
+energy gate misses most isolated clips during calibration. Raw Stage 1 → Stage 2
+first-event label accuracy is **10%**, with abstentions counted as misses.
+See [TEST_RESULTS.md](TEST_RESULTS.md) for all metrics and false positives.
 
 ## Setup and execution
 
@@ -43,6 +46,18 @@ java -jar build/OmniEar.jar
 The build helper is itself Java. The JAR has no external runtime dependencies;
 JDK-provided audio/desktop OS integration is the only platform integration.
 Runtime files default to `data/` relative to the current working directory.
+On first launch, bundled training WAVs are installed into a **missing** default
+`data/training/` directory. They persist and load automatically on every launch;
+no network access or manual training is needed. Existing training directories
+and explicit `--training` paths are preserved. The portable JAR includes training
+audio and attribution; it works from another directory without the repository.
+
+Try an actual unseen recording immediately:
+
+```sh
+java -jar build/OmniEar.jar --classify datasets/held-out/scream_distress/fsd-264918.wav
+java -jar build/OmniEar.jar --evaluate datasets/held-out
+```
 
 ```sh
 # Optional paths; existing original organized WAV datasets can be read directly.
@@ -57,8 +72,9 @@ java -cp build/classes omniear.Main --mic-test
 java -jar build/OmniEar.jar --help
 ```
 
-`--train` loads/checks real WAVs and builds an in-memory model; it does not invent
-examples, save a neural network or evaluate accuracy. Nonzero exit status means
+`--train` loads/checks real WAVs and builds an in-memory model; the persistent
+training recordings are the k-NN model assets. Startup recomputes features and
+training-only scales automatically, avoiding stale feature caches. Nonzero exit status means
 invalid input, missing required training coverage or an I/O error.
 
 ## Dashboard workflow
@@ -69,8 +85,9 @@ signal/event divider can be dragged; long training content and tables scroll.
 The design uses a flat charcoal palette, readable standard fonts, teal readiness
 indicators, and text plus severity colors. No third-party UI library is used.
 
-1. **Train first** for classification, or start without training to inspect RMS
-   anomalies. The missing-model state and per-category WAV counts are visible.
+1. Wait for **Classification ready** and the per-category training counts. The
+   bundled model loads automatically. Custom incomplete datasets still produce
+   unclassified anomalies, never invented categories.
 2. **Start monitoring** opens the laptop's OS default input. Stay quiet for the
    first two seconds. RMS, rolling baseline, threshold, elapsed audio time and
    the actual last 100 ms waveform update live. **Stop** closes the microphone.
@@ -88,7 +105,8 @@ indicators, and text plus severity colors. No third-party UI library is used.
    short-clip padding and exact-match diagnostics. Lower distance means closer
    training features, not a calibrated similarity probability.
    **Evaluate held-out folder** tests separate labeled recordings and reports
-   overlap exclusions, per-file predictions and a confusion matrix; see [DATASETS.md](DATASETS.md).
+    overlap exclusions, per-file predictions, precision/recall, false positives,
+    confusion matrices and raw/calibrated pipeline replays; see [DATASETS.md](DATASETS.md).
 5. **Detected events** includes alerts, suppressed background/low-vote outcomes
    and unclassified anomalies. **Alert history** filters to emitted P0/P1/P4
    alerts. Tables show UTC timestamps, audio offsets, category, severity, RMS,
@@ -140,8 +158,9 @@ training and inference always use the same extractor.
 The upstream Keras head expects 3,072 YAMNet embedding features, not these Java
 features. Its HDF5 weights, TensorFlow semantic-fusion logic and upstream
 evaluation numbers **cannot be reused as a Java k-NN model or evaluation**.
-Verified public download links, licenses, label mappings and split preparation
-for FSD50K, ESC-50 and NIGENS are in [DATASETS.md](DATASETS.md).
+The frozen acquisition script, per-recording attribution, label rationale and
+source/session split are in [DATASETS.md](DATASETS.md). Python/ffmpeg are only
+needed to reproduce data preparation, never to build or run the application.
 
 ## Detection and classification
 
@@ -169,12 +188,15 @@ for FSD50K, ESC-50 and NIGENS are in [DATASETS.md](DATASETS.md).
   log energies, orthonormal DCT-II, including coefficient zero).
 - Concatenated mean/max/population-standard-deviation pooling gives **60
   features**, preserving temporal variability and transients.
-- k-NN uses `k=3`, Euclidean distance with training-only standard-deviation
-  scaling and inverse-distance votes. Exact matches vote only among exact
+- k-NN uses `k=7`, Euclidean distance with training-only standard-deviation
+  scaling and inverse-distance votes divided by each training class's count.
+  Class balancing and k were selected using training-only leave-source-group-out
+  validation (macro recall 62.33% → 75.33% versus the previous unbalanced k=3).
+  Exact matches vote only among exact
   neighbors. Immutable models are replaced only after successful reload.
 - **Vote share is a neighbor-agreement score, not a calibrated probability,
   accuracy estimate or certainty that an emergency occurred.** There is no
-  pretrained semantic evidence or out-of-distribution rejection.
+  deep pretrained semantic evidence or out-of-distribution rejection.
 
 | Category | Alert priority | Initial minimum vote share |
 |---|---|---|
@@ -185,9 +207,9 @@ for FSD50K, ESC-50 and NIGENS are in [DATASETS.md](DATASETS.md).
 | Background | Suppressed | Never alerts |
 
 These gates retain the upstream values for continuity, **not** its confidence
-calibration. Calibrate them on genuinely held-out recordings before making any
-performance claim. Keep related/augmented versions of a source recording in the
-same split; do not treat training-set matches as classification accuracy.
+calibration. They were not tuned on the final test set. Classification metrics
+are separate from alert metrics. Use a separate development set for future gate
+calibration; keep related recordings in one split.
 
 ## Architecture and meaningful OOP
 
@@ -222,8 +244,8 @@ there is no unbounded inference queue. The microphone line has a half-second
 buffer. Large workloads or slow disks can overrun that buffer; separate bounded
 inference/storage workers would be the next step if measured latency requires it.
 Training is disabled during monitoring so model changes cannot race a session.
-`HeldOutEvaluation` owns leakage checks and evaluation; `DarkTheme` owns Swing
-colors/typography. Neither changes the detector, FFT/MFCC or k-NN algorithms.
+`HeldOutEvaluation` owns leakage checks and direct/pipeline evaluation;
+`DarkTheme` owns Swing colors/typography.
 
 ## Audio, persistence and cleanup
 
@@ -257,6 +279,8 @@ colors/typography. Neither changes the detector, FFT/MFCC or k-NN algorithms.
 ```sh
 java Build.java test
 java Build.java ui-test      # optional: needs a real graphical desktop
+java -cp build/classes omniear.TrainedSmokeTest --ui  # real bundled model + real unseen WAV
+python scripts/prepare_data.py --verify-only       # optional dataset provenance/hash audit
 ```
 
 `test` covers calibration, rolling eviction, adaptive floor/cooldown boundaries,
@@ -277,13 +301,11 @@ Test tones/feature vectors are temporary **algorithm-mechanics fixtures only**:
 they are not real acoustic training data, are not bundled with the application,
 and do not measure classification accuracy.
 
-Verified here with OpenJDK 21 on Linux: warning-free compilation, **208 regression
-checks**, real-display Swing smoke test and an actual five-second Java Sound input
-test. The input test detected clipping; lower OS input gain and rehearse on the
-intended laptop. Real-world recognition still requires a labeled evaluation:
-check OS input/permissions, calibrate quietly, play safe licensed test recordings,
-verify Stop/restart and CSV reload. There is no claim of verified semantic
-recognition without a real, held-out dataset.
+Verified here with OpenJDK 21 on Linux: warning-free compilation, **217 checks**
+including bundled real-data fresh startup/restart, real-display Swing tests with
+mechanical fixtures and genuine held-out audio, and a five-second Java Sound input
+test. The microphone captured audio but reported clipping: reduce OS input gain.
+The 50-recording evaluation measures this curated subset, not live reliability.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for exact verification scope.
 
 ## Limitations
@@ -295,8 +317,11 @@ See [TEST_RESULTS.md](TEST_RESULTS.md) for exact verification scope.
   one label. Short/continuous sirens can be missed by the original energy gate.
 - Microphone sensitivity, room acoustics, distance and OS gain vary. Settings
   need real-world tuning; normalized RMS is **not calibrated dB SPL**.
-- No trained dataset is supplied and no real-world accuracy has been evaluated.
-  One example per class or a high vote share does not establish reliability.
+- The small training set is uneven (18 explosions, 32 sirens, 40 each other class).
+  Explosion training has only three source groups. Most screams are acted
+  fear/pain/horror; crashes are glass/ceramic impacts, not vehicle collisions.
+  Six of ten held-out backgrounds received a non-background direct label;
+  two passed direct-clip alert gates. No distress-vs-joy or field safety claim.
 - No Pi/GSM, remote dispatch, simulated fleet/map, WebSocket server, deep neural
   inference or synthetic analytics is included. All requested laptop functions
   work locally; no physical/network alert is sent.

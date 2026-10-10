@@ -29,6 +29,7 @@ public final class TestSuite {
         heldOutEvaluation();
         pipelineAndThreading();
         integration();
+        TrainedSmokeTest.main(new String[0]);
         System.out.println("PASS: " + checks + " checks");
     }
 
@@ -172,6 +173,11 @@ public final class TestSuite {
         double[] changed = features.values();
         changed[0] = 99;
         check(features.get(0) != 99, "feature encapsulation");
+        double[] common = new double[FeatureExtractor.DIMENSIONS], query = new double[FeatureExtractor.DIMENSIONS];
+        java.util.Arrays.fill(common, 1.1); java.util.Arrays.fill(query, 1.04);
+        for (int i = 0; i < 4; i++) examples.add(new TrainingExample(Category.BACKGROUND, new FeatureVector(common), "imbalanced mechanics fixture"));
+        check(new KnnClassifier(examples, 3).classify(new FeatureVector(query)).category() == Category.EXPLOSION,
+                "inverse-frequency votes avoid majority-class bias among equally close neighbors");
     }
 
     private static void trainingAndPersistence() throws Exception {
@@ -346,6 +352,8 @@ public final class TestSuite {
             String result = HeldOutEvaluation.evaluate(training, testing);
             check(result.contains("Evaluated: 1") && result.contains("skipped: 1"), "only unseen WAV evaluated");
             check(result.contains("Training overlap") && result.contains("Confusion matrix"), "leakage diagnostics and matrix");
+            check(result.contains("precision=") && result.contains("recall=") && result.contains("false positives="), "per-class holdout metrics");
+            check(result.contains("Stage 1 → Stage 2") && result.contains("NO_EVENT") && result.contains("background recordings with alerts: 0/1"), "raw pipeline includes missed short recordings and false alerts");
             expect(IOException.class, () -> HeldOutEvaluation.evaluate(training, training), "reject same train/test root");
             Files.delete(unseen);
             check(HeldOutEvaluation.evaluate(training, testing).contains("No accuracy calculated"), "no score without eligible test samples");

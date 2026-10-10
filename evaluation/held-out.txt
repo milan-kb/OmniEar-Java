@@ -1,0 +1,117 @@
+Held-out WAV classification · Stage 1 bypassed
+Training-only scaling; vote shares are not probabilities.
+scream_distress/fsd-118521.wav → scream_distress · vote 0.862 · distance 1.435 · pipeline [] · calibrated [3.00s:scream_distress:ALERT]
+scream_distress/fsd-178313.wav → scream_distress · vote 0.863 · distance 0.701 · pipeline [] · calibrated [4.00s:scream_distress:ALERT]
+scream_distress/fsd-249745.wav → siren_traffic · vote 0.637 · distance 1.395 · pipeline [] · calibrated [3.60s:scream_distress:ALERT]
+scream_distress/fsd-264918.wav → scream_distress · vote 0.716 · distance 0.981 · pipeline [] · calibrated [3.20s:scream_distress:ALERT]
+scream_distress/fsd-321230.wav → siren_traffic · vote 0.773 · distance 0.663 · pipeline [] · calibrated [3.00s:explosion:LOW_VOTE_SUPPRESSED]
+scream_distress/fsd-355741.wav → scream_distress · vote 0.528 · distance 1.206 · pipeline [] · calibrated [3.00s:scream_distress:ALERT]
+scream_distress/fsd-386055.wav → scream_distress · vote 0.862 · distance 0.978 · pipeline [] · calibrated [3.10s:scream_distress:ALERT]
+scream_distress/fsd-406088.wav → scream_distress · vote 1.000 · distance 0.698 · pipeline [] · calibrated [4.00s:scream_distress:ALERT]
+scream_distress/fsd-415354.wav → scream_distress · vote 0.859 · distance 1.333 · pipeline [] · calibrated [3.30s:scream_distress:ALERT]
+scream_distress/fsd-48052.wav → siren_traffic · vote 0.625 · distance 0.765 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+explosion/fsd-108640.wav → explosion · vote 0.458 · distance 0.782 · pipeline [] · calibrated [3.20s:background:BACKGROUND_SUPPRESSED]
+explosion/fsd-108641.wav → explosion · vote 0.449 · distance 0.454 · pipeline [] · calibrated [3.10s:explosion:ALERT]
+explosion/fsd-195181.wav → explosion · vote 0.922 · distance 0.463 · pipeline [] · calibrated [3.10s:explosion:ALERT]
+explosion/fsd-256295.wav → explosion · vote 0.744 · distance 0.524 · pipeline [] · calibrated [3.40s:explosion:ALERT]
+explosion/fsd-256296.wav → explosion · vote 0.764 · distance 0.478 · pipeline [] · calibrated [3.40s:explosion:ALERT]
+explosion/fsd-256300.wav → explosion · vote 0.716 · distance 0.573 · pipeline [] · calibrated [4.00s:explosion:LOW_VOTE_SUPPRESSED]
+explosion/fsd-426163.wav → explosion · vote 0.614 · distance 0.713 · pipeline [] · calibrated [3.00s:explosion:LOW_VOTE_SUPPRESSED]
+explosion/fsd-426164.wav → explosion · vote 0.519 · distance 0.555 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+explosion/fsd-426165.wav → explosion · vote 0.745 · distance 0.870 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+explosion/fsd-426167.wav → background · vote 0.500 · distance 1.058 · pipeline [] · calibrated [3.00s:explosion:LOW_VOTE_SUPPRESSED]
+impact_crash/fsd-112213.wav → impact_crash · vote 0.572 · distance 0.615 · pipeline [] · calibrated [3.00s:impact_crash:ALERT]
+impact_crash/fsd-155620.wav → impact_crash · vote 1.000 · distance 0.333 · pipeline [6.70s:impact_crash:ALERT] · calibrated [4.00s:impact_crash:ALERT, 9.70s:impact_crash:ALERT]
+impact_crash/fsd-204185.wav → impact_crash · vote 1.000 · distance 0.754 · pipeline [] · calibrated [4.20s:impact_crash:ALERT]
+impact_crash/fsd-232176.wav → impact_crash · vote 1.000 · distance 0.430 · pipeline [2.20s:impact_crash:ALERT] · calibrated [5.20s:impact_crash:ALERT]
+impact_crash/fsd-320167.wav → impact_crash · vote 1.000 · distance 0.466 · pipeline [] · calibrated [3.30s:impact_crash:ALERT]
+impact_crash/fsd-330800.wav → impact_crash · vote 1.000 · distance 0.606 · pipeline [] · calibrated [3.00s:impact_crash:ALERT]
+impact_crash/fsd-341070.wav → impact_crash · vote 1.000 · distance 0.565 · pipeline [] · calibrated [3.10s:impact_crash:ALERT]
+impact_crash/fsd-343756.wav → impact_crash · vote 1.000 · distance 0.431 · pipeline [4.30s:impact_crash:LOW_VOTE_SUPPRESSED, 7.80s:impact_crash:ALERT, 10.90s:impact_crash:ALERT, 13.50s:impact_crash:ALERT, 16.40s:impact_crash:ALERT] · calibrated [4.20s:impact_crash:ALERT, 7.30s:impact_crash:LOW_VOTE_SUPPRESSED, 10.80s:impact_crash:ALERT, 13.90s:impact_crash:ALERT, 16.50s:impact_crash:ALERT, 19.40s:impact_crash:ALERT]
+impact_crash/fsd-378568.wav → impact_crash · vote 1.000 · distance 0.781 · pipeline [] · calibrated [3.30s:impact_crash:ALERT]
+impact_crash/fsd-98650.wav → impact_crash · vote 1.000 · distance 0.844 · pipeline [3.70s:impact_crash:ALERT] · calibrated [3.00s:impact_crash:ALERT, 6.70s:impact_crash:ALERT]
+siren_traffic/fsd-117181.wav → siren_traffic · vote 0.632 · distance 0.682 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+siren_traffic/fsd-123085.wav → siren_traffic · vote 0.748 · distance 0.593 · pipeline [] · calibrated [3.10s:explosion:LOW_VOTE_SUPPRESSED]
+siren_traffic/fsd-133473.wav → background · vote 0.814 · distance 0.379 · pipeline [] · calibrated [3.00s:explosion:LOW_VOTE_SUPPRESSED]
+siren_traffic/fsd-135718.wav → siren_traffic · vote 0.772 · distance 1.203 · pipeline [] · calibrated [3.00s:background:BACKGROUND_SUPPRESSED]
+siren_traffic/fsd-188004.wav → siren_traffic · vote 0.756 · distance 0.751 · pipeline [] · calibrated []
+siren_traffic/fsd-238228.wav → siren_traffic · vote 0.899 · distance 0.612 · pipeline [] · calibrated [3.10s:background:BACKGROUND_SUPPRESSED]
+siren_traffic/fsd-30823.wav → background · vote 0.536 · distance 0.409 · pipeline [] · calibrated [3.60s:explosion:LOW_VOTE_SUPPRESSED]
+siren_traffic/fsd-321753.wav → background · vote 0.654 · distance 0.589 · pipeline [] · calibrated []
+siren_traffic/fsd-378257.wav → background · vote 0.683 · distance 0.409 · pipeline [] · calibrated [3.20s:explosion:LOW_VOTE_SUPPRESSED]
+siren_traffic/fsd-431651.wav → siren_traffic · vote 0.769 · distance 1.431 · pipeline [] · calibrated [3.10s:scream_distress:ALERT]
+background/fsd-110612.wav → background · vote 0.825 · distance 0.391 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+background/fsd-114503.wav → background · vote 0.857 · distance 0.319 · pipeline [13.20s:background:BACKGROUND_SUPPRESSED] · calibrated [4.10s:background:BACKGROUND_SUPPRESSED, 16.20s:background:BACKGROUND_SUPPRESSED]
+background/fsd-136991.wav → explosion · vote 0.618 · distance 0.745 · pipeline [2.10s:explosion:LOW_VOTE_SUPPRESSED] · calibrated [3.00s:explosion:ALERT, 4.90s:explosion:LOW_VOTE_SUPPRESSED]
+background/fsd-147844.wav → explosion · vote 0.450 · distance 0.485 · pipeline [] · calibrated [3.70s:explosion:ALERT]
+background/fsd-215178.wav → background · vote 0.818 · distance 0.425 · pipeline [] · calibrated []
+background/fsd-251931.wav → explosion · vote 0.938 · distance 0.503 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+background/fsd-338169.wav → explosion · vote 0.447 · distance 0.579 · pipeline [] · calibrated [3.00s:explosion:ALERT]
+background/fsd-381853.wav → scream_distress · vote 0.562 · distance 0.773 · pipeline [] · calibrated []
+background/fsd-58548.wav → explosion · vote 0.442 · distance 0.522 · pipeline [] · calibrated [3.00s:explosion:ALERT, 4.60s:explosion:LOW_VOTE_SUPPRESSED]
+background/fsd-90416.wav → background · vote 0.526 · distance 0.709 · pipeline [] · calibrated [3.10s:explosion:ALERT]
+
+Direct classification Confusion matrix: rows = expected, columns = predicted
+[scream_distress, explosion, impact_crash, siren_traffic, background]
+scream_distress: [7, 0, 0, 3, 0]
+explosion: [0, 9, 0, 0, 1]
+impact_crash: [0, 0, 10, 0, 0]
+siren_traffic: [0, 0, 0, 6, 4]
+background: [1, 5, 0, 0, 4]
+scream_distress: n=10; precision=87.50%; recall=70.00%; false positives=1
+explosion: n=10; precision=64.29%; recall=90.00%; false positives=5
+impact_crash: n=10; precision=100.00%; recall=100.00%; false positives=0
+siren_traffic: n=10; precision=66.67%; recall=60.00%; false positives=3
+background: n=10; precision=44.44%; recall=40.00%; false positives=5
+Missing test classes: []
+Evaluated: 50 · correct: 36 · skipped: 0
+Observed accuracy on these files only: 72.00%
+
+Stage 1 → Stage 2: original WAVs, default detector, no added silence or gain changes.
+Each recording starts a fresh 2 s calibration; first emitted event supplies the matrix label. NO_EVENT is an abstention.
+
+Raw gated Confusion matrix: rows = expected, columns = predicted
+[scream_distress, explosion, impact_crash, siren_traffic, background, NO_EVENT]
+scream_distress: [0, 0, 0, 0, 0, 10]
+explosion: [0, 0, 0, 0, 0, 10]
+impact_crash: [0, 0, 4, 0, 0, 6]
+siren_traffic: [0, 0, 0, 0, 0, 10]
+background: [0, 1, 0, 0, 1, 8]
+scream_distress: n=10; precision=N/A; recall=0.00%; false positives=0
+explosion: n=10; precision=0.00%; recall=0.00%; false positives=1
+impact_crash: n=10; precision=100.00%; recall=40.00%; false positives=0
+siren_traffic: n=10; precision=N/A; recall=0.00%; false positives=0
+background: n=10; precision=100.00%; recall=10.00%; false positives=0
+scream_distress: recordings with Stage 1 events=0/10; correct-category routed alerts=0/10
+explosion: recordings with Stage 1 events=0/10; correct-category routed alerts=0/10
+impact_crash: recordings with Stage 1 events=4/10; correct-category routed alerts=4/10
+siren_traffic: recordings with Stage 1 events=0/10; correct-category routed alerts=0/10
+background: recordings with Stage 1 events=2/10; correct-category routed alerts=0/10
+Gated label accuracy (abstentions count as misses): 10.00%; events=10; alerts=7; audio=474.50s
+Direct-clip background recordings passing alert gates: 2/10
+Pipeline background recordings with alerts: 0/10 (0.00%)
+Clip-level weak labels have no event timestamps. These replay metrics are not live-event detection accuracy or false alarms per deployed hour.
+
+Controlled calibration diagnostic: 3 s DIGITAL SILENCE then each unchanged real WAV.
+Artificial quiet context, NOT additional recordings, training examples, or live detection evidence. Same default thresholds.
+
+Calibrated replay Confusion matrix: rows = expected, columns = predicted
+[scream_distress, explosion, impact_crash, siren_traffic, background, NO_EVENT]
+scream_distress: [8, 2, 0, 0, 0, 0]
+explosion: [0, 9, 0, 0, 1, 0]
+impact_crash: [0, 0, 10, 0, 0, 0]
+siren_traffic: [1, 5, 0, 0, 2, 2]
+background: [0, 7, 0, 0, 1, 2]
+scream_distress: n=10; precision=88.89%; recall=80.00%; false positives=1
+explosion: n=10; precision=39.13%; recall=90.00%; false positives=14
+impact_crash: n=10; precision=100.00%; recall=100.00%; false positives=0
+siren_traffic: n=10; precision=N/A; recall=0.00%; false positives=0
+background: n=10; precision=25.00%; recall=10.00%; false positives=3
+scream_distress: correct-category routed alerts=8/10
+explosion: correct-category routed alerts=6/10
+impact_crash: correct-category routed alerts=10/10
+siren_traffic: correct-category routed alerts=0/10
+background: correct-category routed alerts=0/10
+Calibrated first-event label accuracy (abstentions count as misses): 56.00%
+Calibrated background recordings with alerts: 7/10
+Missing test classes and related/re-encoded excerpts limit interpretation. Split by original recording/source before importing.

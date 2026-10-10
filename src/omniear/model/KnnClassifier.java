@@ -2,12 +2,14 @@ package omniear.model;
 
 import java.util.*;
 
-/** Immutable model: training-only z-score scaling and inverse-distance k-neighbor voting. */
+/** Immutable model: training-only scaling and inverse-distance, class-balanced voting. */
 public final class KnnClassifier implements SoundClassifier {
+    public static final int DEFAULT_K = 7;
     private final List<TrainingExample> examples;
     private final double[] mean = new double[FeatureExtractor.DIMENSIONS];
     private final double[] scale = new double[FeatureExtractor.DIMENSIONS];
     private final int k;
+    private final int[] classCounts = new int[Category.values().length];
     private record Neighbor(Category category, double distance) { }
 
     public KnnClassifier(List<TrainingExample> examples, int k) {
@@ -17,6 +19,7 @@ public final class KnnClassifier implements SoundClassifier {
         examples.forEach(e -> categories.add(e.category()));
         if (categories.size() != Category.values().length) throw new IllegalArgumentException("Provide real WAV training examples for all five categories, including background.");
         this.k = Math.min(k, examples.size());
+        for (var example : examples) classCounts[example.category().ordinal()]++;
         for (var example : examples) for (int i = 0; i < mean.length; i++) mean[i] += example.features().get(i) / examples.size();
         for (var example : examples) for (int i = 0; i < scale.length; i++) scale[i] += Math.pow(example.features().get(i) - mean[i], 2) / examples.size();
         for (int i = 0; i < scale.length; i++) scale[i] = scale[i] < 1e-12 ? 1 : Math.sqrt(scale[i]);
@@ -38,7 +41,8 @@ public final class KnnClassifier implements SoundClassifier {
         double[] votes = new double[Category.values().length];
         for (Neighbor neighbor : nearest) {
             if (closest < 1e-9 && neighbor.distance() >= 1e-9) continue;
-            votes[neighbor.category().ordinal()] += closest < 1e-9 ? 1 : 1 / Math.max(1e-9, neighbor.distance());
+            votes[neighbor.category().ordinal()] += (closest < 1e-9 ? 1 : 1 / Math.max(1e-9, neighbor.distance()))
+                    / classCounts[neighbor.category().ordinal()];
         }
         int best = Category.BACKGROUND.ordinal();
         double total = 0;

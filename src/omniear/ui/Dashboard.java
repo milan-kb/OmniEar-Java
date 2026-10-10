@@ -46,7 +46,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         events = new EventTableModel(store == null ? List.of() : store.history());
         training = new TrainingPanel(trainingRoot, report -> {
                     classifier = report.classifier().orElse(null);
-                    modelState.setText(classifier == null ? "Classification unavailable · add WAVs in Training" : "Classification ready · Java k-NN / k=3");
+                    modelState.setText(classifier == null ? "Classification unavailable · add WAVs in Training" : "Classification ready · class-balanced Java k-NN / k=" + KnnClassifier.DEFAULT_K);
                     modelState.setForeground(classifier == null ? DarkTheme.MUTED : DarkTheme.ACCENT); updateControls();
                 },
                 this::problem, busy -> { trainingBusy = busy; updateControls(); });
@@ -115,7 +115,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         for (int i = events.getRowCount() - 1; i >= 0; i--) {
             if (events.eventAt(i).isAlert()) { showAlert(events.eventAt(i)); break; }
         }
-        problem("Prototype only — not a validated emergency system. Train on diverse real recordings; no classification accuracy is claimed.");
+        problem("Trained research prototype · held-out results and limitations: TEST_RESULTS.md. Vote share is not emergency certainty.");
         if (persistenceProblem != null) problem(persistenceProblem);
         updateControls(); SwingUtilities.invokeLater(training::reload);
     }
