@@ -116,6 +116,11 @@ Observed held-out failure modes (no subsequent fitting or threshold tuning):
 | `java Build.java ui-test` | PASS on KDE/Wayland display: all four tabs, WAV/pipeline workflow, keyboard navigation, persistence and cleanup |
 | `java -cp build/classes omniear.TrainedSmokeTest --ui` | PASS: real 170-recording model loads asynchronously; unseen FSD50K 264918 visibly predicts scream, vote **0.716**, distance **0.981**, P0 |
 | `python scripts/prepare_data.py --verify-only` | PASS: 220 WAVs, hashes, unique decoded PCM, selection/inventory match, uploader/group separation |
+| `java Build.java jar` | PASS; training audio and attribution packaged; no external runtime dependencies |
+| Clean local Git clone at `3cff1e1` | PASS: 217 tests, JAR build and provenance audit without any download/preparation step |
+| Portable JAR launched outside repository | PASS: auto-installed 170 recordings; unseen explosion 256296 predicts explosion, vote **0.764**, distance **0.478**, P0; gated WAV analysis also completes |
+| Clean-clone JAR evaluation | PASS: **exact text match** with committed `evaluation/held-out.txt`, using automatically installed training |
+| `jdeps -s build/OmniEar.jar` | Only `java.base` and `java.desktop` |
 | Five-second microphone diagnostic | Captured and released input; RMS **0.6838**, peak **1.0000**; **clipping reported** |
 
 The keyboard smoke test exposed KDE/Wayland focus-stealing prevention: requesting
