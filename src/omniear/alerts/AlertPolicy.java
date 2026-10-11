@@ -13,7 +13,8 @@ public final class AlertPolicy {
         double votes = prediction == null ? 0 : prediction.voteShare();
         SoundEvent.Status status = prediction == null ? SoundEvent.Status.UNTRAINED
                 : category == Category.BACKGROUND ? SoundEvent.Status.BACKGROUND_SUPPRESSED
-                : votes < category.alertGate() ? SoundEvent.Status.LOW_VOTE_SUPPRESSED : SoundEvent.Status.ALERT;
+                : votes < category.alertGate() ? SoundEvent.Status.LOW_VOTE_SUPPRESSED
+                : prediction.backgroundConflict() ? SoundEvent.Status.BACKGROUND_CONFLICT_SUPPRESSED : SoundEvent.Status.ALERT;
         Priority priority = status == SoundEvent.Status.ALERT ? category.priority() : Priority.NONE;
         return new SoundEvent(UUID.randomUUID(), timestamp, source, audioSeconds, reading.rms(), reading.baseline(),
                 reading.threshold(), category, votes, prediction == null ? 0 : prediction.nearestDistance(), priority, status);

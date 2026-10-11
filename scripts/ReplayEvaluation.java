@@ -11,11 +11,13 @@ class ReplayEvaluation {
     static final Locale LOCALE = Locale.ROOT;
     static long calls, nanos;
     static final List<Long> blockNanos = new ArrayList<>();
+    static SoundClassifier suppliedModel;
+    static String extraHeader = "", extraFields = "";
     public static void main(String[] args) throws Exception {
         Path training = Path.of(args[0]);
         String split = args[1];
-        if (!Set.of("development", "final-test").contains(split)) throw new IllegalArgumentException("Explicit split required");
-        var model = new TrainingRepository(training).load().classifier().orElseThrow();
+        if (!Set.of("development", "final-test", "rejection-dev", "rejection-final").contains(split)) throw new IllegalArgumentException("Explicit split required");
+        SoundClassifier model = suppliedModel != null ? suppliedModel : new TrainingRepository(training).load().classifier().orElseThrow();
         SoundClassifier measured = features -> {
             long before = System.nanoTime();
             var result = model.classify(features);
@@ -25,11 +27,12 @@ class ReplayEvaluation {
         var clips = new ArrayList<Clip>();
         for (String row : Files.readAllLines(Path.of("datasets/groups.tsv"))) {
             String[] cells = row.split("\t");
-            if (cells[0].startsWith("datasets/" + split + "/") || split.equals("development") && cells[0].startsWith("datasets/held-out/"))
+            if (cells[0].startsWith("datasets/" + split + "/") || split.equals("development") && cells[0].startsWith("datasets/held-out/")
+                    || split.equals("rejection-dev") && (cells[0].startsWith("datasets/held-out/") || cells[0].startsWith("datasets/development/") || cells[0].startsWith("datasets/final-test/")))
                 clips.add(new Clip(cells[0], Category.fromId(cells[1]), WavSource.load(Path.of(cells[0]))));
         }
         var backgrounds = clips.stream().filter(c -> c.category == Category.BACKGROUND).toList();
-        System.out.println("kind\tscenario\tfile\ttruth\tstart\tend\temission\ttrigger\tpredicted\tvote\tdistance\talert");
+        System.out.println("kind\tscenario\tfile\ttruth\tstart\tend\temission\ttrigger\tpredicted\tvote\tdistance\talert" + extraHeader);
         for (int n = 0; n < clips.size(); n++) {
             Clip clip = clips.get(n);
             var direct = DetectionPipeline.classifyClip(clip.audio, measured, Instant.EPOCH, clip.path);
@@ -81,6 +84,6 @@ class ReplayEvaluation {
         System.out.printf(LOCALE, "RECORD\t%s\t%s\t%s\t%.6f\t%.6f\t0\t0\t-\t0\t0\tfalse%n", scenario, clip.path, clip.category.id(), start, end);
     }
     static void print(String kind, String scenario, Clip clip, double start, double end, double emission, SoundEvent event) {
-        System.out.printf(LOCALE, "%s\t%s\t%s\t%s\t%.6f\t%.6f\t%.6f\t%.6f\t%s\t%.6f\t%.6f\t%b%n", kind, scenario, clip.path, clip.category.id(), start, end, emission, event.audioSeconds(), event.category().id(), event.voteShare(), event.nearestDistance(), event.isAlert());
+        System.out.printf(LOCALE, "%s\t%s\t%s\t%s\t%.6f\t%.6f\t%.6f\t%.6f\t%s\t%.6f\t%.6f\t%b%s%n", kind, scenario, clip.path, clip.category.id(), start, end, emission, event.audioSeconds(), event.category().id(), event.voteShare(), event.nearestDistance(), event.isAlert(), extraFields);
     }
 }

@@ -29,11 +29,14 @@ public final class KnnClassifier implements SoundClassifier {
 
     @Override public Prediction classify(FeatureVector features) {
         var nearest = new PriorityQueue<Neighbor>(Comparator.comparingDouble(Neighbor::distance).reversed());
+        double[] closestByClass = new double[Category.values().length];
+        Arrays.fill(closestByClass, Double.POSITIVE_INFINITY);
         // ponytail: exact O(N * 60) search; use a spatial index only if measured dataset latency requires it.
         for (var example : examples) {
             double squared = 0;
             for (int i = 0; i < scale.length; i++) squared += Math.pow((features.get(i) - example.features().get(i)) / scale[i], 2);
             double distance = Math.sqrt(squared / scale.length);
+            closestByClass[example.category().ordinal()] = Math.min(closestByClass[example.category().ordinal()], distance);
             if (nearest.size() < k) nearest.add(new Neighbor(example.category(), distance));
             else if (distance < nearest.peek().distance()) { nearest.poll(); nearest.add(new Neighbor(example.category(), distance)); }
         }
@@ -47,6 +50,10 @@ public final class KnnClassifier implements SoundClassifier {
         int best = Category.BACKGROUND.ordinal();
         double total = 0;
         for (int i = 0; i < votes.length; i++) { total += votes[i]; if (votes[i] > votes[best]) best = i; }
-        return new Prediction(Category.values()[best], Math.clamp(votes[best] / total, 0, 1), closest);
+        Category category = Category.values()[best];
+        // Development-selected relative evidence; no new absolute-distance or vote calibration.
+        double margin = category == Category.SCREAM_DISTRESS ? .9 : category == Category.IMPACT_CRASH ? 1 : 0;
+        boolean conflict = closestByClass[Category.BACKGROUND.ordinal()] < margin * closestByClass[best];
+        return new Prediction(category, Math.clamp(votes[best] / total, 0, 1), closest, conflict);
     }
 }

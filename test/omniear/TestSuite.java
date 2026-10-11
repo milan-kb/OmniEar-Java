@@ -25,6 +25,7 @@ public final class TestSuite {
         windowing();
         audio();
         featuresAndClassifier();
+        RejectionTest.main(new String[0]);
         trainingAndPersistence();
         heldOutEvaluation();
         pipelineAndThreading();

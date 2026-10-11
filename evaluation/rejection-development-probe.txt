@@ -1,0 +1,8 @@
+scream_distress leave-source-group-out 95% nearest-positive radius=1.1780658059337628
+explosion leave-source-group-out 95% nearest-positive radius=0.9900556790901011
+impact_crash leave-source-group-out 95% nearest-positive radius=0.784230493941191
+siren_traffic leave-source-group-out 95% nearest-positive radius=1.755542315270886
+background leave-source-group-out 95% nearest-positive radius=1.049235570166855
+Classifier calls=677 mean kNN=0.160ms (DSP and wall replay timed separately)
+accept() DSP+scheduling+kNN: blocks=68430 p95=0.006ms max=24.671ms; excludes CSV/UI and EOF
+Negative reference windows=166; source recordings=82; no development audio in reference index
