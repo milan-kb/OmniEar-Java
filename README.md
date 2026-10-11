@@ -14,10 +14,17 @@ energy gate misses most isolated clips during calibration. Raw Stage 1 → Stage
 first-event label accuracy is **10%**, with abstentions counted as misses.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for all metrics and false positives.
 
-**Continuous-detection experiment (2026-10-11):** a periodic-window candidate
+**False-alert investigation (2026-10-12):** distance rejection, hard negatives
+and temporal confirmation were evaluated. A background-conflict gate improved
+development results but changed no decisions on 48 fresh final recordings, so
+it was reverted. The original runtime is retained; see
+[the decision and evidence](evaluation/REJECTION_DECISION.md). All inspected
+test sets now require replacement before further tuning/final evaluation.
+
+**Earlier continuous-detection experiment (2026-10-11):** a periodic-window candidate
 improved raw event recall but increased false alerts on a new 41-file final set,
 so it was reverted. The working 170-recording runtime model is retained. The
-repository now includes 47 additional research training recordings, 58 development
+repository then included 47 additional research training recordings, 58 development
 recordings (including the old holdout) and the 41 inspected final recordings,
 plus reproducible continuous-stream benchmarks. Research additions are not
 automatically loaded. No live-reliability improvement is claimed.

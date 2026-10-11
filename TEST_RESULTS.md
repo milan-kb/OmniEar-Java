@@ -1,9 +1,84 @@
 # Verification results
 
-**Latest (2026-10-11): the continuous-detection candidate was rejected and
-reverted after increasing final-test false alerts.** See
-[the new experiment results below](#continuous-detection-experiment--2026-10-11).
-The following 2026-10-10 results describe the retained original runtime.
+**Latest (2026-10-12): the background-conflict candidate was rejected and
+reverted because it reduced no final-test false alerts.** The original runtime
+and 170-recording model are retained. Full diagnosis, development comparisons
+and reproduction: [evaluation/REJECTION_DECISION.md](evaluation/REJECTION_DECISION.md).
+
+## False-alert investigation — 2026-10-12
+
+Baseline `747f7e8`; data freeze `9ac2ab0`; candidate freeze `4e4e17f`;
+rollback `d9befdd`. No periodic/onset/hybrid scheduler was reintroduced.
+The candidate suppressed scream/impact alerts when a background training
+neighbor was sufficiently closer, retaining the actual class/vote and an explicit
+rejection status. On 99 development files, it preserved all 199 baseline-correct
+recording/scenario intervals while reducing background alerts 99 → 94
+(including direct decisions; streaming alone 90 → 87). These are repeated
+scenarios, not 199 independent events.
+
+### Fresh final comparison
+
+48 source/uploader-disjoint recordings: 8 screams, 8 breakages, 2 traffic sirens,
+30 backgrounds, **no explosions**. Selection and candidate were frozen before
+final inference; no final-set retuning. Every one of the 671 TSV rows is identical
+between baseline and candidate, including all predictions, alert flags and times.
+
+| Metric | Baseline | Rejected candidate |
+|---|---:|---:|
+| Direct classification accuracy | 25/48 (52.08%) | 25/48 (52.08%) |
+| Direct correctly routed target recall | 15/18 | 15/18 |
+| Direct alert precision | 15/24 (62.50%) | 15/24 (62.50%) |
+| Direct background clips passing gates | 8/30 | 8/30 |
+| Raw routed target recall | 1/18 (5.56%) | 1/18 (5.56%) |
+| Raw alert precision | 1/4 (25%) | 1/4 (25%) |
+| Raw background false alerts / exposure | 3 / 329.96 s | 3 / 329.96 s |
+| Raw false alerts/hour | 32.73 | 32.73 |
+| Raw no emitted classification | 41/48 | 41/48 |
+| Raw files with no routed alert | 44/48 | 44/48 |
+| Raw correct-alert latency median / maximum | 4.3 / 4.3 s | 4.3 / 4.3 s |
+
+All following results are also identical for baseline and candidate. Continuous
+multi includes background gaps in its false-alert count, precision and exposure.
+
+| Scenario | Routed targets (/18) | False alerts | False alerts/hour | Alert precision | No emitted classification (/48) | Correct-alert latency median / max (s) |
+|---|---:|---:|---:|---:|---:|---:|
+| Quiet prelude | 16 | 25 | 189.89 | 17/44 | 0 | 1.5 / 3.5 |
+| Quiet, 0.25× gain | 11 | 13 | 98.74 | 11/24 | 13 | 1.7 / 3.3 |
+| Quiet, 2× gain/clipping | 16 | 29 | 220.27 | 19/49 | 0 | 1.5 / 3.5 |
+| Real-background bed/prelude | 9 | 18 | 136.72 | 10/31 | 16 | 1.7 / 2.6 |
+| Continuous multi-file + gaps | 9 | 17 | 129.13 | 11/29 | 20 | 1.5 / 2.5 |
+
+Negative exposure is 473.96 s per prelude scenario and for the combined stream.
+Latency is file-insertion-to-emission for detected targets, **not acoustic-onset
+latency**; misses are excluded from latency and included in recall. First-label
+and first-alert confusion matrices, per-class precision/recall and per-window
+predictions are in `evaluation/rejection-final-{baseline,candidate}.{txt,tsv}`.
+Few minutes of transformed audio do not establish a deployed false-alarm rate.
+
+### Verification of the retained release
+
+- Clean Java 21 warning-free build and **217 passing checks**; startup/restart,
+  WAV decoding, persistence, anomaly detection and alert routing included.
+- Real-display Swing smoke test and genuine development-file UI classification
+  passed: scream 264918 → scream/P0, vote 0.716, distance 0.981.
+- Dataset audit passed all 364 assets; all 316 prior manifest entries/hashes
+  unchanged. `src/`, `test/` and `Build.java` match `747f7e8` after rollback.
+- Replay metric regression passed; paired summaries reproduce exactly from TSV.
+- JAR build/help and portable fresh startup/restart passed; genuine explosion
+  256296 → explosion/P0, vote 0.764, distance 0.478. Gated WAV processing completed.
+  The JAR bundles exactly 170 training WAVs; `jdeps` shows only `java.base` and
+  `java.desktop`. Rejected test classes were removed by a clean rebuild.
+- Physical microphone diagnostic captured/released five seconds: RMS 0.0010,
+  peak 0.0282, signal received. It validates input operation only, not room-event
+  recognition; no raw microphone data was retained.
+- Candidate mechanics passed 229 checks before rejection; its implementation
+  and geometry/status persistence tests remain available at `4e4e17f`.
+
+No measured final false-alert improvement was achieved. Missing explosion
+coverage, two sirens, acted screams, breakage semantics and weak file-level
+labels limit the conclusions. No emergency-response reliability is claimed.
+
+The following sections are historical results for earlier experiments.
 
 ## Trained release — 2026-10-10
 

@@ -1,4 +1,53 @@
-# Reproduce the continuous-stream experiment
+# Reproduce the detection experiments
+
+## Latest: false-alert rejection study
+
+The background-conflict candidate at `4e4e17f` was frozen before the 48-file
+`rejection-final` set was evaluated. It produced identical final predictions
+to baseline `747f7e8` and was reverted at `d9befdd`. See
+[REJECTION_DECISION.md](REJECTION_DECISION.md) and
+[REJECTION_PROTOCOL.md](REJECTION_PROTOCOL.md). All test sets are now inspected.
+`rejection-dev` pools the original 50 holdout, eight development backgrounds and
+41 previously inspected final recordings (99 total). No fresh-final recordings
+are used by the diagnostic/selection or supplementary hard-negative scripts.
+
+From the current repository, reproduce baseline and development diagnostics:
+
+```sh
+java Build.java build
+python3 scripts/prepare_data.py --verify-only
+python3 scripts/test_replay_metrics.py
+python3 scripts/check_rejection_evidence.py
+javac --release 21 -cp build/classes -d build/study scripts/ReplayEvaluation.java scripts/RejectionStudy.java scripts/HardNegativeStudy.java
+java -Xmx512m -cp build/classes:build/study RejectionStudy > development-probe.tsv
+python3 scripts/summarize_replay.py development-probe.tsv
+# This reads the committed development probe, never the final set:
+python3 scripts/select_rejection.py
+java -Xmx512m -cp build/classes:build/study HardNegativeStudy > hard-negative.tsv
+python3 scripts/summarize_replay.py hard-negative.tsv
+java -Xmx512m -cp build/classes:build/study ReplayEvaluation datasets/training rejection-final > baseline-final.tsv
+python3 scripts/summarize_replay.py baseline-final.tsv
+```
+
+Reproduce the **rejected** candidate using a detached worktree:
+
+```sh
+git worktree add --detach /tmp/opencode/omniear-conflict-candidate 4e4e17f
+(cd /tmp/opencode/omniear-conflict-candidate && java Build.java test)
+# Execute from this repository; training and evaluation files are the frozen selections.
+java -Xmx512m -cp /tmp/opencode/omniear-conflict-candidate/build/classes scripts/ReplayEvaluation.java datasets/training rejection-final > candidate-final.tsv
+python3 scripts/summarize_replay.py candidate-final.tsv
+diff -u baseline-final.tsv candidate-final.tsv
+```
+
+The diff is empty. Substitute `rejection-dev` for the split to reproduce the
+candidate's development comparison. On Windows use `;` in compiled classpaths.
+The candidate's geometry/regression tests live at its frozen commit. The retained
+runtime suite is unchanged and passes 217 checks. New audio can be reacquired by
+`python3 scripts/prepare_data.py`; `rejection_selection.py` preserves the original
+metadata-only selection process and does not choose new IDs from predictions.
+
+## Earlier: periodic-window experiment
 
 **Outcome: candidate rejected and reverted. Current main uses the original
 170-recording model and RMS-gated runtime.** The 47 additional training files
@@ -69,7 +118,9 @@ dataset snapshots remain in git history; the rollback did not erase evidence.
   target intervals. Uploader clips have no independent acoustic-onset annotation;
   slow approach/initial quiet can make this proxy long. Misses have no measured
   latency; recall must be read alongside the latency statistics.
-- Same-class supported windows merge into an episode until 3 s without support.
+- In the rejected periodic candidate only, same-class supported windows merge
+  into an episode until 3 s without support. The baseline and conflict candidate
+  use the original energy-gated capture schedule without this episode policy.
   TSV preserves every non-silent decision, including rejected/repeated outcomes
   through its `alert` flag. The application CSV additionally stores the rejection
   status; TSV classifications/votes/distances are actual model outputs.

@@ -1,5 +1,30 @@
 # Real recordings and honest evaluation
 
+## False-alert extension (2026-10-12)
+
+**364 licensed recordings:** 170 accepted training, 47 research-only training,
+99 development (50 original holdout + eight backgrounds + 41 previously inspected
+final recordings), and 48 newly acquired final recordings in `rejection-final/`.
+The new final is now inspected too; it must not be reused as an untouched test.
+
+Selection froze at `9ac2ab0`, before inference and before the rejection candidate
+froze at `4e4e17f`. The 48 files have 48 distinct uploaders, disjoint from all
+previous splits: eight human screams, eight glass/bottle/light-bulb breakages,
+two recorded traffic sirens and 30 backgrounds (dogs, thunder, spoken/cheerful
+voices, doors, traffic, hammering, applause and rain). Mostly acted screams do
+not establish distress; glass breakage does not establish vehicle collisions.
+No confidently documented unused explosion source was found in the reviewed
+permissible FSD50K metadata. Explosion final recall is **unmeasured**. Ambiguous,
+synthetic/composite and firework/gunshot candidates were not relabeled to fill it.
+
+New audio licenses: 22 CC BY 3.0 and 26 CC0; total: 193 CC BY 3.0 and 171 CC0.
+Full recordings, verified archive acquisition and mono 16 kHz PCM16 conversion
+follow the workflow below. All 316 previous manifest entries and WAV hashes are
+unchanged. Metadata-based source/session review and decoded uniqueness audits
+passed; unknown cross-uploader copies cannot be ruled out. Curation is not an
+independent listening-panel validation. The new files are excluded from runtime
+training and JAR audio packaging. See [the rejection study](evaluation/REJECTION_DECISION.md).
+
 ## Continuous-detection extension (2026-10-11)
 
 **316 licensed recordings: 170 accepted training, 47 research-only additional

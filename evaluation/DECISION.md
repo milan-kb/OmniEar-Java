@@ -1,5 +1,9 @@
 # Candidate rejected; original runtime retained
 
+This is the earlier periodic experiment. The later false-alert rejection study
+is documented in [REJECTION_DECISION.md](REJECTION_DECISION.md); its separate
+candidate also failed acceptance and was reverted.
+
 Data selection froze at `199361d`; periodic candidate froze at `241bed3` before
 final inference. `ac6a22b` reverted the candidate after it failed the no-increase
 in background false-alert requirement. There was no threshold tuning on final

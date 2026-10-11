@@ -1,0 +1,9 @@
+Untrained: 0 usable WAVs; need at least one in each of the five categories
+  scream_distress: 0
+  explosion: 0
+  impact_crash: 0
+  siren_traffic: 0
+  background: 0
+Opening Default laptop microphone
+Microphone test · speak normally for 5 seconds · no events saved
+Microphone test complete · RMS 0.0010 · peak 0.0282 · Signal received
