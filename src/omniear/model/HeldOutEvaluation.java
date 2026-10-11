@@ -76,13 +76,13 @@ public final class HeldOutEvaluation {
         if (total > 0) output.append(String.format(Locale.ROOT, "Observed accuracy on these files only: %.2f%%%n", 100.0 * correct / total));
         else output.append("No eligible unseen recordings. No accuracy calculated.\n");
         output.append("\nStage 1 → Stage 2: original WAVs, default detector, no added silence or gain changes.\n")
-                .append("Trained periodic one-second windows bypass the RMS warmup barrier; first emitted decision supplies the matrix label. NO_EVENT is an abstention.\n");
+                .append("Each recording starts a fresh 2 s calibration; first emitted event supplies the matrix label. NO_EVENT is an abstention.\n");
         appendMetrics(output, gated, "Raw gated Confusion matrix");
         int gatedCorrect = 0;
         for (Category category : Category.values()) {
             int i = category.ordinal(), support = Arrays.stream(gated[i]).sum();
             gatedCorrect += gated[i][i];
-            output.append(category.id()).append(": recordings with streaming decisions=").append(detected[i]).append('/').append(support)
+            output.append(category.id()).append(": recordings with Stage 1 events=").append(detected[i]).append('/').append(support)
                     .append("; correct-category routed alerts=").append(routed[i]).append('/').append(support).append('\n');
         }
         output.append(String.format(Locale.ROOT, "Gated label accuracy (abstentions count as misses): %s; events=%d; alerts=%d; audio=%.2fs%n",

@@ -7,19 +7,9 @@ public final class FeatureExtractor {
     private static final int FRAME = 400, HOP = 160, FFT = 512, BANDS = 26;
     private static final int FRAME_FEATURES = 20;
     public static final int DIMENSIONS = FRAME_FEATURES * 3;
-    private final int windowSize;
-    private final boolean normalize;
     private final double[][] melWeights = new double[BANDS][FFT / 2 + 1];
 
     public FeatureExtractor() {
-        this(AudioSamples.SAMPLE_RATE, true);
-    }
-
-    /** Explicit experimental transform; training and inference must use the same instance settings. */
-    public FeatureExtractor(int windowSize, boolean normalize) {
-        if (windowSize < FRAME || windowSize > 40000) throw new IllegalArgumentException("Feature window must be 25 ms–2.5 s");
-        this.windowSize = windowSize;
-        this.normalize = normalize;
         double topMel = 2595 * Math.log10(1 + 8000.0 / 700);
         double[] edges = new double[BANDS + 2];
         for (int i = 0; i < edges.length; i++) edges[i] = 700 * (Math.pow(10, topMel * i / (BANDS + 1) / 2595) - 1);
@@ -32,11 +22,7 @@ public final class FeatureExtractor {
 
     public FeatureVector extract(float[] audio) {
         AudioSamples.rms(audio); // Validate once at the boundary, including NaNs.
-        float[] window = AudioSamples.loudestWindow(audio, windowSize, AudioSamples.SAMPLE_RATE);
-        if (normalize) {
-            double rms = AudioSamples.rms(window);
-            if (rms > 1e-6) for (int i = 0; i < window.length; i++) window[i] *= (float) (.1 / rms);
-        }
+        float[] window = AudioSamples.loudestWindow(audio, AudioSamples.WINDOW_SIZE, AudioSamples.SAMPLE_RATE);
         double[] sum = new double[FRAME_FEATURES], squares = new double[FRAME_FEATURES], maxima = new double[FRAME_FEATURES];
         java.util.Arrays.fill(maxima, Double.NEGATIVE_INFINITY);
         double[] previous = new double[FFT / 2 + 1];

@@ -31,16 +31,16 @@ public final class UiSmokeTest {
             });
             waitFor(() -> !reference.get().isBusy() && reference.get().hasClassifier(), "training loads off EDT");
             SwingUtilities.invokeAndWait(() -> reference.get().startWav(input));
-            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 3, "GUI WAV-to-three-streaming-decisions integration");
+            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 1, "GUI WAV-to-event integration");
             SwingUtilities.invokeAndWait(() -> reference.get().classifyWav(input));
-            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 4, "unseen clip classification");
+            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 2, "unseen clip classification");
             SwingUtilities.invokeAndWait(() -> TestSuite.check(reference.get().predictionText().contains("Nearest standardized distance"), "prediction scores visible"));
             SwingUtilities.invokeAndWait(() -> reference.get().classifyWav(root.resolve("missing.wav")));
             waitFor(() -> !reference.get().isBusy() && reference.get().predictionText().contains("failed"), "invalid WAV error and control recovery");
             SwingUtilities.invokeAndWait(() -> reference.get().classifyWav(input));
-            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 5, "classification recovers after error");
+            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 3, "classification recovers after error");
             SwingUtilities.invokeAndWait(() -> reference.get().classifyWav(root.resolve("training/scream_distress/mechanics-only.wav")));
-            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 6, "known-fixture priority alert routing");
+            waitFor(() -> !reference.get().isBusy() && reference.get().eventCount() == 4, "known-fixture priority alert routing");
             SwingUtilities.invokeAndWait(() -> TestSuite.check(reference.get().predictionText().contains("Exact feature match"), "training-match diagnostic"));
             Path holdout = root.resolve("held-out");
             Files.createDirectories(holdout.resolve("explosion")); Files.copy(input, holdout.resolve("explosion/unseen-mechanics.wav"));
@@ -69,9 +69,8 @@ public final class UiSmokeTest {
             // required before Robot keyboard input, even after requestFocus().
             var focusPoint = new AtomicReference<Point>();
             SwingUtilities.invokeAndWait(() -> {
-                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront(); frame.requestFocus();
-                JTabbedPane tabs = findTabs(frame); tabs.requestFocusInWindow();
-                Point point = tabs.getLocationOnScreen(); point.translate(30, 20); focusPoint.set(point);
+                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront();
+                Point point = frame.getContentPane().getLocationOnScreen(); point.translate(120, 30); focusPoint.set(point);
             });
             Point pointer = MouseInfo.getPointerInfo().getLocation();
             robot.mouseMove(focusPoint.get().x, focusPoint.get().y);
@@ -90,7 +89,7 @@ public final class UiSmokeTest {
             });
             SwingUtilities.invokeAndWait(() -> {
                 TestSuite.check(reference.get().isShowing(), "real dashboard visible");
-                TestSuite.check(reference.get().eventCount() == 6, "real table has streaming and clip events");
+                TestSuite.check(reference.get().eventCount() == 4, "real table has anomaly and clip events");
                 reference.get().closeApplication();
             });
             waitFor(() -> !reference.get().isDisplayable(), "dashboard disposes");
@@ -100,7 +99,7 @@ public final class UiSmokeTest {
             boolean released = false;
             while (!released && System.nanoTime() < deadline) {
                 try (var reopened = new EventStore(root.resolve("events.csv"))) {
-                    TestSuite.check(reopened.history().size() == 6, "GUI events persisted and lock released"); released = true;
+                    TestSuite.check(reopened.history().size() == 4, "GUI events persisted and lock released"); released = true;
                 } catch (java.io.IOException e) { Thread.sleep(20); }
             }
             TestSuite.check(released, "GUI resource cleanup");

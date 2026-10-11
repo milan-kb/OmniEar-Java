@@ -194,9 +194,9 @@ alarms and baby crying are not automatic substitutes for the requested labels.
    once; conflicting labels prevent model loading until corrected.
 5. Supported PCM formats are decoded, downmixed and resampled in Java to
    16 kHz mono **in memory**, without changing the original or imported WAV.
-    Files and capture RMS remain unmodified; the selected feature window is RMS-normalized in memory. Compressed WAV/MP3/OGG/FLAC need
+   No per-file gain normalization is applied. Compressed WAV/MP3/OGG/FLAC need
    separately obtained PCM WAV versions; the application does not claim to
-    decode these formats. Short clips are padded to the one-second feature window.
+   decode these formats. Short clips are padded to the 2.5-second feature window.
 6. Use **WAV Testing → Evaluate held-out folder**, or:
 
    ```sh

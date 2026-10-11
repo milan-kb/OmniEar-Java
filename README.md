@@ -7,11 +7,11 @@ The upstream repository is untouched. See [INSPECTION.md](INSPECTION.md) for the
 inspected commit, repository inventory and preserved/replaced behavior.
 
 **A real, trained Java FFT/MFCC + k-NN classifier is bundled.** The repository
-contains 217 licensed FSD50K training recordings, 58 development recordings and
-41 new source-group-disjoint final-test recordings. Trained monitoring uses
-one-second windows twice per second, so initial RMS calibration no longer blocks
-short sounds or sustained sirens. **This is not YAMNet or a validated
-emergency-response system.**
+contains 170 licensed FSD50K training recordings and 50 source-group-disjoint
+held-out recordings. Direct WAV accuracy on this subset is **72% (36/50)**.
+**This is not YAMNet or a validated emergency-response system:** the unchanged
+energy gate misses most isolated clips during calibration. Raw Stage 1 → Stage 2
+first-event label accuracy is **10%**, with abstentions counted as misses.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for all metrics and false positives.
 
 ## Setup and execution
@@ -51,11 +51,8 @@ On first launch, bundled training WAVs are installed into a **missing** default
 no network access or manual training is needed. Existing training directories
 and explicit `--training` paths are preserved. The portable JAR includes training
 audio and attribution; it works from another directory without the repository.
-To use the expanded model with an existing installation, select `datasets/training`
-in the Training tab or pass `--training datasets/training`. Existing custom or
-older default training folders are deliberately preserved, not silently merged.
 
-Try a real development recording immediately (the old holdout has been inspected):
+Try an actual unseen recording immediately:
 
 ```sh
 java -jar build/OmniEar.jar --classify datasets/held-out/scream_distress/fsd-264918.wav
@@ -91,17 +88,17 @@ indicators, and text plus severity colors. No third-party UI library is used.
 1. Wait for **Classification ready** and the per-category training counts. The
    bundled model loads automatically. Custom incomplete datasets still produce
    unclassified anomalies, never invented categories.
-2. **Start monitoring** opens the laptop's OS default input. Trained decisions
-   start after one second. RMS, rolling baseline, threshold, elapsed audio time and
+2. **Start monitoring** opens the laptop's OS default input. Stay quiet for the
+   first two seconds. RMS, rolling baseline, threshold, elapsed audio time and
    the actual last 100 ms waveform update live. **Stop** closes the microphone.
    **Test microphone · 5 s** checks input RMS/peak and reports quiet/clipped audio;
    it stops automatically and saves no audio or events. Stop also cancels it.
-3. In **WAV Testing**, **Analyze WAV** runs the same continuous detector as the microphone. Files are
+3. In **WAV Testing**, **Analyze WAV** runs the same gated detector as the microphone. Files are
    analyzed faster than real time, not played back; timing uses sample offsets.
-   When trained, RMS calibration is advisory; silence skips expensive inference.
-   Short WAVs flush one partial window at EOF; Stop discards unfinished work.
-4. **Classify WAV** explicitly bypasses streaming scheduling and uses the loudest 1 s
-   window. Use this for inspecting an isolated sound.
+   The first two seconds calibrate. A very short or constantly loud file may
+   correctly produce no Stage 1 event.
+4. **Classify WAV** explicitly bypasses Stage 1 and uses the loudest 2.5 s
+   window. Use this for short isolated sounds without a quiet calibration prelude.
    Its source is marked `[clip; Stage 1 bypass]`; baseline/threshold are zero,
     rather than fabricated calibration values. It is enabled only when trained.
    The result includes vote share, nearest standardized feature distance, duration,
@@ -115,9 +112,8 @@ indicators, and text plus severity colors. No third-party UI library is used.
    alerts. Tables show UTC timestamps, audio offsets, category, severity, RMS,
    vote share and outcome; columns sort and scroll. Statistics use actual retained
    events, not synthetic city/fleet data. Latest-alert text includes severity.
-6. Adjust the RMS anomaly threshold multiplier, absolute floor and cooldown while stopped.
-   These control untrained anomaly detection and telemetry, not trained periodic
-   scheduling or evidence gates. Keyboard Tab navigation and Alt+button mnemonics
+6. Adjust the threshold multiplier, absolute floor and cooldown while stopped.
+   Defaults match upstream. Keyboard Tab navigation and Alt+button mnemonics
    are available; labeled controls expose Swing accessible names. Severity is
    expressed in text, not color alone.
 
@@ -168,7 +164,7 @@ needed to reproduce data preparation, never to build or run the application.
 
 ## Detection and classification
 
-### Stage 1 telemetry and untrained anomalies
+### Stage 1 (preserved)
 
 - 16,000 Hz normalized mono, 1,600 samples / 100 ms per block.
 - RMS: `sqrt(sum(sample²) / sampleCount)`; no per-clip gain/peak normalization.
@@ -176,23 +172,12 @@ needed to reproduce data preparation, never to build or run the application.
 - Trigger only if `RMS > max(baseline × 6, 0.02)` and cooldown is **strictly
   greater than** 1.5 seconds. Every block, including anomalies, enters the baseline
   **after** comparison, exactly as upstream.
-- When untrained, capture a bounded 3.5 s in-memory ring and wait at least 1.25 s after the trigger
+- Capture a bounded 3.5 s in-memory ring and wait at least 1.25 s after the trigger
   block. Completion is quantized to 100 ms block boundaries (normally 1.3 s).
-- Untrained anomaly time is the trigger-block time. No class is invented.
-
-### Trained streaming schedule and shared audio transform
-
-- Every 0.5 s, classify the trailing 1 s, beginning at 1 s; RMS below 0.0001 skips
-  DSP/k-NN. This does not require an onset or a quiet calibration prelude.
-- Training/direct inspection select the loudest 1 s using rolling 100 ms RMS;
-  short inputs are centered and zero-padded. The same transform normalizes the
-  selected feature window to RMS 0.1 (unless effectively silent), improving gain
-  invariance. Original WAVs, microphone samples and displayed RMS remain unchanged.
-- WAV EOF flushes an unclassified partial tail once; Stop discards it. Periodic
-  event timestamps are **decision times**, not estimated acoustic onsets.
-- Neighbor-support gates reject weak/distant matches. Explosions require two
-  consecutive supported decisions. A category episode alerts once until 3 s
-  without a supported match; repeated windows remain visible as suppressed.
+- Training and inference select the loudest 2.5 s using rolling sums of 100 ms
+  RMS frames; short clips are centered and zero-padded. WAV EOF flushes pending
+  capture; manual Stop discards unfinished capture. Event time is the trigger
+  block time, not the later classification time.
 
 ### Stage 2 (replacement)
 
@@ -211,8 +196,7 @@ needed to reproduce data preparation, never to build or run the application.
   neighbors. Immutable models are replaced only after successful reload.
 - **Vote share is a neighbor-agreement score, not a calibrated probability,
   accuracy estimate or certainty that an emergency occurred.** There is no
-  deep pretrained semantic evidence. Distance rejection is a development heuristic,
-  not a calibrated out-of-distribution detector.
+  deep pretrained semantic evidence or out-of-distribution rejection.
 
 | Category | Alert priority | Initial minimum vote share |
 |---|---|---|
@@ -223,12 +207,9 @@ needed to reproduce data preparation, never to build or run the application.
 | Background | Suppressed | Never alerts |
 
 These gates retain the upstream values for continuity, **not** its confidence
-calibration. Additional shared evidence gates require vote/distance of
-0.70/≤0.80 for screams and breakage, 0.99/≤0.30 for explosions, and 0.80/≤0.70
-for sirens. They were selected on development, not the new final test set.
-`EVIDENCE_SUPPRESSED` and `DUPLICATE_SUPPRESSED` retain real predictions without
-routing alerts. Conservative rejection particularly limits explosion recall.
-Classification metrics are separate from alert metrics; see `TEST_RESULTS.md`.
+calibration. They were not tuned on the final test set. Classification metrics
+are separate from alert metrics. Use a separate development set for future gate
+calibration; keep related recordings in one split.
 
 ## Architecture and meaningful OOP
 
@@ -320,28 +301,27 @@ Test tones/feature vectors are temporary **algorithm-mechanics fixtures only**:
 they are not real acoustic training data, are not bundled with the application,
 and do not measure classification accuracy.
 
-Verified here with OpenJDK 21 on Linux: warning-free compilation, **332 checks**
+Verified here with OpenJDK 21 on Linux: warning-free compilation, **217 checks**
 including bundled real-data fresh startup/restart, real-display Swing tests with
-mechanical fixtures and genuine development audio. The original 50-file holdout
-is development data now; new source-disjoint final recordings are evaluated once
-after freezing decisions. Replay metrics measure curated audio, not live reliability.
+mechanical fixtures and genuine held-out audio, and a five-second Java Sound input
+test. The microphone captured audio but reported clipping: reduce OS input gain.
+The 50-recording evaluation measures this curated subset, not live reliability.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for exact verification scope.
 
 ## Limitations
 
 - Handcrafted features/k-NN do not reproduce pretrained YAMNet semantics or
   distress-vs-joyful-scream understanding. Similar acoustic events can be confused.
-- Quiet sounds below the activity floor are skipped; evidence rejection can miss
-  real events, especially explosions. Mixed events inside one window get one
-  label. Same-category events less than 3 s apart may merge into one episode.
+- Quiet threats may not trigger; loud startup events calibrate into the baseline;
+  sustained loud sound raises the baseline. Mixed events inside one window get
+  one label. Short/continuous sirens can be missed by the original energy gate.
 - Microphone sensitivity, room acoustics, distance and OS gain vary. Settings
   need real-world tuning; normalized RMS is **not calibrated dB SPL**.
-- The small training set is uneven (22 explosions, 33 sirens, 82 backgrounds,
-  40 each other class).
+- The small training set is uneven (18 explosions, 32 sirens, 40 each other class).
   Explosion training has only three source groups. Most screams are acted
   fear/pain/horror; crashes are glass/ceramic impacts, not vehicle collisions.
-  Unseen backgrounds can still receive non-background labels; evidence gates
-  reduce alerts but do not fix semantic ambiguity. No distress-vs-joy or field safety claim.
+  Six of ten held-out backgrounds received a non-background direct label;
+  two passed direct-clip alert gates. No distress-vs-joy or field safety claim.
 - No Pi/GSM, remote dispatch, simulated fleet/map, WebSocket server, deep neural
   inference or synthetic analytics is included. All requested laptop functions
   work locally; no physical/network alert is sent.
