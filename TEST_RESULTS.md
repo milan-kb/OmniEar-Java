@@ -1,5 +1,10 @@
 # Verification results
 
+**Latest (2026-10-11): the continuous-detection candidate was rejected and
+reverted after increasing final-test false alerts.** See
+[the new experiment results below](#continuous-detection-experiment--2026-10-11).
+The following 2026-10-10 results describe the retained original runtime.
+
 ## Trained release — 2026-10-10
 
 170 real, licensed FSD50K training recordings; 50 held-out recordings, **10 per
@@ -217,3 +222,116 @@ microphone stability have not been tested.
   `--mic-test` is the separate device diagnostic used above.
 - GUI audio and CSV error handling are implemented; OS/audio-device behavior
   outside this Linux/JDK environment has not been manually verified.
+# Continuous-detection experiment — 2026-10-11
+
+**Outcome: no runtime improvement promoted.** The periodic candidate improved
+development recall, but increased background false alerts on the new final set.
+It was reverted, as required. The original trained Java 21/JDK-only app and its
+170-recording default model remain operational. Additional data and reproducible
+evaluation tools are retained; they do not silently change the default model.
+
+## Unbiased final comparison (frozen before inference)
+
+Baseline `5a5b764`; candidate `241bed3`; rollback `ac6a22b`. The final 41 files
+contain 8 screams, 2 explosions, 8 glass breakages, 3 traffic sirens and 20
+backgrounds, with uploader/known-source separation from all training/development.
+No final predictions were used to select features, windows or thresholds. The
+set is now inspected and cannot serve as an untouched test for future tuning.
+
+| Metric on new final set | Original / retained | Rejected periodic candidate |
+|---|---:|---:|
+| Direct classification accuracy | 24/41 (58.54%) | 22/41 (53.66%) |
+| Direct background label recall | 6/20 (30%) | 8/20 (40%) |
+| Direct background clips passing alert gates | 6/20 | 0/20 |
+| Raw replay first-label accuracy | 6/41 (14.63%) | 21/41 (51.22%) |
+| Raw replay classifier abstentions | 33/41 | 0/41 |
+| Raw correctly routed target-file recall | 3/21 (14.29%) | 9/21 (42.86%) |
+| Raw alert classification precision | 9/11 (81.82%) | 10/15 (66.67%) |
+| Raw background false alerts / exposure | 2 / 196.12 s | 5 / 196.12 s |
+| Raw false alerts per replay hour | 36.71 | 91.78 |
+| Correct raw alert latency, median / maximum | 7.3 / 7.9 s | 1.0 / 6.6 s |
+
+Latency is **file-insertion-to-emission**, not independently annotated acoustic
+onset latency; undetected targets are excluded from latency and included in
+recall. Each weakly labeled file is one target interval, not an event-instance
+annotation. Zero classifier abstentions does **not** mean zero missed alerts.
+
+| Simulated scenario | Correctly routed targets, original → candidate (/21) | Background false alerts, original → candidate | False alerts/hour, original → candidate |
+|---|---:|---:|---:|
+| Original WAV, fresh stream | 3 → 9 | 2 → 5 | 36.71 → 91.78 |
+| Three-second digital quiet prelude | 15 → 10 | 14 → 5 | 157.94 → 56.41 |
+| Quiet prelude, 0.25× recording gain | 13 → 10 | 8 → 5 | 90.25 → 56.41 |
+| Quiet prelude, 2× gain with clipping | 15 → 9 | 13 → 5 | 146.66 → 56.41 |
+| Real-background bed and prelude | 5 → 4 | 8 → 7 | 90.25 → 78.97 |
+| Continuous multi-file stream, including gaps | 6 → 7 | 9 → 10 | 101.53 → 112.81 |
+
+Prelude/continuous negative exposure is 319.12 s per scenario; these are repeated,
+digitally arranged recordings, not extra independent samples or deployed hours.
+All background preludes are included in false-alert accounting, even when a
+spurious prelude label matches the later target. Continuous gap boundaries count
+late target-tail alerts as false, conservatively. The candidate routed **0/2
+explosions and 0/3 sirens** correctly in raw replay. It failed the false-positive
+bar despite selected improvements, so no emergency-response reliability is claimed.
+
+## Diagnosis, development and retained assets
+
+- Warmup hides short startup events; a rolling mean contaminated by event energy
+  suppresses sustained sirens. The 6×/0.02 RMS gate misses quiet recordings. The
+  original 1.3 s post-trigger wait produces windows unlike loudest 2.5 s training
+  clips. Vote-only gates do not reject distant neighbors reliably.
+- Implemented and compared adaptive-onset-only, periodic and hybrid scheduling.
+  Shared one-second RMS-normalized training/inference windows, bounded 2 Hz
+  classification, distance/vote rejection and episode deduplication were tested
+  in the candidate; FFT/MFCC and balanced k=7 were retained.
+- On 58 development files, raw routed recall rose 4/40 → 22/40 at zero background
+  alerts, while quiet-prelude background alerts fell 10 → 0. This did not
+  generalize. Full results and the frozen/rejection decision are in
+  [evaluation/DECISION.md](evaluation/DECISION.md).
+- Added 96 genuine licensed recordings: 47 additional training candidates,
+  8 development backgrounds and 41 final recordings. Attribution, hashes and
+  source/session groups cover all 316 assets. No synthetic training data.
+- The data-only 217-file ablation also failed development: raw background alerts
+  0 → 1, background-bed alerts 0 → 3. Its additions are kept in
+  `datasets/additional-training/`, excluded from automatic installation and JAR
+  training. The original 170 files are byte-identical and still bundled.
+
+## Full evidence and reproduction
+
+See [evaluation/README.md](evaluation/README.md) for exact commands, replay
+construction, metric definitions and historical candidate reproduction.
+`stream-baseline-final.{txt,tsv}` describes the retained model;
+`stream-final.{txt,tsv}` describes the rejected candidate. Both contain direct
+and streaming confusion matrices, per-class precision/recall, counts and actual
+per-window predictions. Development and data-only reports are also committed.
+
+Candidate runtime passed 332 mechanics/regression checks, real Swing tests and
+real-file UI inference before acoustic rejection; a distance-gate mutation was
+caught by the startup scheduling test. Reverting its behavior also reverted
+its behavior-specific tests. Final retained-runtime verification passed:
+
+- `java Build.java test`: **217 checks**, fresh trained startup/restart included.
+- `java Build.java ui-test`: passed all display, keyboard, persistence and recovery
+  assertions. KDE/Wayland focus was intermittent; a rerun passed after explicitly
+  requesting window/tab focus and clicking the tab strip. No assertion was removed.
+- `java -cp build/classes omniear.TrainedSmokeTest --ui`: actual development scream
+  predicted scream/P0, vote 0.716, distance 0.981.
+- `java Build.java jar`: successful warning-free Java 21 build.
+- Portable JAR, fresh directory and restart: installed exactly 170 WAVs; real
+  development explosion 256296 predicted explosion/P0, vote 0.764, distance 0.478.
+- Dataset audit passed hashes, inventory, decoded uniqueness and logical
+  training/development/final source separation; original 220 WAV hashes unchanged.
+- `src/` and `Build.java` are byte-for-byte unchanged from `5a5b764` after rollback.
+- `python3 scripts/test_replay_metrics.py`: passed prelude false-alert accounting,
+  precision, exposure and insertion-latency regression assertions.
+
+The five-second **physical microphone diagnostic**, separate from simulated
+replay, captured/released input: RMS 0.0007, peak 0.0225, signal received, no
+clipping reported. It did not validate event detection in a room. Candidate
+`accept()` processing measured p95 8.844 ms / maximum 10.963 ms on this machine
+(DSP+scheduling+k-NN; excludes CSV/UI/EOF). Low latency did not fix accuracy.
+
+Remaining limitations: few independent explosion/siren sources, acted screams,
+glass rather than vehicle collisions, poor background generalization, weak
+timestamps, short repeated replay exposure, and unresolved live detection.
+
+---

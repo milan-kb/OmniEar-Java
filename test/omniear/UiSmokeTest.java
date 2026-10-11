@@ -69,8 +69,9 @@ public final class UiSmokeTest {
             // required before Robot keyboard input, even after requestFocus().
             var focusPoint = new AtomicReference<Point>();
             SwingUtilities.invokeAndWait(() -> {
-                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront();
-                Point point = frame.getContentPane().getLocationOnScreen(); point.translate(120, 30); focusPoint.set(point);
+                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront(); frame.requestFocus();
+                JTabbedPane tabs = findTabs(frame); tabs.requestFocusInWindow();
+                Point point = tabs.getLocationOnScreen(); point.translate(30, 20); focusPoint.set(point);
             });
             Point pointer = MouseInfo.getPointerInfo().getLocation();
             robot.mouseMove(focusPoint.get().x, focusPoint.get().y);

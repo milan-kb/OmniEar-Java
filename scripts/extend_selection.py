@@ -10,9 +10,9 @@ selection = [r for r in selection if r['id'] not in excluded]
 infos = {s: json.loads((ROOT / f'data/downloads/FSD50K.metadata/{s}_clips_info_FSD50K.json').read_text())
          for s in ('dev', 'eval')}
 additions = {
-    ('training', 'explosion'): [182429, 182431, 332181, 171971],
-    ('training', 'siren_traffic'): [393666],
-    ('training', 'background'): [182474, 212182, 264993, 162443, 268015, 275558,
+    ('additional-training', 'explosion'): [182429, 182431, 332181, 171971],
+    ('additional-training', 'siren_traffic'): [393666],
+    ('additional-training', 'background'): [182474, 212182, 264993, 162443, 268015, 275558,
         350724, 380941, 379754, 383062, 76683, 395415, 329760, 199953,
         194842, 401719, 369574, 346154, 104525, 332914, 72723, 328728,
         370714, 170015, 121888, 87315, 221639, 251969, 60689, 354056,
@@ -35,6 +35,10 @@ rationales = {
     'background': 'Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives.',
 }
 existing = {r['id'] for r in selection}
+additional_ids = {sound_id for (split, _), ids in additions.items() if split == 'additional-training' for sound_id in ids}
+for row in selection:
+    if row['id'] in additional_ids:
+        row['split'] = 'additional-training'
 for (split, category), ids in additions.items():
     for sound_id in ids:
         if sound_id in existing:
@@ -44,7 +48,7 @@ for (split, category), ids in additions.items():
         assert '/licenses/by/' in info['license'] or '/publicdomain/zero/' in info['license']
         prior = next((r for r in selection if infos[r['source_split']][str(r['id'])]['uploader'] == info['uploader']), None)
         if prior:
-            assert prior['split'] == split, (sound_id, info['uploader'], prior)
+            assert prior['split'] == split or {prior['split'], split} <= {'training', 'additional-training'}, (sound_id, info['uploader'], prior)
         selection.append(dict(id=sound_id, source_split=subset, split=split, category=category,
                               group=prior['group'] if prior else 'uploader:' + info['uploader'],
                               rationale=rationales[category]))

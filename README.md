@@ -7,12 +7,20 @@ The upstream repository is untouched. See [INSPECTION.md](INSPECTION.md) for the
 inspected commit, repository inventory and preserved/replaced behavior.
 
 **A real, trained Java FFT/MFCC + k-NN classifier is bundled.** The repository
-contains 170 licensed FSD50K training recordings and 50 source-group-disjoint
-held-out recordings. Direct WAV accuracy on this subset is **72% (36/50)**.
+bundles 170 licensed FSD50K training recordings. On the original, now-inspected
+50-file holdout, direct WAV accuracy was **72% (36/50)**.
 **This is not YAMNet or a validated emergency-response system:** the unchanged
 energy gate misses most isolated clips during calibration. Raw Stage 1 → Stage 2
 first-event label accuracy is **10%**, with abstentions counted as misses.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for all metrics and false positives.
+
+**Continuous-detection experiment (2026-10-11):** a periodic-window candidate
+improved raw event recall but increased false alerts on a new 41-file final set,
+so it was reverted. The working 170-recording runtime model is retained. The
+repository now includes 47 additional research training recordings, 58 development
+recordings (including the old holdout) and the 41 inspected final recordings,
+plus reproducible continuous-stream benchmarks. Research additions are not
+automatically loaded. No live-reliability improvement is claimed.
 
 ## Setup and execution
 

@@ -35,3 +35,7 @@ Report all scenarios even if worse. Repeated/gain/mixed replay is not extra data
 Final checks: data integrity and source separation, mechanics/regression tests,
 `java Build.java test`, `ui-test`, `jar`, fresh trained startup and physical
 microphone diagnostic. Physical diagnostic only establishes input operation.
+
+Outcome: the final quality gate failed; the periodic candidate was reverted.
+The data-only expansion also failed the development false-alert constraint.
+See `DECISION.md`; current runtime retains the original 170-recording model.

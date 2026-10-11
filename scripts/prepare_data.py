@@ -176,7 +176,7 @@ def main():
         (ROOT / 'datasets/ATTRIBUTION.md').write_text('\n'.join(credit) + '\n')
     seen, users, groups = set(), {}, {}
     assert [{k: r[k] for k in selection[0]} for r in records] == selection, 'Selection/manifest mismatch; rerun preparation'
-    splits = ('training', 'held-out', 'development', 'final-test')
+    splits = ('training', 'additional-training', 'held-out', 'development', 'final-test')
     actual = {str(p.relative_to(ROOT)) for s in splits for p in (ROOT / 'datasets' / s).rglob('*.wav')}
     assert actual == {r['path'] for r in records}, 'Missing or unlisted WAVs in curated directories'
     for row in records:
@@ -185,7 +185,8 @@ def main():
         assert row['pcm_sha256'] not in seen, f'Duplicate decoded audio: {path}'
         seen.add(row['pcm_sha256'])
         for values, key in ((users, row['uploader']), (groups, row['group'])):
-            assert values.setdefault(key, row['split']) == row['split'], f'Split leakage: {key}'
+            partition = 'training' if row['split'] == 'additional-training' else row['split']
+            assert values.setdefault(key, partition) == partition, f'Split leakage: {key}'
     for category in CLASSES:
         print(category, {s: sum(r['category'] == category and r['split'] == s for r in records)
                          for s in splits})

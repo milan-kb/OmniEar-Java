@@ -1,0 +1,18 @@
+
+MODE onset data/downloads/windows-expanded-real1s-normalized.tsv
+scream_distress hits across repeated scenarios= 24 vote>= 0.7 distance<= 0.8 confirmations= 1
+explosion hits across repeated scenarios= 0 vote>= 0.99 distance<= 0.3 confirmations= 2
+impact_crash hits across repeated scenarios= 49 vote>= 0.7 distance<= 0.8 confirmations= 1
+siren_traffic hits across repeated scenarios= 9 vote>= 0.8 distance<= 0.7 confirmations= 1
+
+MODE periodic data/downloads/windows-expanded-real1s-normalized.tsv
+scream_distress hits across repeated scenarios= 29 vote>= 0.7 distance<= 0.8 confirmations= 1
+explosion hits across repeated scenarios= 0 vote>= 0.99 distance<= 0.3 confirmations= 2
+impact_crash hits across repeated scenarios= 50 vote>= 0.7 distance<= 0.8 confirmations= 1
+siren_traffic hits across repeated scenarios= 29 vote>= 0.8 distance<= 0.7 confirmations= 1
+
+MODE hybrid data/downloads/windows-expanded-real1s-normalized.tsv
+scream_distress hits across repeated scenarios= 29 vote>= 0.7 distance<= 0.8 confirmations= 1
+explosion hits across repeated scenarios= 0 vote>= 0.99 distance<= 0.3 confirmations= 2
+impact_crash hits across repeated scenarios= 49 vote>= 0.7 distance<= 0.8 confirmations= 1
+siren_traffic hits across repeated scenarios= 29 vote>= 0.8 distance<= 0.7 confirmations= 1

@@ -1762,7 +1762,7 @@
   {
     "id": 182429,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "explosion",
     "group": "uploader:qubodup",
     "rationale": "Uploader documents a recorded explosive detonation; excludes gunshots, synthesized booms and fireworks. 171971 credits authentic 4kg TNT source 165808."
@@ -1770,7 +1770,7 @@
   {
     "id": 182431,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "explosion",
     "group": "uploader:qubodup",
     "rationale": "Uploader documents a recorded explosive detonation; excludes gunshots, synthesized booms and fireworks. 171971 credits authentic 4kg TNT source 165808."
@@ -1778,7 +1778,7 @@
   {
     "id": 332181,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "explosion",
     "group": "uploader:klankbeeld",
     "rationale": "Uploader documents a recorded explosive detonation; excludes gunshots, synthesized booms and fireworks. 171971 credits authentic 4kg TNT source 165808."
@@ -1786,7 +1786,7 @@
   {
     "id": 171971,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "explosion",
     "group": "uploader:qubodup",
     "rationale": "Uploader documents a recorded explosive detonation; excludes gunshots, synthesized booms and fireworks. 171971 credits authentic 4kg TNT source 165808."
@@ -1794,7 +1794,7 @@
   {
     "id": 393666,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "siren_traffic",
     "group": "uploader:chripei",
     "rationale": "Recorded traffic emergency siren; 393666 is an uploader-edited loop of recorded NYC siren, not a synthesized tone."
@@ -1802,7 +1802,7 @@
   {
     "id": 182474,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:keweldog",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1810,7 +1810,7 @@
   {
     "id": 212182,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:blaukreuz",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1818,7 +1818,7 @@
   {
     "id": 264993,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:sethlind",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1826,7 +1826,7 @@
   {
     "id": 162443,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:zendry423",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1834,7 +1834,7 @@
   {
     "id": 268015,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:jjamespacap",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1842,7 +1842,7 @@
   {
     "id": 275558,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:rhadniel",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1850,7 +1850,7 @@
   {
     "id": 350724,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:AlienXXX",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1858,7 +1858,7 @@
   {
     "id": 380941,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:mricken1",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1866,7 +1866,7 @@
   {
     "id": 379754,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:MicrosoftSam",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1874,7 +1874,7 @@
   {
     "id": 383062,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Artro03",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1882,7 +1882,7 @@
   {
     "id": 76683,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:skiersailor",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1890,7 +1890,7 @@
   {
     "id": 395415,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:mosvane",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1898,7 +1898,7 @@
   {
     "id": 329760,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:maksinkster",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1906,7 +1906,7 @@
   {
     "id": 199953,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Marth8880",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1914,7 +1914,7 @@
   {
     "id": 194842,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:xspackets",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1922,7 +1922,7 @@
   {
     "id": 401719,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:samarobryn",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1930,7 +1930,7 @@
   {
     "id": 369574,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:DomainHunter",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1938,7 +1938,7 @@
   {
     "id": 346154,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:suhral",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1946,7 +1946,7 @@
   {
     "id": 104525,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:skyumori",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1954,7 +1954,7 @@
   {
     "id": 332914,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:ProjectsU012",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1962,7 +1962,7 @@
   {
     "id": 72723,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:moffet",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1970,7 +1970,7 @@
   {
     "id": 328728,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:ivolipa",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1978,7 +1978,7 @@
   {
     "id": 370714,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Jadester64",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1986,7 +1986,7 @@
   {
     "id": 170015,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:fabiopx",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -1994,7 +1994,7 @@
   {
     "id": 121888,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:StephenSaldanha",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2002,7 +2002,7 @@
   {
     "id": 87315,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Sailor55",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2010,7 +2010,7 @@
   {
     "id": 221639,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:dafiles",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2018,7 +2018,7 @@
   {
     "id": 251969,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:cliftonmcarlson",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2026,7 +2026,7 @@
   {
     "id": 60689,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:barrigan",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2034,7 +2034,7 @@
   {
     "id": 354056,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:eeease",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2042,7 +2042,7 @@
   {
     "id": 184833,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Gauraa",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2050,7 +2050,7 @@
   {
     "id": 402642,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:theuncertainman",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2058,7 +2058,7 @@
   {
     "id": 17643,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:TwistedLemon",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2066,7 +2066,7 @@
   {
     "id": 223521,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:JarAxe",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2074,7 +2074,7 @@
   {
     "id": 256513,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:HunteR4708",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2082,7 +2082,7 @@
   {
     "id": 336390,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:ghaelen",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2090,7 +2090,7 @@
   {
     "id": 273320,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:Clagnut",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2098,7 +2098,7 @@
   {
     "id": 100144,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:NoiseCollector",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2106,7 +2106,7 @@
   {
     "id": 386226,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:ldezem",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2114,7 +2114,7 @@
   {
     "id": 143591,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:gilly11",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2122,7 +2122,7 @@
   {
     "id": 11585,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:samplecat",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
@@ -2130,7 +2130,7 @@
   {
     "id": 219551,
     "source_split": "dev",
-    "split": "training",
+    "split": "additional-training",
     "category": "background",
     "group": "uploader:vumseplutten1709",
     "rationale": "Genuine non-target environmental/household/voice noise; includes thunder, door/hammer knocks, dogs, cheering and fireworks as hard negatives."
