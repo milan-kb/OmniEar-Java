@@ -228,3 +228,99 @@ Full original descriptions, label rationale, groups and hashes: manifest.json.
 | held-out / background | [90416](https://freesound.org/s/90416/) short female laugh.wav | uair01 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
 | held-out / background | [136991](https://freesound.org/s/136991/) carlos 2.MP3 | milton. | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
 | held-out / background | [251931](https://freesound.org/s/251931/) Room Clap.wav | pan14 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / explosion | [182429](https://freesound.org/s/182429/) Explosion | qubodup | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / explosion | [182431](https://freesound.org/s/182431/) Explosive 1 v2 [DOD 130303].flac | qubodup | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / explosion | [332181](https://freesound.org/s/332181/) mortar  grenade shell 001.wav | klankbeeld | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / explosion | [171971](https://freesound.org/s/171971/) Explosion, short [sidohzen 165808] | qubodup | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / siren_traffic | [393666](https://freesound.org/s/393666/) WaHi siren to loop.mp3 | chripei | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [182474](https://freesound.org/s/182474/) car horn.wav | keweldog | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [212182](https://freesound.org/s/212182/) 120308_NYTbldg01.wav | blaukreuz | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [264993](https://freesound.org/s/264993/) Car honk.wav | sethlind | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [162443](https://freesound.org/s/162443/) traffic.mp3 | zendry423 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [268015](https://freesound.org/s/268015/) Car Horns Morocco | jjamespacap | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [275558](https://freesound.org/s/275558/) bombay road noise.mp3 | rhadniel | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [350724](https://freesound.org/s/350724/) Dry_leaves_and_parasol_creaks_02.wav | AlienXXX | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [380941](https://freesound.org/s/380941/) wind in bushes edited.wav | mricken1 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [379754](https://freesound.org/s/379754/) soft rain 01.wav | MicrosoftSam | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [383062](https://freesound.org/s/383062/) Rain in Town.mp3 | Artro03 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [76683](https://freesound.org/s/76683/) ThunderAndRain4.wav | skiersailor | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [395415](https://freesound.org/s/395415/) heavy raindrops.wav | mosvane | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [329760](https://freesound.org/s/329760/) Heavy Rain | maksinkster | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [199953](https://freesound.org/s/199953/) Thunder roll 06 | Marth8880 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [194842](https://freesound.org/s/194842/) JulyAdrianThunder.mp3 | xspackets | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [401719](https://freesound.org/s/401719/) Rain and Thunder | samarobryn | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [369574](https://freesound.org/s/369574/) 2010 Corolla Driver Door Close Inside.wav | DomainHunter | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [346154](https://freesound.org/s/346154/) creaking door_3.mp3 | suhral | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [104525](https://freesound.org/s/104525/) Door_Close_Long_Sqeuak_01.wav | skyumori | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [332914](https://freesound.org/s/332914/) Front door opening and closing (with chime) | ProjectsU012 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [72723](https://freesound.org/s/72723/) Bark of impatience.mp3 | moffet | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [328728](https://freesound.org/s/328728/) Mad_Barking_Dog.wav | ivolipa | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [370714](https://freesound.org/s/370714/) Dogs barking.mp3 | Jadester64 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [170015](https://freesound.org/s/170015/) one bark of a poodle dog | fabiopx | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [121888](https://freesound.org/s/121888/) DOGFX_BICHONFRISE_BARK.wav | StephenSaldanha | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [87315](https://freesound.org/s/87315/) Bus Money FS.wav | Sailor55 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [221639](https://freesound.org/s/221639/) Mumbai (Bombay) Street Sounds, Traffic | dafiles | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [251969](https://freesound.org/s/251969/) Motorcycle Pass 2 | cliftonmcarlson | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [60689](https://freesound.org/s/60689/) Good Morning.wav | barrigan | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [354056](https://freesound.org/s/354056/) BaseballGameApplause.wav | eeease | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [184833](https://freesound.org/s/184833/) Crowd | Gauraa | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [402642](https://freesound.org/s/402642/) Go Go Go - (Version 1) Northern British Soldier | theuncertainman | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [17643](https://freesound.org/s/17643/) happy-birthday.wav | TwistedLemon | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [223521](https://freesound.org/s/223521/) Creepy Little Man | JarAxe | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [256513](https://freesound.org/s/256513/) Knock on the door | HunteR4708 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [336390](https://freesound.org/s/336390/) door knocking.wav | ghaelen | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [273320](https://freesound.org/s/273320/) Fireworks | Clagnut | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [100144](https://freesound.org/s/100144/) raw_firework_niceshot.mp3 | NoiseCollector | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [386226](https://freesound.org/s/386226/) Wood - Steel on Wood 1 | ldezem | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [143591](https://freesound.org/s/143591/) industrial_hammer_wood_distance.mp3 | gilly11 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| training / background | [11585](https://freesound.org/s/11585/) glass sounds short.WAV | samplecat | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| training / background | [219551](https://freesound.org/s/219551/) mousejumpinhgontable3.wav | vumseplutten1709 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| development / background | [198496](https://freesound.org/s/198496/) thunder.flac | Prankoys | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| development / background | [151849](https://freesound.org/s/151849/) Thunder and wind on stormy night.aif | carroll27 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| development / background | [369247](https://freesound.org/s/369247/) Car starting.WAV | gabirel | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| development / background | [36902](https://freesound.org/s/36902/) dog barking 03.wav | oen | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| development / background | [36161](https://freesound.org/s/36161/) bells2.wav | sagetyrtle | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| development / background | [76813](https://freesound.org/s/76813/) door knock 2.mp3 | DJ Burnham | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| development / background | [109733](https://freesound.org/s/109733/) double hit distant cheer.aiff | SoundCollectah | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| development / background | [160679](https://freesound.org/s/160679/) Construction site with a tractor | antique98 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / explosion | [73005](https://freesound.org/s/73005/) Blast.wav | Benboncan | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / explosion | [251759](https://freesound.org/s/251759/) BOOMING PUNCHY EXPLOSION - close, big SCHOEPS MK41.wav | misosound | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / siren_traffic | [377125](https://freesound.org/s/377125/) Fire-truck large.WAV | Sandermotions | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / siren_traffic | [377126](https://freesound.org/s/377126/) Fire-truck Small.WAV | Sandermotions | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / scream_distress | [110139](https://freesound.org/s/110139/) Scary scream 1.wav | Ryding | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / scream_distress | [110140](https://freesound.org/s/110140/) Scary scream 2.wav | Ryding | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / scream_distress | [208893](https://freesound.org/s/208893/) Scream, female x2 | peridactyloptrix | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / scream_distress | [169628](https://freesound.org/s/169628/) Male voice screaming loudly | Dinsfire | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / scream_distress | [367307](https://freesound.org/s/367307/) woman_scream.wav | themfish | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / scream_distress | [328003](https://freesound.org/s/328003/) Scream 1.wav | Hali_Pinson | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / scream_distress | [345450](https://freesound.org/s/345450/) Male_Death_03 | Artmasterrich | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / impact_crash | [367624](https://freesound.org/s/367624/) Crash.wav | FxKid2 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / impact_crash | [355340](https://freesound.org/s/355340/) Glass breaking | Samgd14 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / impact_crash | [387177](https://freesound.org/s/387177/) Smashing a glass | pfranzen | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / impact_crash | [115916](https://freesound.org/s/115916/) Glass Hits floor, breaks, shatters.wav | issalcake | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / impact_crash | [273647](https://freesound.org/s/273647/) Glass Bottle Shatter.wav | qyxs | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / impact_crash | [260432](https://freesound.org/s/260432/) Glass Break - Small Jar 02 | RoganDerrick | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / impact_crash | [221528](https://freesound.org/s/221528/) Glass Break | unfa | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [26176](https://freesound.org/s/26176/) toet00.wav | WIM | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [151359](https://freesound.org/s/151359/) KEY FOB.wav | shakaharu | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [15547](https://freesound.org/s/15547/) Chime01.wav | LG | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [199688](https://freesound.org/s/199688/) R05_0273.mp3 | Omar Alvarado | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [423964](https://freesound.org/s/423964/) Storm.m4a | ritasofio | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [71602](https://freesound.org/s/71602/) thunderstorm.wav | ghostcake | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [96933](https://freesound.org/s/96933/) 2thunderclaps.wav | clippingdetected | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [151589](https://freesound.org/s/151589/) Door-Pantry-Squeak-04.wav | D W | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [316558](https://freesound.org/s/316558/) Screechy Door_Sample_15.07.15.wav | else_fucker | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [221207](https://freesound.org/s/221207/) DOG-Small-1 (7sec Loop).wav | rickdenny | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [128042](https://freesound.org/s/128042/) Igor3B.wav | be-steele | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [257034](https://freesound.org/s/257034/) Vehicle passing - driving car - lorry - van - bus - tractor - truck | Jagadamba | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [156212](https://freesound.org/s/156212/) vehicles-engine_2.wav | Lau7 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [349401](https://freesound.org/s/349401/) The crowd shouted Countdown星光大道呼喊声音.WAV | zheng142326 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [168251](https://freesound.org/s/168251/) Bell Ring Plaza | gmarchisio | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [361551](https://freesound.org/s/361551/) applause002.mp3 | tec studios | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [253611](https://freesound.org/s/253611/) BECAUSE I LIKE IT.wav | xtrgamr | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / background | [422724](https://freesound.org/s/422724/) D_Man_Stop.wav | Grubzyy | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [83479](https://freesound.org/s/83479/) doorknock.wav | mlestn1 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / background | [198353](https://freesound.org/s/198353/) fireworks impact21.wav | schafferdavid | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| final-test / siren_traffic | [43806](https://freesound.org/s/43806/) Siren.wav | daveincamas | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / scream_distress | [90790](https://freesound.org/s/90790/) Scream_Male_MidDistance_Outdoors.wav | kMoon | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| final-test / impact_crash | [372919](https://freesound.org/s/372919/) Glass Falling and Breaking | shortshorts | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |

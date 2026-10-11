@@ -1,6 +1,44 @@
 # Real recordings and honest evaluation
 
-## Bundled subset (2026-10-10)
+## Continuous-detection extension (2026-10-11)
+
+**316 licensed recordings: 217 training, 58 development, 41 new final-test.**
+The original `held-out/` directory is retained for reproducibility but its 50
+already-inspected files are now development data, alongside eight new background
+files in `development/`. Only `final-test/` is the new evaluation set.
+
+| Class | Training (groups) | Development | New final (groups) |
+|---|---:|---:|---:|
+| Distress scream | 40 (14) | 10 | 8 (7) |
+| Explosion | 22 (3) | 10 | 2 (2) |
+| Impact/crash | 40 (13) | 10 | 8 (8) |
+| Traffic siren | 33 (21) | 10 | 3 (2) |
+| Background | 82 (72) | 18 | 20 (20) |
+
+All original assets are preserved. Added 42 real training hard negatives include
+traffic/horns, rain/wind, thunder, door squeaks/closures, barking, speech/cheering,
+knocks/hammering and fireworks. These are **non-target** sounds under this narrow
+five-class definition, not proof that fireworks or thunder are harmless.
+Four additional documented explosive recordings and one recorded NYC siren loop
+remain with their original uploaders in training. Edited recordings are not
+counted as independent sessions. Explosion training still has only three groups.
+
+Final explosions are a railway controlled blast (Benboncan) and a documented
+film-set pyrotechnic fireball (misosound); final sirens are two Dutch fire-truck
+recordings (Sandermotions) and a search-and-rescue siren excerpt (daveincamas).
+These very small supports do not establish broad class generalization.
+All 316 clips are CC BY 3.0 (171) or CC0 (145); full provenance/hashes/credits are
+in the manifest and attribution. No generated training sounds were added.
+
+Selection was frozen using metadata, before final predictions. During the
+metadata-only audit, candidate IDs 381951, 379015 and 380664 were replaced with
+90790, 372919 and 43806 to conservatively avoid possible UPF/school-session
+overlap with development. No scores informed these replacements. Acquisition
+and checks use the existing verified-range/CRC/checksum workflow; same-uploader
+and identified source-group separation covers all four directories.
+The experiment contract is [evaluation/PROTOCOL.md](evaluation/PROTOCOL.md).
+
+## Historical baseline subset (2026-10-10)
 
 **220 real FSD50K recordings are included: 170 training, 50 held out.** They are
 full-length source clips converted to mono 16 kHz PCM16 WAV, with no gain

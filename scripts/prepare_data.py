@@ -176,7 +176,8 @@ def main():
         (ROOT / 'datasets/ATTRIBUTION.md').write_text('\n'.join(credit) + '\n')
     seen, users, groups = set(), {}, {}
     assert [{k: r[k] for k in selection[0]} for r in records] == selection, 'Selection/manifest mismatch; rerun preparation'
-    actual = {str(p.relative_to(ROOT)) for s in ('training', 'held-out') for p in (ROOT / 'datasets' / s).rglob('*.wav')}
+    splits = ('training', 'held-out', 'development', 'final-test')
+    actual = {str(p.relative_to(ROOT)) for s in splits for p in (ROOT / 'datasets' / s).rglob('*.wav')}
     assert actual == {r['path'] for r in records}, 'Missing or unlisted WAVs in curated directories'
     for row in records:
         path = ROOT / row['path']
@@ -187,7 +188,7 @@ def main():
             assert values.setdefault(key, row['split']) == row['split'], f'Split leakage: {key}'
     for category in CLASSES:
         print(category, {s: sum(r['category'] == category and r['split'] == s for r in records)
-                         for s in ('training', 'held-out')})
+                         for s in splits})
     print('PASS: hashes, decoded-audio uniqueness, uploader and session/source-group separation')
 
 
