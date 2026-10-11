@@ -40,7 +40,7 @@ public final class WavTestingPanel extends JPanel implements AutoCloseable {
         buttons.add(classify); buttons.add(evaluate); direct.add(buttons, BorderLayout.SOUTH);
         routes.add(DarkTheme.section("SOUND CLASSIFICATION · Stage 2", direct));
         JPanel gated = new JPanel(new BorderLayout(8, 12));
-        gated.add(new JLabel("<html>Find RMS spikes, then classify captured events.<br>Begin with 2 seconds of quiet calibration audio.</html>"), BorderLayout.CENTER);
+        gated.add(new JLabel("<html>Trained: one-second windows, twice per second.<br>Untrained: RMS anomalies after baseline calibration.</html>"), BorderLayout.CENTER);
         gated.add(analyze, BorderLayout.SOUTH);
         routes.add(DarkTheme.section("ANOMALY DETECTION · Stage 1 → 2", gated));
         add(routes, BorderLayout.NORTH);
@@ -87,7 +87,7 @@ public final class WavTestingPanel extends JPanel implements AutoCloseable {
                     result.setText(String.format(java.util.Locale.ROOT,
                             "%s%n%nPrediction: %s%nVote share: %.3f   |   Nearest standardized distance: %.3f%nOutcome: %s   |   Priority: %s%nDuration: %.3f s · normalized to 16 kHz mono%n%n%s%n%s",
                             path, event.category(), event.voteShare(), event.nearestDistance(), event.status(), event.priority(), duration,
-                            duration < 2.5 ? "Short clip: centered zero-padding to 2.5 s; limited acoustic context." : "Uses the loudest 2.5-second feature window.",
+                            duration < 1 ? "Short clip: centered zero-padding to 1 s; limited acoustic context." : "Uses the loudest one-second feature window with RMS normalization.",
                             event.nearestDistance() < 1e-9 ? "Exact feature match: this may be training audio. Do not count it as unseen evaluation." : "One prediction is not an accuracy estimate. Use the held-out folder for labeled testing."));
                     result.setCaretPosition(0);
                 } catch (InterruptedException e) { Thread.currentThread().interrupt(); }

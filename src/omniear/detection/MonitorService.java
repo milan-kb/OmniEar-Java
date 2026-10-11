@@ -50,7 +50,9 @@ public final class MonitorService implements AutoCloseable {
             if (stopping) return;
             input.open();
             var pipeline = new DetectionPipeline(config, classifier, Instant.now(), input.description());
-            listener.onState(true, testOnly ? "Microphone test · speak normally for 5 seconds · no events saved" : "Listening — calibrating for the first 2 seconds");
+            listener.onState(true, testOnly ? "Microphone test · speak normally for 5 seconds · no events saved"
+                    : classifier == null ? "Listening — anomaly baseline calibrates for 2 seconds"
+                    : "Listening — one-second windows, at most two classifications per second");
             float[] buffer = new float[AudioSamples.BLOCK_SIZE];
             double peak = 0, sumSquares = 0;
             long sampleCount = 0;

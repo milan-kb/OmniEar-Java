@@ -72,12 +72,12 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEADING, 8, 0));
         start.setMnemonic('S'); stop.setMnemonic('T'); wav.setMnemonic('W'); micTest.setMnemonic('M');
         for (JButton button : List.of(start, stop, micTest)) buttons.add(button);
-        buttons.add(new JLabel("First 2 s: stay quiet to calibrate"));
+        buttons.add(new JLabel("Trained: 1 s windows · RMS baseline: 2 s"));
         live.add(buttons, BorderLayout.NORTH);
         live.add(waveform, BorderLayout.CENTER);
         JPanel signalStatus = new JPanel(new GridLayout(2, 1, 0, 4)); signalStatus.add(state); signalStatus.add(meter);
         live.add(signalStatus, BorderLayout.SOUTH);
-        overview.add(DarkTheme.section("LIVE SIGNAL · RMS anomalies trigger classification when trained", live), BorderLayout.CENTER);
+        overview.add(DarkTheme.section("LIVE SIGNAL · trained periodic classification / RMS anomaly telemetry", live), BorderLayout.CENTER);
         JPanel calibrate = new JPanel(new FlowLayout(FlowLayout.LEADING, 8, 0));
         labeled(calibrate, "Threshold ×", multiplier); labeled(calibrate, "RMS floor", floor); labeled(calibrate, "Cooldown (s)", cooldown);
         overview.add(calibrate, BorderLayout.SOUTH);
@@ -155,7 +155,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
     }
     private void chooseWav() {
         JFileChooser chooser = new JFileChooser(); chooser.setFileFilter(new FileNameExtensionFilter("WAV audio", "wav"));
-        chooser.setDialogTitle("Analyze WAV through both stages (first 2 s calibrate)");
+        chooser.setDialogTitle("Analyze WAV continuously (trained: one-second windows)");
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             Path path = chooser.getSelectedFile().toPath();
             startWav(path);
@@ -177,7 +177,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         waveform.setSamples(block.samples());
         var reading = block.reading();
         meter.setText(String.format(java.util.Locale.ROOT, "RMS %.4f    Baseline %.4f    Threshold %.4f    Audio %.2f s    %s",
-                reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "Calibrated" : "Calibrating (stay quiet)"));
+                reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "RMS baseline ready" : "RMS baseline warming up"));
     }
     private void updateControls() {
         boolean running = monitor.isRunning(), idle = !running && !trainingBusy && !clipBusy && !closing;

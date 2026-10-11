@@ -96,6 +96,6 @@ public final class Main {
                 + "  java -cp build/classes omniear.Main --classify FILE.wav [--training DIR] [--data DIR]\n"
                 + "  java -cp build/classes omniear.Main --evaluate HELD_OUT_ROOT --training LABELED_WAV_ROOT\n"
                 + "  java -cp build/classes omniear.Main --mic-test\n"
-                + "--analyze preserves Stage 1 calibration; --classify explicitly bypasses Stage 1.");
+                + "--analyze uses trained periodic windows (RMS anomalies when untrained); --classify inspects one clip.");
     }
 }
