@@ -8,7 +8,7 @@ import omniear.alerts.Priority;
 public record SoundEvent(UUID id, Instant timestamp, String source, double audioSeconds,
         double rms, double baseline, double threshold, Category category, double voteShare,
         double nearestDistance, Priority priority, Status status) {
-    public enum Status { ALERT, BACKGROUND_SUPPRESSED, LOW_VOTE_SUPPRESSED, UNTRAINED, BACKGROUND_CONFLICT_SUPPRESSED }
+    public enum Status { ALERT, BACKGROUND_SUPPRESSED, LOW_VOTE_SUPPRESSED, UNTRAINED }
     public SoundEvent {
         Objects.requireNonNull(id); Objects.requireNonNull(timestamp); Objects.requireNonNull(source);
         Objects.requireNonNull(priority); Objects.requireNonNull(status);
@@ -20,7 +20,6 @@ public record SoundEvent(UUID id, Instant timestamp, String source, double audio
                 || (status == Status.ALERT && (category == null || category == Category.BACKGROUND || priority != category.priority() || voteShare < category.alertGate()))
                 || (status != Status.ALERT && priority != Priority.NONE)
                 || (status == Status.BACKGROUND_SUPPRESSED && category != Category.BACKGROUND)
-                || (status == Status.BACKGROUND_CONFLICT_SUPPRESSED && category != Category.SCREAM_DISTRESS && category != Category.IMPACT_CRASH)
                 || (status == Status.LOW_VOTE_SUPPRESSED && (category == Category.BACKGROUND || voteShare >= category.alertGate()))) {
             throw new IllegalArgumentException("Inconsistent event category/status/priority");
         }
