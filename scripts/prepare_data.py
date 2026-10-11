@@ -176,7 +176,7 @@ def main():
         (ROOT / 'datasets/ATTRIBUTION.md').write_text('\n'.join(credit) + '\n')
     seen, users, groups = set(), {}, {}
     assert [{k: r[k] for k in selection[0]} for r in records] == selection, 'Selection/manifest mismatch; rerun preparation'
-    splits = ('training', 'additional-training', 'held-out', 'development', 'final-test')
+    splits = ('training', 'additional-training', 'held-out', 'development', 'final-test', 'rejection-final')
     actual = {str(p.relative_to(ROOT)) for s in splits for p in (ROOT / 'datasets' / s).rglob('*.wav')}
     assert actual == {r['path'] for r in records}, 'Missing or unlisted WAVs in curated directories'
     for row in records:

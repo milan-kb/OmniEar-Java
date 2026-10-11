@@ -2526,5 +2526,389 @@
     "category": "impact_crash",
     "group": "uploader:shortshorts",
     "rationale": "Recorded glass breakage; not a vehicle collision label."
+  },
+  {
+    "id": 175385,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:DigitalDominic",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 241591,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:pushkin",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 235595,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:tcrocker68",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 243376,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:JohnsonBrandEditing",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 82418,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:Vampirella17",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 400183,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:tomattka",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 159460,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:GR3AVE5Y",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 132828,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "scream_distress",
+    "group": "uploader:rogueturtle",
+    "rationale": "Recorded human scream; mostly acted/scary/fear/pain according to descriptions/tags; does not establish actual distress."
+  },
+  {
+    "id": 336425,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:221Beimesche",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 376462,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:Mystikuum",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 978,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:RHumphries",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 20133,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:gezortenplotz",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 141563,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:avrahamy",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 186767,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:mshahen",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 182896,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:aktinium",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 189575,
+    "source_split": "eval",
+    "split": "rejection-final",
+    "category": "impact_crash",
+    "group": "uploader:Unopiate",
+    "rationale": "Recorded glass/bottle/window/light-bulb breakage, not vehicle collision."
+  },
+  {
+    "id": 147933,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "siren_traffic",
+    "group": "uploader:bmoreno",
+    "rationale": "Uploader describes recorded passing ambulance (147933) or city street distant siren (93110); original tags corroborate traffic context."
+  },
+  {
+    "id": 93110,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "siren_traffic",
+    "group": "uploader:Tgruber",
+    "rationale": "Uploader describes recorded passing ambulance (147933) or city street distant siren (93110); original tags corroborate traffic context."
+  },
+  {
+    "id": 364662,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:TOC1",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 182395,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:pgonsilva",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 389254,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:DJames619",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 264332,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:RafaStone",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 261286,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:mcginnster",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 348332,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:rubenap",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 165874,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:GaryEdstrom",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 253763,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:ullsokk",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 155833,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:heptor",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 243757,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:GeronimoGeronimo",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 249950,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:IllusiaProductions",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 34930,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:vibe_crc",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 368841,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:SkyRaeVoicing",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 234034,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:11linda",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 219766,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:MadamVicious",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 397317,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:DesignDean",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 125093,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:dr.eel",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 337153,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:evsecrets",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 175382,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:vedas",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 183601,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:MaxDemianAGL",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 138465,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:campl",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 262759,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:temawas",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 334903,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:equiloud",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 89872,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:lsprice",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 201183,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:phonoflora",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 342542,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:sgrowe",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 415826,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:marsal.oido",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 241895,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:kalinkamalinka",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 221567,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:AlaskaRobotics",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 413854,
+    "source_split": "dev",
+    "split": "rejection-final",
+    "category": "background",
+    "group": "uploader:jaegrover",
+    "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
   }
 ]

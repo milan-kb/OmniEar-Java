@@ -324,3 +324,51 @@ Full original descriptions, label rationale, groups and hashes: manifest.json.
 | final-test / siren_traffic | [43806](https://freesound.org/s/43806/) Siren.wav | daveincamas | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
 | final-test / scream_distress | [90790](https://freesound.org/s/90790/) Scream_Male_MidDistance_Outdoors.wav | kMoon | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
 | final-test / impact_crash | [372919](https://freesound.org/s/372919/) Glass Falling and Breaking | shortshorts | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / scream_distress | [175385](https://freesound.org/s/175385/) Scream | DigitalDominic | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [241591](https://freesound.org/s/241591/) pandoramachineannalisaloefflerscreams_03.flac | pushkin | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [235595](https://freesound.org/s/235595/) Girl_Two_Screams.wav | tcrocker68 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [243376](https://freesound.org/s/243376/) human male scream 2 | JohnsonBrandEditing | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [82418](https://freesound.org/s/82418/) Jeanette - Scream 2.wav | Vampirella17 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [400183](https://freesound.org/s/400183/) Girl Screaming_01.wav | tomattka | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / scream_distress | [159460](https://freesound.org/s/159460/) SamGreaves-Scream-01.wav | GR3AVE5Y | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / scream_distress | [132828](https://freesound.org/s/132828/) Scream.aif | rogueturtle | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / impact_crash | [336425](https://freesound.org/s/336425/) Glass Shattering and Falling | 221Beimesche | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / impact_crash | [376462](https://freesound.org/s/376462/) breaking_glass.wav | Mystikuum | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / impact_crash | [978](https://freesound.org/s/978/) RBH Glass_Break 02.wav | RHumphries | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / impact_crash | [20133](https://freesound.org/s/20133/) breaking_glass.wav | gezortenplotz | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / impact_crash | [141563](https://freesound.org/s/141563/) Glass Break | avrahamy | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / impact_crash | [186767](https://freesound.org/s/186767/) Bottleandsmallglassbreak.wav | mshahen | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / impact_crash | [182896](https://freesound.org/s/182896/) light-bulb smash.wav | aktinium | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / impact_crash | [189575](https://freesound.org/s/189575/) Breaking Glass.wav | Unopiate | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / siren_traffic | [147933](https://freesound.org/s/147933/) 0111 Ambulance.wav | bmoreno | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / siren_traffic | [93110](https://freesound.org/s/93110/) city_street_distant_siren.wav | Tgruber | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [364662](https://freesound.org/s/364662/) Dog Bark.wav | TOC1 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [182395](https://freesound.org/s/182395/) Big_dog_bark_01.aiff | pgonsilva | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [389254](https://freesound.org/s/389254/) Ladrido.wav | DJames619 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [264332](https://freesound.org/s/264332/) Golden_Retriever.mp3 | RafaStone | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [261286](https://freesound.org/s/261286/) dog-bark.WAV | mcginnster | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [348332](https://freesound.org/s/348332/) abbaio.wav | rubenap | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [165874](https://freesound.org/s/165874/) Thunder Without Rain or Wind | GaryEdstrom | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [253763](https://freesound.org/s/253763/) thunder.wav | ullsokk | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [155833](https://freesound.org/s/155833/) thunderclap.wav | heptor | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [243757](https://freesound.org/s/243757/) Rain Distant Thunder | GeronimoGeronimo | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [249950](https://freesound.org/s/249950/) Thunder.wav | IllusiaProductions | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [34930](https://freesound.org/s/34930/) thunder_rain.mp3 | vibe_crc | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [368841](https://freesound.org/s/368841/) Alright! We did it! Female Cheer for games | SkyRaeVoicing | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [234034](https://freesound.org/s/234034/) calling: dinners ready | 11linda | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [219766](https://freesound.org/s/219766/) Come back here and face me | MadamVicious | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [397317](https://freesound.org/s/397317/) kids_WOAH.wav | DesignDean | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [125093](https://freesound.org/s/125093/) door_squeak_20_02_11_19_1.mp3 | dr.eel | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [337153](https://freesound.org/s/337153/) Door opening and closing with creaking - Tascam DR1 Stereo.wav | evsecrets | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [175382](https://freesound.org/s/175382/) door-squeak.wav | vedas | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [183601](https://freesound.org/s/183601/) Door_close_inside01.aiff | MaxDemianAGL | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [138465](https://freesound.org/s/138465/) Cars_Horns.wav | campl | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [262759](https://freesound.org/s/262759/) Car Pass.wav | temawas | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [334903](https://freesound.org/s/334903/) Cars_Passing_By_Rainy_Day_Atmo.WAV | equiloud | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [89872](https://freesound.org/s/89872/) soh05.aif | lsprice | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [201183](https://freesound.org/s/201183/) Avoncroft Blacksmith (1).wav | phonoflora | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [342542](https://freesound.org/s/342542/) Outside Hammer | sgrowe | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [415826](https://freesound.org/s/415826/) AMBIENCE MANIFESTATION SANT CELONI APPLAUSE 2.mp3 | marsal.oido | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [241895](https://freesound.org/s/241895/) croc-14.wav | kalinkamalinka | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| rejection-final / background | [221567](https://freesound.org/s/221567/) cheering and clapping crowd 2 | AlaskaRobotics | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| rejection-final / background | [413854](https://freesound.org/s/413854/) Ambience - Freezing Rain falling on snow-covered leaves | jaegrover | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
