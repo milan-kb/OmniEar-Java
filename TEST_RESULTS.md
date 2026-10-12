@@ -9,6 +9,8 @@ accepted training recordings are unchanged from `fb5246f`.
 
 - **249 regression checks pass**, including six input-level boundary checks and
   26 checks for the ten actual demo recordings and separate training resources.
+  A temporary mutation raising the near-full-scale cutoff from 0.99 to 2.0 was
+  rejected by the diagnostic test; the original source was restored afterward.
 - `demo/VERIFIED_RESULTS.tsv` records current inference: one selected direct
   success and one known failure per category; all ten raw replays emit no event.
   This is a teaching selection, not a representative accuracy estimate.
@@ -28,6 +30,29 @@ accepted training recordings are unchanged from `fb5246f`.
   threat recognition or absence of analog clipping.
 - Dataset audit passes all 364 recordings. The five paired rejection-study
   summaries still reproduce; historical experiment predictions are preserved.
+- Fresh local clone of submission snapshot `85884be` (no existing build/data):
+  `java Build.java test` passed 249 checks; JAR build/help passed; `jdeps` found
+  only `java.base` and `java.desktop`. Both Swing suites also passed using the
+  **packaged JAR classes** on the isolated display, including the primary demo
+  button being fully visible at 1060×820.
+- Portable JAR run from an empty temporary working directory reproduced the
+  committed demo TSV exactly without repository files. Separate fresh CLI
+  launch/restart installed 170 training WAVs, classified explosion 256296 as
+  explosion/P0 twice, preserved two correctly marked CSV records, and completed
+  gated WAV processing. ZIP inspection verified **170 training + 10 separate demo
+  WAVs**; demo hashes, labels, authors, source URLs and licenses match the manifest.
+
+For Linux test hosts with compositor focus restrictions and an existing Xwayland
+installation, the equivalent isolated-display check can be run in two terminals
+(choose an unused display number; stop the server after testing):
+
+```sh
+# Terminal 1 — optional system test facility, not an application dependency:
+Xwayland :9 -geometry 1360x1000 -nolisten tcp -noreset
+# Terminal 2 — same real Swing/Robot assertions, no skipped checks:
+DISPLAY=:9 java Build.java ui-test
+DISPLAY=:9 java -cp build/classes omniear.TrainedSmokeTest --ui
+```
 
 Submission documents: [report](docs/PROJECT_REPORT.md), [UML](docs/UML.md),
 [five-minute demo/viva](docs/DEMO.md), [feature audit](docs/FEATURE_AUDIT.md).
