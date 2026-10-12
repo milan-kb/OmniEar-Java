@@ -49,10 +49,14 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
                     classifier = report.classifier().orElse(null);
                     int count = report.counts().values().stream().mapToInt(Integer::intValue).sum();
                     modelState.setText(classifier == null ? "UNTRAINED · anomaly monitoring only · add all five classes in Training"
-                            : "Classification ready · " + count + " WAVs / 5 classes · k=" + KnnClassifier.DEFAULT_K + " · readiness ≠ accuracy; live detection is unreliable");
+                            : "Classification ready · " + count + " WAVs / 5 classes · k≤" + KnnClassifier.DEFAULT_K + " · readiness ≠ accuracy; live detection is unreliable");
                     modelState.setForeground(classifier == null ? DarkTheme.MUTED : DarkTheme.ACCENT); updateControls();
                 },
-                this::problem, busy -> { trainingBusy = busy; updateControls(); });
+                this::problem, busy -> {
+                    trainingBusy = busy;
+                    if (busy) { modelState.setText("Loading training · classification paused until all five classes are checked…"); modelState.setForeground(DarkTheme.MUTED); }
+                    updateControls();
+                });
         testing = new WavTestingPanel(() -> classifier, training::root, store, this::onEvent, this::problem,
                 busy -> { clipBusy = busy; updateControls(); }, wav);
         setDefaultCloseOperation(WindowConstants.DO_NOTHING_ON_CLOSE);
@@ -180,7 +184,9 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         if (block == null) return;
         waveform.setSamples(block.samples());
         var level = new InputDiagnostics(); level.add(block.samples());
-        inputLevel.setText("Last block · " + level.summary()); inputLevel.setToolTipText(inputLevel.getText());
+        inputLevel.setText(String.format(java.util.Locale.ROOT, "Last block · peak %.4f · near full scale %.2f%% · %s", level.peak(), level.nearFullScalePercent(),
+                level.peak() >= .99 ? "Possible clipping: lower OS gain" : level.peak() < .001 ? "Very quiet: check input/mute/gain" : "Signal received (not a recognition check)"));
+        inputLevel.setToolTipText(level.summary());
         var reading = block.reading();
         meter.setText(String.format(java.util.Locale.ROOT, "RMS %.4f    Baseline %.4f    Threshold %.4f    Audio %.2f s    %s",
                 reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "Calibrated" : "Calibrating (stay quiet)"));

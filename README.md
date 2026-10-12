@@ -1,5 +1,24 @@
 # OmniEar — Java OOP semester project
 
+## Academic submission / demonstration
+
+Start with [the five-minute demo and viva guide](docs/DEMO.md),
+[project report](docs/PROJECT_REPORT.md), [UML class diagram](docs/UML.md) and
+[feature/claim audit](docs/FEATURE_AUDIT.md).
+
+```sh
+java Build.java jar
+java -jar build/OmniEar.jar --data demo-session
+```
+
+Open **WAV Testing → select Example label → Classify example**. Ten genuine,
+licensed examples cover all five categories, including a correct prediction and
+a known failure for each. Predictions are computed with the active model; labels,
+attribution and matches/mismatches are displayed explicitly. Demo audio is
+packaged separately from training. **WAV classification is not continuous
+microphone detection**, and no audio playback is performed. Reproduce all ten:
+`java -cp build/OmniEar.jar omniear.SubmissionDemoTest`.
+
 A working, offline desktop acoustic-monitoring application using **Java 21 and
 only the standard JDK**. Swing, Java Sound, collections, concurrency, CSV file
 I/O and Java-implemented DSP replace the upstream Python/React/TensorFlow stack.
@@ -106,12 +125,14 @@ indicators, and text plus severity colors. No third-party UI library is used.
 2. **Start monitoring** opens the laptop's OS default input. Stay quiet for the
    first two seconds. RMS, rolling baseline, threshold, elapsed audio time and
    the actual last 100 ms waveform update live. **Stop** closes the microphone.
-   **Test microphone · 5 s** checks input RMS/peak and reports quiet/clipped audio;
+   **Test microphone · 5 s** checks decoded RMS/dBFS, peak and near-full-scale
+   percentage, with OS input/mute/gain guidance. Possible clipping is a heuristic,
+   not a measurement of analog distortion; dBFS is not acoustic dB SPL;
    it stops automatically and saves no audio or events. Stop also cancels it.
 3. In **WAV Testing**, **Analyze WAV** runs the same gated detector as the microphone. Files are
    analyzed faster than real time, not played back; timing uses sample offsets.
    The first two seconds calibrate. A very short or constantly loud file may
-   correctly produce no Stage 1 event.
+   produce no Stage 1 event, including genuine target recordings.
 4. **Classify WAV** explicitly bypasses Stage 1 and uses the loudest 2.5 s
    window. Use this for short isolated sounds without a quiet calibration prelude.
    Its source is marked `[clip; Stage 1 bypass]`; baseline/threshold are zero,
@@ -208,7 +229,8 @@ needed to reproduce data preparation, never to build or run the application.
   Class balancing and k were selected using training-only leave-source-group-out
   validation (macro recall 62.33% → 75.33% versus the previous unbalanced k=3).
   Exact matches vote only among exact
-  neighbors. Immutable models are replaced only after successful reload.
+   neighbors. Reload pauses classification; a failed reload clears the active
+   classifier rather than silently retaining stale readiness.
 - **Vote share is a neighbor-agreement score, not a calibrated probability,
   accuracy estimate or certainty that an emergency occurred.** There is no
   deep pretrained semantic evidence or out-of-distribution rejection.
@@ -316,11 +338,12 @@ Test tones/feature vectors are temporary **algorithm-mechanics fixtures only**:
 they are not real acoustic training data, are not bundled with the application,
 and do not measure classification accuracy.
 
-Verified here with OpenJDK 21 on Linux: warning-free compilation, **217 checks**
-including bundled real-data fresh startup/restart, real-display Swing tests with
-mechanical fixtures and genuine held-out audio, and a five-second Java Sound input
-test. The microphone captured audio but reported clipping: reduce OS input gain.
-The 50-recording evaluation measures this curated subset, not live reliability.
+The submission regression suite has **249 checks**, including real bundled-data
+fresh startup/restart, input-diagnostic boundaries and ten selected demo outcomes.
+Swing tests exercise mechanical fixtures and genuine recordings; microphone
+diagnostics separately test capture/release, not event recognition. Check the
+actual latest diagnostic rather than assuming an earlier gain result still applies.
+The 50-recording historical evaluation measures its curated subset, not live reliability.
 See [TEST_RESULTS.md](TEST_RESULTS.md) for exact verification scope.
 
 ## Limitations

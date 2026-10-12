@@ -58,9 +58,12 @@ public final class Main {
             return true;
         }
         var report = mode.equals("mic-test") ? new TrainingRepository.Report(java.util.Optional.empty(), java.util.Map.of(), java.util.List.of()) : new TrainingRepository(training).load();
-        System.out.println(report.summary());
-        for (Category category : Category.values()) System.out.println("  " + category.id() + ": " + report.counts().getOrDefault(category, 0));
-        report.problems().forEach(System.err::println);
+        if (mode.equals("mic-test")) System.out.println("Input diagnostic only: no classifier, audio files or events are saved.");
+        else {
+            System.out.println(report.summary());
+            for (Category category : Category.values()) System.out.println("  " + category.id() + ": " + report.counts().getOrDefault(category, 0));
+            report.problems().forEach(System.err::println);
+        }
         if (mode.equals("train")) return report.classifier().isPresent();
         SoundClassifier model = report.classifier().orElse(null);
         if (mode.equals("classify")) {

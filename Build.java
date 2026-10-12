@@ -32,6 +32,14 @@ public class Build {
                 entry.setTime(0); zip.putNextEntry(entry); Files.copy(path, zip); zip.closeEntry();
             }
         }
+        Path demo = output.resolve("omniear/demo"); Files.createDirectories(demo);
+        Files.copy(Path.of("demo/samples.tsv"), demo.resolve("samples.tsv"), StandardCopyOption.REPLACE_EXISTING);
+        for (String row : Files.readAllLines(Path.of("demo/samples.tsv"))) {
+            Path path = Path.of(row.split("\t")[0]).normalize();
+            if ((!path.startsWith("datasets/held-out") && !path.startsWith("datasets/final-test")) || !path.toString().endsWith(".wav"))
+                throw new IllegalArgumentException("Demo must use inspected non-training WAVs: " + path);
+            Files.copy(path, demo.resolve(path.getFileName()), StandardCopyOption.REPLACE_EXISTING);
+        }
         for (String name : List.of("DATASETS.md", "TEST_RESULTS.md", "datasets/manifest.json", "datasets/ATTRIBUTION.md", "datasets/LICENSE-DATASET")) {
             Path path = Path.of(name);
             Files.copy(path, output.resolve("omniear/" + path.getFileName()), StandardCopyOption.REPLACE_EXISTING);

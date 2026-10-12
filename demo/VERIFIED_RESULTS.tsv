@@ -1,0 +1,11 @@
+file	label	direct_prediction	vote	distance	status	raw_first_prediction	raw_alerts
+fsd-264918.wav	scream_distress	scream_distress	0.716172	0.980568	ALERT	NO_EVENT	0
+fsd-249745.wav	scream_distress	siren_traffic	0.637200	1.395464	LOW_VOTE_SUPPRESSED	NO_EVENT	0
+fsd-256296.wav	explosion	explosion	0.764136	0.477744	ALERT	NO_EVENT	0
+fsd-426167.wav	explosion	background	0.500338	1.058435	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-320167.wav	impact_crash	impact_crash	1.000000	0.465799	ALERT	NO_EVENT	0
+fsd-367624.wav	impact_crash	explosion	0.629467	0.566095	LOW_VOTE_SUPPRESSED	NO_EVENT	0
+fsd-238228.wav	siren_traffic	siren_traffic	0.899236	0.612103	ALERT	NO_EVENT	0
+fsd-378257.wav	siren_traffic	background	0.682705	0.408854	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-110612.wav	background	background	0.824735	0.391419	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-381853.wav	background	scream_distress	0.561604	0.773047	ALERT	NO_EVENT	0

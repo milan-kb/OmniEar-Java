@@ -1,0 +1,4 @@
+Input diagnostic only: no classifier, audio files or events are saved.
+Opening OS default recording input
+Microphone test · speak normally for 5 seconds · no events saved
+Microphone test complete · RMS 0.0012 (-58.2 dBFS) · peak 0.0321 · near full scale 0.00% · Signal received; gain is controlled in OS sound settings

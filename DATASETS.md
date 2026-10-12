@@ -1,5 +1,17 @@
 # Real recordings and honest evaluation
 
+## Submission demonstration resources
+
+`demo/samples.tsv` selects ten **already-inspected** recordings from the existing
+holdout/previous-final directories, two per category: one observed direct-label
+match and one mismatch. They are not new evaluation data or added training.
+`Build.java` copies them into separate `omniear/demo/` resources for portable GUI
+demonstrations. The training ZIP still contains exactly 170 WAVs. Five selected
+clips are CC BY 3.0 and five CC0; the GUI/catalog show authors, source links and
+licenses. Full original descriptions and hashes remain in the manifest below.
+The collection still contains 364 unique recordings; packaging duplicates does
+not increase sample counts. This deliberately selected demo cannot estimate accuracy.
+
 ## False-alert extension (2026-10-12)
 
 **364 licensed recordings:** 170 accepted training, 47 research-only training,

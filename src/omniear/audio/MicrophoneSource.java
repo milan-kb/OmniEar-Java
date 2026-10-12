@@ -6,7 +6,7 @@ import javax.sound.sampled.*;
 /** Laptop default input only; common native rates are tried without external libraries. */
 public final class MicrophoneSource extends PcmSource {
     private volatile TargetDataLine line;
-    @Override public String description() { return "Default laptop microphone"; }
+    @Override public String description() { return "OS default recording input"; }
 
     @Override protected AudioInputStream openStream() throws IOException {
         Exception last = null;

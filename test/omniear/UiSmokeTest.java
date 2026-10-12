@@ -46,7 +46,7 @@ public final class UiSmokeTest {
             Files.createDirectories(holdout.resolve("explosion")); Files.copy(input, holdout.resolve("explosion/unseen-mechanics.wav"));
             SwingUtilities.invokeAndWait(() -> ((omniear.ui.WavTestingPanel) findTabs(reference.get()).getComponentAt(1)).evaluate(holdout));
             waitFor(() -> !reference.get().isBusy() && reference.get().predictionText().contains("Evaluated: 1"), "held-out folder GUI evaluation");
-            Robot robot = new Robot(); robot.waitForIdle();
+            Robot robot = new Robot(); robot.setAutoDelay(100); robot.waitForIdle();
             Files.createDirectories(Path.of("build"));
             // Paint our displayed Swing window, rather than Robot screen capture, which
             // can block on a Wayland portal permission dialog and capture unrelated apps.
@@ -68,15 +68,22 @@ public final class UiSmokeTest {
             // KDE/Wayland may deny programmatic focus stealing. A real click is
             // required before Robot keyboard input, even after requestFocus().
             var focusPoint = new AtomicReference<Point>();
-            SwingUtilities.invokeAndWait(() -> {
-                var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront(); frame.requestFocus();
-                JTabbedPane tabs = findTabs(frame); tabs.requestFocusInWindow();
-                Point point = tabs.getLocationOnScreen(); point.translate(30, 20); focusPoint.set(point);
-            });
             Point pointer = MouseInfo.getPointerInfo().getLocation();
-            robot.mouseMove(focusPoint.get().x, focusPoint.get().y);
-            robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK); robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
-            robot.waitForIdle();
+            for (int attempt = 0; attempt < 5; attempt++) {
+                SwingUtilities.invokeAndWait(() -> {
+                    var frame = reference.get(); frame.setAlwaysOnTop(true); frame.toFront(); frame.requestFocus();
+                    findTabs(frame).requestFocusInWindow();
+                });
+                // Window-manager raise/placement is asynchronous, outside the Swing queue.
+                robot.waitForIdle(); robot.delay(200);
+                SwingUtilities.invokeAndWait(() -> {
+                    Point point = findTabs(reference.get()).getLocationOnScreen(); point.translate(30, 20); focusPoint.set(point);
+                });
+                robot.mouseMove(focusPoint.get().x, focusPoint.get().y);
+                robot.mousePress(java.awt.event.InputEvent.BUTTON1_DOWN_MASK); robot.mouseRelease(java.awt.event.InputEvent.BUTTON1_DOWN_MASK);
+                robot.waitForIdle(); robot.delay(100);
+                if (reference.get().isActive()) break;
+            }
             waitFor(() -> reference.get().isActive(), "desktop grants keyboard focus to test window");
             SwingUtilities.invokeAndWait(() -> reference.get().setAlwaysOnTop(false));
             robot.keyPress(java.awt.event.KeyEvent.VK_ALT); robot.keyPress(java.awt.event.KeyEvent.VK_2);
@@ -104,6 +111,19 @@ public final class UiSmokeTest {
                 } catch (java.io.IOException e) { Thread.sleep(20); }
             }
             TestSuite.check(released, "GUI resource cleanup");
+            SwingUtilities.invokeAndWait(() -> {
+                var untrained = new Dashboard(root.resolve("empty-training"), null, "Test: memory-only CSV mode");
+                reference.set(untrained); untrained.setVisible(true);
+            });
+            waitFor(() -> !reference.get().isBusy(), "empty training readiness settles");
+            SwingUtilities.invokeAndWait(() -> {
+                TestSuite.check(!reference.get().hasClassifier() && containsLabel(reference.get(), "UNTRAINED"), "untrained mode explicitly identified");
+                TestSuite.check(!findButton(reference.get(), "Classify WAV…").isEnabled()
+                        && !findButton(reference.get(), "Classify example").isEnabled(), "untrained clip and demo prediction disabled");
+                TestSuite.check(findButton(reference.get(), "Start monitoring").isEnabled()
+                        && containsLabel(reference.get(), "CSV PERSISTENCE DISABLED"), "anomaly-only monitoring remains available with explicit memory-only status");
+                reference.get().closeApplication();
+            });
             System.out.println("PASS: real-display Swing smoke test; four tabs, unseen clip, error recovery, keyboard navigation, persistence; build/ui-tab-*.png");
         } finally {
             if (reference.get() != null) SwingUtilities.invokeAndWait(() -> reference.get().closeApplication());
@@ -123,6 +143,20 @@ public final class UiSmokeTest {
             JTable table = findTable(child); if (table != null) return table;
         }
         return null;
+    }
+    private static JButton findButton(Container parent, String text) {
+        for (Component child : parent.getComponents()) {
+            if (child instanceof JButton button && text.equals(button.getText())) return button;
+            if (child instanceof Container container) { var found = findButton(container, text); if (found != null) return found; }
+        }
+        return null;
+    }
+    private static boolean containsLabel(Container parent, String text) {
+        for (Component child : parent.getComponents()) {
+            if (child instanceof JLabel label && label.getText() != null && label.getText().contains(text)) return true;
+            if (child instanceof Container container && containsLabel(container, text)) return true;
+        }
+        return false;
     }
     private static void waitFor(BooleanSupplier predicate, String name) throws Exception {
         long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(15);

@@ -1,7 +1,9 @@
 package omniear;
 
 import java.nio.file.*;
+import java.awt.*;
 import java.util.concurrent.atomic.AtomicReference;
+import javax.swing.*;
 import javax.swing.SwingUtilities;
 import omniear.alerts.EventStore;
 import omniear.model.TrainingRepository;
@@ -32,6 +34,38 @@ public final class TrainedSmokeTest {
                         waitFor(reference, true);
                         SwingUtilities.invokeAndWait(() -> {
                             TestSuite.check(reference.get().predictionText().contains("Nearest standardized distance"), "real held-out prediction visible");
+                            System.out.println(reference.get().predictionText());
+                        });
+                        Files.createDirectories(Path.of("build"));
+                        var image = new AtomicReference<java.awt.image.BufferedImage>();
+                        SwingUtilities.invokeAndWait(() -> {
+                            var frame = reference.get(); frame.setSize(frame.getMinimumSize()); frame.validate();
+                            var demoButton = findDemoButton(frame);
+                            TestSuite.check(demoButton.getVisibleRect().height == demoButton.getHeight() && demoButton.getHeight() > 0,
+                                    "primary guided-demo action fully visible at minimum window size");
+                            var rendered = new java.awt.image.BufferedImage(frame.getWidth(), frame.getHeight(), java.awt.image.BufferedImage.TYPE_INT_RGB);
+                            var graphics = rendered.createGraphics();
+                            try { frame.printAll(graphics); } finally { graphics.dispose(); }
+                            image.set(rendered);
+                        });
+                        javax.imageio.ImageIO.write(image.get(), "png", Path.of("build/submission-demo.png").toFile());
+                        SwingUtilities.invokeAndWait(() -> {
+                            var examples = findExamples(reference.get());
+                            TestSuite.check(examples != null && examples.getItemCount() == 10, "all licensed demo choices visible");
+                            examples.setSelectedIndex(9); // Real wind recording: known false scream alert.
+                            findDemoButton(reference.get()).doClick();
+                        });
+                        long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(30);
+                        boolean done = false;
+                        while (!done && System.nanoTime() < deadline) {
+                            var ready = new java.util.concurrent.atomic.AtomicBoolean();
+                            SwingUtilities.invokeAndWait(() -> ready.set(!reference.get().isBusy() && reference.get().eventCount() == 2));
+                            done = ready.get(); if (!done) Thread.sleep(25);
+                        }
+                        TestSuite.check(done, "guided demo button completes inference");
+                        SwingUtilities.invokeAndWait(() -> {
+                            TestSuite.check(reference.get().predictionText().contains("LABEL MISMATCH")
+                                    && reference.get().predictionText().contains("not live microphone detection"), "actual demo failure and mode distinction visible");
                             System.out.println(reference.get().predictionText());
                         });
                     } finally {
@@ -68,5 +102,19 @@ public final class TrainedSmokeTest {
             Thread.sleep(25);
         }
         throw new AssertionError("Trained dashboard did not become ready");
+    }
+    private static JComboBox<?> findExamples(Container parent) {
+        for (Component child : parent.getComponents()) {
+            if (child instanceof JComboBox<?> box && box.getItemCount() == 10) return box;
+            if (child instanceof Container container) { var found = findExamples(container); if (found != null) return found; }
+        }
+        return null;
+    }
+    private static JButton findDemoButton(Container parent) {
+        for (Component child : parent.getComponents()) {
+            if (child instanceof JButton button && button.getText().equals("Classify example")) return button;
+            if (child instanceof Container container) { var found = findDemoButton(container); if (found != null) return found; }
+        }
+        return null;
     }
 }

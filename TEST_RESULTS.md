@@ -1,6 +1,39 @@
 # Verification results
 
-**Latest (2026-10-12): the background-conflict candidate was rejected and
+## Academic submission and demonstration — 2026-10-12
+
+The submission adds a guided, licensed WAV demo, explicit model/mode indicators,
+read-only microphone gain diagnostics and academic documentation. The classifier,
+FFT/MFCC features, detector, capture pipeline, alert gates, PCM conversion and
+accepted training recordings are unchanged from `fb5246f`.
+
+- **249 regression checks pass**, including six input-level boundary checks and
+  26 checks for the ten actual demo recordings and separate training resources.
+- `demo/VERIFIED_RESULTS.tsv` records current inference: one selected direct
+  success and one known failure per category; all ten raw replays emit no event.
+  This is a teaching selection, not a representative accuracy estimate.
+- Swing smoke tests passed with real displayed widgets, keyboard shortcuts,
+  invalid-WAV recovery, CSV persistence/reopen, untrained prediction controls and
+  explicit memory-only status. The genuine-data test clicked **Classify example**
+  and displayed the actual wind → scream/P0 mismatch. Renders were inspected,
+  including the minimum window size; provenance/results panes scroll and resize.
+- KDE/Wayland intermittently refused Robot focus on the primary desktop. Tests
+  now allow native-event/placement delays and bounded focus attempts, retaining
+  assertions. The complete suites passed on an isolated **rootful Xwayland**
+  display using the system's existing server; no dependency was installed or
+  desktop permission bypassed. Manual input focus still matters on the main desktop.
+- The physical input diagnostic captured/released five seconds: RMS 0.0012
+  (-58.2 dBFS), peak 0.0321, near-full-scale samples 0.00%. See
+  `demo/MICROPHONE_CHECK.txt`. This is decoded input operation, not evidence of
+  threat recognition or absence of analog clipping.
+- Dataset audit passes all 364 recordings. The five paired rejection-study
+  summaries still reproduce; historical experiment predictions are preserved.
+
+Submission documents: [report](docs/PROJECT_REPORT.md), [UML](docs/UML.md),
+[five-minute demo/viva](docs/DEMO.md), [feature audit](docs/FEATURE_AUDIT.md).
+No new ML experiment, prediction fabrication or reliability claim was introduced.
+
+**Previous experiment (2026-10-12): the background-conflict candidate was rejected and
 reverted because it reduced no final-test false alerts.** The original runtime
 and 170-recording model are retained. Full diagnosis, development comparisons
 and reproduction: [evaluation/REJECTION_DECISION.md](evaluation/REJECTION_DECISION.md).
