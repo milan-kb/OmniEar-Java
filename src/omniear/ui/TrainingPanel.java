@@ -108,10 +108,10 @@ public final class TrainingPanel extends JPanel implements AutoCloseable {
                     int ready = 0;
                     for (Category value : Category.values()) {
                         int count = report.counts().getOrDefault(value, 0); if (count > 0) ready++;
-                        counts.get(value).setText(value + "   /   " + value.id() + "   ·   " + count + " usable WAVs" + (count == 0 ? "   — ADD RECORDINGS" : "   — READY"));
+                        counts.get(value).setText(value + "   /   " + value.id() + "   ·   " + count + " usable WAVs" + (count == 0 ? "   — ADD RECORDINGS" : "   — PRESENT (not an accuracy score)"));
                         counts.get(value).setForeground(count == 0 ? DarkTheme.severity(omniear.alerts.Priority.P1) : DarkTheme.ACCENT);
                     }
-                    progress.setValue(ready); progress.setString(ready + " / 5 classes ready");
+                    progress.setValue(ready); progress.setString(ready + " / 5 classes present · coverage only");
                     report.problems().forEach(message -> { log("ERROR · " + message); onProblem.accept(message); });
                     log("Reload complete at " + java.time.LocalTime.now().withNano(0) + " · " + report.summary()); onReport.accept(report);
                 } catch (InterruptedException e) { Thread.currentThread().interrupt(); }

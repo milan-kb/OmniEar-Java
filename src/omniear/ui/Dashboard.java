@@ -30,6 +30,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
     private final JTextArea diagnostics = new JTextArea(3, 60);
     private final JButton start = new JButton("Start monitoring"), stop = new JButton("Stop"), wav = new JButton("Analyze WAV…"), micTest = new JButton("Test microphone · 5 s");
     private final JLabel modelState = new JLabel("Classification · loading training…");
+    private final JLabel inputLevel = new JLabel("Input level: run the 5 s test, speak normally, then adjust gain in OS sound settings");
     private final JLabel totalCount = new JLabel(), criticalCount = new JLabel(), highCount = new JLabel(), monitorCount = new JLabel();
     private final JSpinner multiplier = new JSpinner(new SpinnerNumberModel(6.0, 1.0, 30.0, .5));
     private final JSpinner floor = new JSpinner(new SpinnerNumberModel(.02, .001, 1.0, .005));
@@ -46,7 +47,9 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         events = new EventTableModel(store == null ? List.of() : store.history());
         training = new TrainingPanel(trainingRoot, report -> {
                     classifier = report.classifier().orElse(null);
-                    modelState.setText(classifier == null ? "Classification unavailable · add WAVs in Training" : "Classification ready · class-balanced Java k-NN / k=" + KnnClassifier.DEFAULT_K);
+                    int count = report.counts().values().stream().mapToInt(Integer::intValue).sum();
+                    modelState.setText(classifier == null ? "UNTRAINED · anomaly monitoring only · add all five classes in Training"
+                            : "Classification ready · " + count + " WAVs / 5 classes · k=" + KnnClassifier.DEFAULT_K + " · readiness ≠ accuracy; live detection is unreliable");
                     modelState.setForeground(classifier == null ? DarkTheme.MUTED : DarkTheme.ACCENT); updateControls();
                 },
                 this::problem, busy -> { trainingBusy = busy; updateControls(); });
@@ -75,7 +78,8 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         buttons.add(new JLabel("First 2 s: stay quiet to calibrate"));
         live.add(buttons, BorderLayout.NORTH);
         live.add(waveform, BorderLayout.CENTER);
-        JPanel signalStatus = new JPanel(new GridLayout(2, 1, 0, 4)); signalStatus.add(state); signalStatus.add(meter);
+        JPanel signalStatus = new JPanel(new GridLayout(3, 1, 0, 4)); signalStatus.add(state); signalStatus.add(meter); signalStatus.add(inputLevel);
+        inputLevel.getAccessibleContext().setAccessibleName("Decoded input level and gain guidance");
         live.add(signalStatus, BorderLayout.SOUTH);
         overview.add(DarkTheme.section("LIVE SIGNAL · RMS anomalies trigger classification when trained", live), BorderLayout.CENTER);
         JPanel calibrate = new JPanel(new FlowLayout(FlowLayout.LEADING, 8, 0));
@@ -115,7 +119,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         for (int i = events.getRowCount() - 1; i >= 0; i--) {
             if (events.eventAt(i).isAlert()) { showAlert(events.eventAt(i)); break; }
         }
-        problem("Trained research prototype · held-out results and limitations: TEST_RESULTS.md. Vote share is not emergency certainty.");
+        problem("Academic prototype · WAV classification bypasses live calibration. Live monitoring can miss events and produce false alerts. Vote share is not emergency certainty.");
         if (persistenceProblem != null) problem(persistenceProblem);
         updateControls(); SwingUtilities.invokeLater(training::reload);
     }
@@ -175,6 +179,8 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         Block block = latest.getAndSet(null);
         if (block == null) return;
         waveform.setSamples(block.samples());
+        var level = new InputDiagnostics(); level.add(block.samples());
+        inputLevel.setText("Last block · " + level.summary()); inputLevel.setToolTipText(inputLevel.getText());
         var reading = block.reading();
         meter.setText(String.format(java.util.Locale.ROOT, "RMS %.4f    Baseline %.4f    Threshold %.4f    Audio %.2f s    %s",
                 reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "Calibrated" : "Calibrating (stay quiet)"));
@@ -182,6 +188,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
     private void updateControls() {
         boolean running = monitor.isRunning(), idle = !running && !trainingBusy && !clipBusy && !closing;
         start.setEnabled(idle); wav.setEnabled(idle); micTest.setEnabled(idle); testing.setAvailable(idle); stop.setEnabled(running && !closing);
+        start.setToolTipText(classifier == null ? "Anomaly-only mode: no categories or alerts until all five classes are trained" : "Continuous microphone detection; may miss events or raise false alerts");
         for (JSpinner spinner : List.of(multiplier, floor, cooldown)) spinner.setEnabled(idle);
         training.setMonitoring(running || clipBusy);
     }

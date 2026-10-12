@@ -52,8 +52,7 @@ public final class MonitorService implements AutoCloseable {
             var pipeline = new DetectionPipeline(config, classifier, Instant.now(), input.description());
             listener.onState(true, testOnly ? "Microphone test · speak normally for 5 seconds · no events saved" : "Listening — calibrating for the first 2 seconds");
             float[] buffer = new float[AudioSamples.BLOCK_SIZE];
-            double peak = 0, sumSquares = 0;
-            long sampleCount = 0;
+            var levels = new InputDiagnostics();
             while (!stopping) {
                 int count = input.read(buffer);
                 if (stopping) break;
@@ -70,17 +69,17 @@ public final class MonitorService implements AutoCloseable {
                 if (!testOnly) event.ifPresent(this::publish);
                 listener.onBlock(block, pipeline.lastReading(), pipeline.audioSeconds());
                 if (testOnly) {
-                    for (float sample : block) { peak = Math.max(peak, Math.abs(sample)); sumSquares += (double) sample * sample; }
-                    sampleCount += block.length;
+                    levels.add(block);
                     if (pipeline.audioSeconds() >= 5) {
-                        completion = String.format(java.util.Locale.ROOT, "Microphone test complete · RMS %.4f · peak %.4f · %s",
-                                Math.sqrt(sumSquares / sampleCount), peak, peak >= .99 ? "Clipping: lower input gain" : peak < .001 ? "Very quiet: check input/mute/gain" : "Signal received");
+                        completion = "Microphone test complete · " + levels.summary();
                         break;
                     }
                 }
             }
         } catch (Exception e) {
-            if (!stopping) { completion = "Audio failed — see diagnostics"; listener.onError("Audio processing failed", e); }
+            if (!stopping) { completion = "Audio failed — see diagnostics"; listener.onError(input instanceof MicrophoneSource
+                    ? "Microphone failed: select the OS default recording input, check permission/mute/gain and close competing apps; use WAV Testing if unavailable"
+                    : "WAV analysis failed: choose a readable PCM WAV, at most 120 seconds", e); }
         } finally {
             reader = null;
             synchronized (this) { running = false; source = null; }

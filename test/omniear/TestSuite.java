@@ -24,6 +24,7 @@ public final class TestSuite {
         detector();
         windowing();
         audio();
+        InputDiagnosticsTest.main(new String[0]);
         featuresAndClassifier();
         trainingAndPersistence();
         heldOutEvaluation();
