@@ -1,13 +1,13 @@
 package omniear;
 
 import java.nio.file.*;
-import java.awt.*;
 import java.util.concurrent.atomic.AtomicReference;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 import omniear.alerts.EventStore;
 import omniear.model.TrainingRepository;
 import omniear.ui.*;
+import static omniear.SwingTestSupport.find;
 
 /** Real bundled training and real held-out audio. Checks readiness, not an accuracy target. */
 public final class TrainedSmokeTest {
@@ -40,7 +40,7 @@ public final class TrainedSmokeTest {
                         var image = new AtomicReference<java.awt.image.BufferedImage>();
                         SwingUtilities.invokeAndWait(() -> {
                             var frame = reference.get(); frame.setSize(frame.getMinimumSize()); frame.validate();
-                            var demoButton = findDemoButton(frame);
+                            var demoButton = find(frame, JButton.class, button -> button.getText().equals("Classify example"));
                             TestSuite.check(demoButton.getVisibleRect().height == demoButton.getHeight() && demoButton.getHeight() > 0,
                                     "primary guided-demo action fully visible at minimum window size");
                             var rendered = new java.awt.image.BufferedImage(frame.getWidth(), frame.getHeight(), java.awt.image.BufferedImage.TYPE_INT_RGB);
@@ -50,10 +50,10 @@ public final class TrainedSmokeTest {
                         });
                         javax.imageio.ImageIO.write(image.get(), "png", Path.of("build/submission-demo.png").toFile());
                         SwingUtilities.invokeAndWait(() -> {
-                            var examples = findExamples(reference.get());
+                            JComboBox<?> examples = find(reference.get(), JComboBox.class, box -> box.getItemCount() == 10);
                             TestSuite.check(examples != null && examples.getItemCount() == 10, "all licensed demo choices visible");
                             examples.setSelectedIndex(9); // Real wind recording: known false scream alert.
-                            findDemoButton(reference.get()).doClick();
+                            find(reference.get(), JButton.class, button -> button.getText().equals("Classify example")).doClick();
                         });
                         long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(30);
                         boolean done = false;
@@ -102,19 +102,5 @@ public final class TrainedSmokeTest {
             Thread.sleep(25);
         }
         throw new AssertionError("Trained dashboard did not become ready");
-    }
-    private static JComboBox<?> findExamples(Container parent) {
-        for (Component child : parent.getComponents()) {
-            if (child instanceof JComboBox<?> box && box.getItemCount() == 10) return box;
-            if (child instanceof Container container) { var found = findExamples(container); if (found != null) return found; }
-        }
-        return null;
-    }
-    private static JButton findDemoButton(Container parent) {
-        for (Component child : parent.getComponents()) {
-            if (child instanceof JButton button && button.getText().equals("Classify example")) return button;
-            if (child instanceof Container container) { var found = findDemoButton(container); if (found != null) return found; }
-        }
-        return null;
     }
 }

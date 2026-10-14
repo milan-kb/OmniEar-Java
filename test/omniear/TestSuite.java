@@ -27,6 +27,7 @@ public final class TestSuite {
         InputDiagnosticsTest.main(new String[0]);
         SubmissionDemoTest.main(new String[0]);
         featuresAndClassifier();
+        swingComponentSearch();
         trainingAndPersistence();
         heldOutEvaluation();
         pipelineAndThreading();
@@ -180,6 +181,23 @@ public final class TestSuite {
         for (int i = 0; i < 4; i++) examples.add(new TrainingExample(Category.BACKGROUND, new FeatureVector(common), "imbalanced mechanics fixture"));
         check(new KnnClassifier(examples, 3).classify(new FeatureVector(query)).category() == Category.EXPLOSION,
                 "inverse-frequency votes avoid majority-class bias among equally close neighbors");
+    }
+
+    private static void swingComponentSearch() throws Exception {
+        SwingUtilities.invokeAndWait(() -> {
+            var root = new javax.swing.JPanel(); var branch = new javax.swing.JPanel();
+            var first = new javax.swing.JButton("match"); var second = new javax.swing.JButton("match");
+            branch.add(first); root.add(branch); root.add(second);
+            check(SwingTestSupport.find(root, javax.swing.JButton.class) == first, "Swing search descends before later siblings");
+            check(SwingTestSupport.find(root, javax.swing.JButton.class, button -> button.getText().equals("match")) == first,
+                    "filtered Swing search preserves first-match order");
+            check(SwingTestSupport.find(root, javax.swing.JButton.class, button -> button == second) == second,
+                    "Swing search continues after rejected matches");
+            check(SwingTestSupport.find(branch, javax.swing.JPanel.class) == branch, "matching root precedes its children");
+            var table = new javax.swing.JTable();
+            check(SwingTestSupport.find(table, javax.swing.JTable.class) == table, "table search accepts a table root");
+            check(SwingTestSupport.find(root, javax.swing.JTabbedPane.class) == null, "absent Swing component returns null");
+        });
     }
 
     private static void trainingAndPersistence() throws Exception {
