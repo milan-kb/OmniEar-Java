@@ -6,7 +6,6 @@ import java.util.*;
 public final class KnnClassifier implements SoundClassifier {
     public static final int DEFAULT_K = 7;
     private final List<TrainingExample> examples;
-    private final double[] mean = new double[FeatureExtractor.DIMENSIONS];
     private final double[] scale = new double[FeatureExtractor.DIMENSIONS];
     private final int k;
     private final int[] classCounts = new int[Category.values().length];
@@ -20,6 +19,7 @@ public final class KnnClassifier implements SoundClassifier {
         if (categories.size() != Category.values().length) throw new IllegalArgumentException("Provide real WAV training examples for all five categories, including background.");
         this.k = Math.min(k, examples.size());
         for (var example : examples) classCounts[example.category().ordinal()]++;
+        double[] mean = new double[FeatureExtractor.DIMENSIONS];
         for (var example : examples) for (int i = 0; i < mean.length; i++) mean[i] += example.features().get(i) / examples.size();
         for (var example : examples) for (int i = 0; i < scale.length; i++) scale[i] += Math.pow(example.features().get(i) - mean[i], 2) / examples.size();
         for (int i = 0; i < scale.length; i++) scale[i] = scale[i] < 1e-12 ? 1 : Math.sqrt(scale[i]);
