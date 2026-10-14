@@ -1,6 +1,7 @@
 # Submission feature and claim audit
 
-Scope: current source after `fb5246f`; no classifier/feature/detector tuning.
+Scope: academic submission behavior after `fb5246f`, retained by the integrated
+cleanup `87ff0fb9`; no classifier/feature/detector tuning.
 Paths below are relative to `src/omniear/`. Historical evaluation reports are
 preserved as dated evidence, not promises about the live demonstration.
 
@@ -44,9 +45,10 @@ preserved as dated evidence, not promises about the live demonstration.
 
 ## Source boundaries checked
 
-The FFT/MFCC extractor, k-NN classifier, `AdaptiveDetector`, `DetectionPipeline`,
+The FFT/MFCC extractor, k-NN arithmetic, `AdaptiveDetector`, `DetectionPipeline`,
 `AlertPolicy`, PCM decoder/resampler and the 170 training WAVs are unchanged from
-`fb5246f`. Presentation, read-only input diagnostics, demo resource packaging and
+`fb5246f`. Cleanup only localizes constructor-only k-NN state and shares test
+search/polling mechanics. Presentation, read-only input diagnostics, demo resource packaging and
 tests/documentation are the submission changes. The demo set is not added to the
 training ZIP or model. Provenance remains in the original manifests.
 
@@ -59,4 +61,6 @@ every OS permission configuration is automated. Component renders verify the
 application window without capturing other desktop content. Screen-reader use,
 other operating systems, long-duration microphone stability and real acoustic
 event detection remain unverified. See `../TEST_RESULTS.md` for the exact final
-run evidence, including any environment-specific limitations.
+run evidence, including any environment-specific limitations. New teammates can
+start with [Setup](GETTING_STARTED.md), [Architecture](ARCHITECTURE.md) and
+[Testing](TESTING.md); this audit is a control-to-code reference, not a setup guide.

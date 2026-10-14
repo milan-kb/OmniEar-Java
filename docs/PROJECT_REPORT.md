@@ -1,5 +1,7 @@
 # OmniEar: Java OOP acoustic-monitoring project
 
+[START HERE](../README.md) · [Setup](GETTING_STARTED.md) · [Architecture](ARCHITECTURE.md) · [Testing](TESTING.md) · [Team handoff](TEAM_HANDOFF.md)
+
 ## Objective and scope
 
 OmniEar is an offline Java 21 desktop application demonstrating object-oriented
@@ -31,11 +33,13 @@ model. Earlier unsuccessful experiments and their evidence remain in git and
    status. `EventStore` persists metadata; `Dashboard` displays it.
 5. `WavTestingPanel` runs direct classification/evaluation in `SwingWorker` jobs.
    `DemoSample` loads licensed, inspected non-training examples from JAR
-   resources. Dataset labels are displayed **after** inference and never passed
-   to the classifier. `TrainingPanel` explicitly imports labeled recordings.
+    resources. Dataset labels are shown as provenance; match/mismatch is computed
+    after inference, and labels are never passed to the classifier.
+    `TrainingPanel` explicitly imports labeled recordings.
 
 The [UML diagram](UML.md) shows source-level relationships rather than a proposed
-architecture. The [feature audit](FEATURE_AUDIT.md) maps controls to implementation.
+architecture. The [architecture guide](ARCHITECTURE.md) explains the pipeline for
+new teammates; the [feature audit](FEATURE_AUDIT.md) maps controls to implementation.
 
 ## Object-oriented concepts, with concrete examples
 
@@ -125,13 +129,33 @@ is a real false scream/P0 alert in direct mode. See
 [`demo/VERIFIED_RESULTS.tsv`](../demo/VERIFIED_RESULTS.tsv) and the
 [five-minute walkthrough](DEMO.md).
 
-Broader historical results remain in `TEST_RESULTS.md`: the original inspected
+Broader historical results remain in [TEST_RESULTS.md](../TEST_RESULTS.md): the original inspected
 50-file direct result was 36/50, while a later 48-file test gave 25/48 and raw
 routed target recall 1/18. Never substitute the favorable earlier result or a
 successful demonstration for a live-detection reliability claim. Most screams
 are acted, impacts are mainly breakages rather than crashes, and explosion/siren
 source coverage is limited. Microphone RMS/dBFS and near-full-scale percentage
 measure decoded input levels, not acoustic dB SPL or recognition performance.
+
+## Integrated cleanup and teammate verification
+
+The behavior-preserving cleanup is integrated into `main` at `87ff0fb9`.
+Six Swing searches share one test-only typed traversal; three readiness loops
+share EDT polling with original waits/assertions. The k-NN constructor's mean
+array is now local; calculations, order, training assets and predictions are unchanged.
+No production algorithm or additional abstraction was introduced.
+
+The suite passes **261 checks** (249 original + twelve helper regressions).
+JAR/help/ten-demo checks, real-display Swing suites, fresh startup/restart, CSV
+reopen and cleanup passed on Linux/JDK 21. Cleanup replay comparisons reproduce
+1,370 development and 671 final non-header TSV rows byte-for-byte; this is
+behavior verification, not a new acoustic accuracy claim. No assertions were skipped.
+
+[Getting started](GETTING_STARTED.md) documents Windows/macOS/Linux setup;
+those other operating systems still need runtime verification. Teammates use
+[Contributing](../CONTRIBUTING.md) for reviewed small changes. Microphone permission,
+input gain and long-running field behavior need actual-machine checks; the
+onboarding documentation does not expand the verified recognition scope.
 
 ## Conclusion
 
