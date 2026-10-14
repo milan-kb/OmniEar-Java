@@ -11,6 +11,7 @@ import omniear.alerts.EventStore;
 import omniear.ui.Dashboard;
 import omniear.ui.DarkTheme;
 import static omniear.SwingTestSupport.find;
+import static omniear.SwingTestSupport.awaitOnEdt;
 
 /** Optional real-display smoke test. Does not access the microphone or evaluate accuracy. */
 public final class UiSmokeTest {
@@ -134,13 +135,6 @@ public final class UiSmokeTest {
         }
     }
     private static void waitFor(BooleanSupplier predicate, String name) throws Exception {
-        long deadline = System.nanoTime() + TimeUnit.SECONDS.toNanos(15);
-        while (System.nanoTime() < deadline) {
-            var ready = new AtomicReference<Boolean>(false);
-            SwingUtilities.invokeAndWait(() -> ready.set(predicate.getAsBoolean()));
-            if (ready.get()) return;
-            Thread.sleep(20);
-        }
-        throw new AssertionError("Timed out: " + name);
+        if (!awaitOnEdt(predicate, 15, 20)) throw new AssertionError("Timed out: " + name);
     }
 }

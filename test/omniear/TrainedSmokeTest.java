@@ -8,6 +8,7 @@ import omniear.alerts.EventStore;
 import omniear.model.TrainingRepository;
 import omniear.ui.*;
 import static omniear.SwingTestSupport.find;
+import static omniear.SwingTestSupport.awaitOnEdt;
 
 /** Real bundled training and real held-out audio. Checks readiness, not an accuracy target. */
 public final class TrainedSmokeTest {
@@ -55,13 +56,7 @@ public final class TrainedSmokeTest {
                             examples.setSelectedIndex(9); // Real wind recording: known false scream alert.
                             find(reference.get(), JButton.class, button -> button.getText().equals("Classify example")).doClick();
                         });
-                        long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(30);
-                        boolean done = false;
-                        while (!done && System.nanoTime() < deadline) {
-                            var ready = new java.util.concurrent.atomic.AtomicBoolean();
-                            SwingUtilities.invokeAndWait(() -> ready.set(!reference.get().isBusy() && reference.get().eventCount() == 2));
-                            done = ready.get(); if (!done) Thread.sleep(25);
-                        }
+                        boolean done = awaitOnEdt(() -> !reference.get().isBusy() && reference.get().eventCount() == 2, 30, 25);
                         TestSuite.check(done, "guided demo button completes inference");
                         SwingUtilities.invokeAndWait(() -> {
                             TestSuite.check(reference.get().predictionText().contains("LABEL MISMATCH")
@@ -93,14 +88,8 @@ public final class TrainedSmokeTest {
     }
 
     private static void waitFor(AtomicReference<Dashboard> reference, boolean classified) throws Exception {
-        long deadline = System.nanoTime() + java.util.concurrent.TimeUnit.SECONDS.toNanos(30);
-        while (System.nanoTime() < deadline) {
-            var ready = new java.util.concurrent.atomic.AtomicBoolean();
-            SwingUtilities.invokeAndWait(() -> ready.set(!reference.get().isBusy() && reference.get().hasClassifier()
-                    && (!classified || reference.get().eventCount() == 1)));
-            if (ready.get()) return;
-            Thread.sleep(25);
-        }
-        throw new AssertionError("Trained dashboard did not become ready");
+        if (!awaitOnEdt(() -> !reference.get().isBusy() && reference.get().hasClassifier()
+                && (!classified || reference.get().eventCount() == 1), 30, 25))
+            throw new AssertionError("Trained dashboard did not become ready");
     }
 }

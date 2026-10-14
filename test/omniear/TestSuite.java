@@ -28,6 +28,7 @@ public final class TestSuite {
         SubmissionDemoTest.main(new String[0]);
         featuresAndClassifier();
         swingComponentSearch();
+        swingReadinessPolling();
         trainingAndPersistence();
         heldOutEvaluation();
         pipelineAndThreading();
@@ -198,6 +199,27 @@ public final class TestSuite {
             check(SwingTestSupport.find(table, javax.swing.JTable.class) == table, "table search accepts a table root");
             check(SwingTestSupport.find(root, javax.swing.JTabbedPane.class) == null, "absent Swing component returns null");
         });
+    }
+
+    private static void swingReadinessPolling() throws Exception {
+        var calls = new java.util.concurrent.atomic.AtomicInteger();
+        var edtOnly = new java.util.concurrent.atomic.AtomicBoolean(true);
+        check(SwingTestSupport.awaitOnEdt(() -> {
+            if (!SwingUtilities.isEventDispatchThread()) edtOnly.set(false);
+            return calls.incrementAndGet() == 3;
+        }, 1, 1), "EDT polling retries until ready");
+        check(calls.get() == 3 && edtOnly.get(), "predicate runs only on EDT and stops at first success");
+        check(!SwingTestSupport.awaitOnEdt(() -> { throw new AssertionError("Expired wait must not evaluate"); }, 0, 1),
+                "expired deadline returns false without evaluating");
+        check(!SwingTestSupport.awaitOnEdt(() -> false, 1, 1), "unsatisfied readiness returns false at timeout");
+        expect(java.lang.reflect.InvocationTargetException.class,
+                () -> SwingTestSupport.awaitOnEdt(() -> { throw new IllegalStateException("predicate failure"); }, 1, 1),
+                "EDT predicate exceptions propagate to test caller");
+        Thread.currentThread().interrupt();
+        try {
+            expect(InterruptedException.class, () -> SwingTestSupport.awaitOnEdt(() -> false, 1, 1),
+                    "readiness polling propagates caller interruption");
+        } finally { Thread.interrupted(); }
     }
 
     private static void trainingAndPersistence() throws Exception {
