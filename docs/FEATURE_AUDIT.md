@@ -48,8 +48,8 @@ preserved as dated evidence, not promises about the live demonstration.
 The FFT/MFCC extractor, k-NN arithmetic, `AdaptiveDetector`, `DetectionPipeline`,
 `AlertPolicy`, PCM decoder/resampler and the 170 training WAVs are unchanged from
 `fb5246f`. Cleanup only localizes constructor-only k-NN state and shares test
-search/polling mechanics. Presentation, read-only input diagnostics, demo resource packaging and
-tests/documentation are the submission changes. The demo set is not added to the
+search/polling mechanics. Presentation, read-only input diagnostics, demo resource
+packaging and tests/documentation are the submission changes. The demo set is not added to the
 training ZIP or model. Provenance remains in the original manifests.
 
 ## Verification boundaries
@@ -60,7 +60,7 @@ readiness, demo button, history and cleanup. Not every native file chooser or
 every OS permission configuration is automated. Component renders verify the
 application window without capturing other desktop content. Screen-reader use,
 other operating systems, long-duration microphone stability and real acoustic
-event detection remain unverified. See `../TEST_RESULTS.md` for the exact final
+event detection remain unverified. See [TEST_RESULTS.md](../TEST_RESULTS.md) for the exact final
 run evidence, including any environment-specific limitations. New teammates can
 start with [Setup](GETTING_STARTED.md), [Architecture](ARCHITECTURE.md) and
 [Testing](TESTING.md); this audit is a control-to-code reference, not a setup guide.

@@ -171,6 +171,19 @@ are checked on this host where applicable; Windows/macOS installers and runtime
 behavior need teammate verification. Dated acoustic results and device observations
 are in [TEST_RESULTS.md](../TEST_RESULTS.md), not a promise of live reliability.
 
+**Onboarding rehearsal, 2026-10-14:** a fresh local clone of `5f0e94d` passed
+build, 261 normal and 261 packaged checks, all four source/JAR Swing smoke
+commands, JAR/help/run-flag dispatch, training inspection, portable ten-demo
+execution, the six exact five-class/failure CLI commands, raw no-event analysis,
+36/50 historical evaluation and two-record CSV restart equality. Documentation
+links/anchors were checked. Runtime/build/test/data files are unchanged from main.
+
+The five-second OS-default input diagnostic also captured/released successfully,
+but reported **RMS 0.6871 (-3.3 dBFS), peak 1.0000, near full scale 0.39%**:
+**possible clipping — lower OS input gain and retest before a presentation**.
+This is a dated decoded-input observation, not identification of the physical
+source, proof of analog clipping or evidence of recognition. No audio was saved.
+
 If a check fails: keep its output, OS/JDK versions, command and current commit;
 reproduce before changing code. See [Contributing](../CONTRIBUTING.md) and
 [setup troubleshooting](GETTING_STARTED.md#troubleshooting). Do not skip assertions,

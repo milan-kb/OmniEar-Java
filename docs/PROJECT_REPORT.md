@@ -33,9 +33,9 @@ model. Earlier unsuccessful experiments and their evidence remain in git and
    status. `EventStore` persists metadata; `Dashboard` displays it.
 5. `WavTestingPanel` runs direct classification/evaluation in `SwingWorker` jobs.
    `DemoSample` loads licensed, inspected non-training examples from JAR
-    resources. Dataset labels are shown as provenance; match/mismatch is computed
-    after inference, and labels are never passed to the classifier.
-    `TrainingPanel` explicitly imports labeled recordings.
+   resources. Dataset labels are shown as provenance; match/mismatch is computed
+   after inference, and labels are never passed to the classifier.
+   `TrainingPanel` explicitly imports labeled recordings.
 
 The [UML diagram](UML.md) shows source-level relationships rather than a proposed
 architecture. The [architecture guide](ARCHITECTURE.md) explains the pipeline for
@@ -143,7 +143,7 @@ The behavior-preserving cleanup is integrated into `main` at `87ff0fb9`.
 Six Swing searches share one test-only typed traversal; three readiness loops
 share EDT polling with original waits/assertions. The k-NN constructor's mean
 array is now local; calculations, order, training assets and predictions are unchanged.
-No production algorithm or additional abstraction was introduced.
+No production algorithm change or new production abstraction was introduced.
 
 The suite passes **261 checks** (249 original + twelve helper regressions).
 JAR/help/ten-demo checks, real-display Swing suites, fresh startup/restart, CSV
