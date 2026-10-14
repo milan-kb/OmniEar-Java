@@ -1,5 +1,37 @@
 # Verification results
 
+## Conservative code cleanup — 2026-10-14
+
+Baseline: `86d850a`; refactor branch: `refactor/code-cleanup`.
+
+- Six Swing component searches now share the test-only typed, depth-first
+  traversal in `test/omniear/SwingTestSupport.java`. Child order, first-match
+  selection and the table-root case are preserved at every existing caller.
+- Three EDT readiness loops share one polling method. Predicates still execute
+  through `invokeAndWait`; callers retain their 15 s / 20 ms or 30 s / 25 ms
+  timeout/interval and original failure assertions. CSV-release polling is unchanged.
+- The k-NN mean array is constructor-local rather than retained model state.
+  All calculations and their order are unchanged; no training-data changes or tuning.
+- `java Build.java test` passes **261 checks**: all 249 original checks plus twelve
+  traversal/polling regressions. The packaged `omniear.TestSuite` also passes 261.
+  Separate temporary mutations inverted the search predicate and readiness
+  condition; both were rejected by the new tests without modifying repository files.
+- `java Build.java ui-test`, packaged `omniear.UiSmokeTest` and packaged
+  `omniear.TrainedSmokeTest --ui` pass on isolated rootful Xwayland, including
+  keyboard focus/navigation, genuine-demo inference, CSV reopen and cleanup.
+  No assertion was skipped; the primary-desktop focus limitation remains.
+- `java Build.java jar`, JAR help and `omniear.SubmissionDemoTest` pass. Demo TSV
+  and help match the baseline byte-for-byte, including demo execution outside the
+  repository. The 170 training WAVs and ten separate demo resources are unchanged;
+  `jdeps` still reports only `java.base` and `java.desktop`.
+- `scripts/ReplayEvaluation.java datasets/training rejection-dev` and
+  `rejection-final` produce byte-identical baseline/refactor TSVs: 1,370 and 671
+  non-header rows respectively. This is behavior comparison, not new ML evidence.
+- Fresh portable CLI launch/restart, existing-training preservation and gated WAV
+  analysis pass. CLI output and persisted CSV match after normalizing only UUIDs
+  and wall-clock timestamps. Temporary data is cleaned up; acoustic limitations
+  and known demo failures are unchanged.
+
 ## Academic submission and demonstration — 2026-10-12
 
 The submission adds a guided, licensed WAV demo, explicit model/mode indicators,
