@@ -372,3 +372,45 @@ Full original descriptions, label rationale, groups and hashes: manifest.json.
 | rejection-final / background | [241895](https://freesound.org/s/241895/) croc-14.wav | kalinkamalinka | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
 | rejection-final / background | [221567](https://freesound.org/s/221567/) cheering and clapping crowd 2 | AlaskaRobotics | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
 | rejection-final / background | [413854](https://freesound.org/s/413854/) Ambience - Freezing Rain falling on snow-covered leaves | jaegrover | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [360465](https://freesound.org/s/360465/) Scream01.mp3 | Topschool | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [338049](https://freesound.org/s/338049/) Scream.mp3 | LittleRainySeasons | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / scream_distress | [104028](https://freesound.org/s/104028/) Scream1_Short.aif | RutgerMuller | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [399675](https://freesound.org/s/399675/) Scream 2 girls.wav | jgriffie919 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / scream_distress | [149825](https://freesound.org/s/149825/) Desperate shout | Gheorghelaza | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [257691](https://freesound.org/s/257691/) SCREAM.wav | vmgraw | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [398007](https://freesound.org/s/398007/) Death_sound.wav | Rickplayer | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / scream_distress | [21323](https://freesound.org/s/21323/) scream_01.flac | cdrk | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / impact_crash | [315647](https://freesound.org/s/315647/) Glas_Multiple_Slices_Drop_On_Floor_Debris_01.wav | TheSoundcatcher | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / impact_crash | [356312](https://freesound.org/s/356312/) coparota2.aif | esmayorga | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [404923](https://freesound.org/s/404923/) breaking glass with feet.wav | squidge316 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [209996](https://freesound.org/s/209996/) Glass Crash | creapersound | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [346173](https://freesound.org/s/346173/) Glass Break 001.wav | VSokorelos | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [367448](https://freesound.org/s/367448/) trencadissa.wav | lluiset7 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [422240](https://freesound.org/s/422240/) Glass bottle smashing | awholenewlife1 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [231297](https://freesound.org/s/231297/) Glass Smash 3.wav | Puniho | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / impact_crash | [369070](https://freesound.org/s/369070/) Breaking_Mirror.wav | LazyLids | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / impact_crash | [391327](https://freesound.org/s/391327/) China Cup Breaks | TobiasLudwig | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [34865](https://freesound.org/s/34865/) Indian Street - Dibrughar.wav | grololo | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [198844](https://freesound.org/s/198844/) Car sequence | bone666138 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [347964](https://freesound.org/s/347964/) inside a car  i'm on the right seat.wav | Nkzdra | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [380772](https://freesound.org/s/380772/) City ​​traffic plus tramway.wav | cosmo235 | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [156091](https://freesound.org/s/156091/) traffic and klaxon of a car.wav | marcolo91 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [52286](https://freesound.org/s/52286/) open door seat belt.aif | trip2000 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [31569](https://freesound.org/s/31569/) Wood Mill (Hammering).wav | Walter_Odington | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [62327](https://freesound.org/s/62327/) Door slam.wav | bsumusictech | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [249490](https://freesound.org/s/249490/) hammering.wav | Katiemullen | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [397034](https://freesound.org/s/397034/) Crowd laughing and clapping inside a bar in Chile (Valparaiso) | felix.blume | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [128896](https://freesound.org/s/128896/) Sentence Recitation.wav | joshenanigans | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [401794](https://freesound.org/s/401794/) We'll Eat Pizzas | Sean-TE0 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [425662](https://freesound.org/s/425662/) barking dog antagonized by father.mp3 | Rebecca_f | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [131199](https://freesound.org/s/131199/) Dog Bark | TheGertz | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [73373](https://freesound.org/s/73373/) dogs barking.aif | sofajoe | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [425904](https://freesound.org/s/425904/) BarkingDog | NatalieTre | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [352421](https://freesound.org/s/352421/) wind_gust.aif | joseph.larralde | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [398885](https://freesound.org/s/398885/) dog.wav | PHetish | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [263079](https://freesound.org/s/263079/) Rain  | SoundProject123456789 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [30216](https://freesound.org/s/30216/) thunder-rumble.wav | Erdie | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [113173](https://freesound.org/s/113173/) wind_howling_01.wav | Fasolt | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [121943](https://freesound.org/s/121943/) Crackling_thunder_far_away.wav | hantorio | [CC BY 3.0](http://creativecommons.org/licenses/by/3.0/) |
+| acoustic-final / background | [210314](https://freesound.org/s/210314/) 20131209_raindrop_OlympusLS10_xy.wav | Soundscape_Leuphana | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |
+| acoustic-final / background | [217800](https://freesound.org/s/217800/) wind_chimes.wav | minian89 | [CC0 1.0](http://creativecommons.org/publicdomain/zero/1.0/) |

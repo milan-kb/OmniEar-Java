@@ -2910,5 +2910,341 @@
     "category": "background",
     "group": "uploader:jaegrover",
     "rationale": "Recorded dogs, thunder, ordinary/cheerful voice, doors, traffic, hammering, applause or rain; no target label inferred from loudness."
+  },
+  {
+    "id": 360465,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:Topschool",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 338049,
+    "source_split": "dev",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:LittleRainySeasons",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 104028,
+    "source_split": "dev",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:RutgerMuller",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 399675,
+    "source_split": "dev",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:jgriffie919",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 149825,
+    "source_split": "dev",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:Gheorghelaza",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 257691,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:vmgraw",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 398007,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:Rickplayer",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 21323,
+    "source_split": "dev",
+    "split": "acoustic-final",
+    "category": "scream_distress",
+    "group": "uploader:cdrk",
+    "rationale": "Recorded human scream; fear/pain/horror or acted scream in uploader description/tags. Not proof of emergency intent. No UPF/666moviescreams workshop sources."
+  },
+  {
+    "id": 315647,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:TheSoundcatcher",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 356312,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:esmayorga",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 404923,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:squidge316",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 209996,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:creapersound",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 346173,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:VSokorelos",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 367448,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:lluiset7",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 422240,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:awholenewlife1",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 231297,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:Puniho",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 369070,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:LazyLids",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 391327,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "impact_crash",
+    "group": "uploader:TobiasLudwig",
+    "rationale": "Recorded glass/ceramic breakage, not vehicle collision. Excludes synthetic/composite and known source remixes."
+  },
+  {
+    "id": 34865,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:grololo",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 198844,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:bone666138",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 347964,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Nkzdra",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 380772,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:cosmo235",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 156091,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:marcolo91",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 52286,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:trip2000",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 31569,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Walter_Odington",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 62327,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:bsumusictech",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 249490,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Katiemullen",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 397034,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:felix.blume",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 128896,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:joshenanigans",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 401794,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Sean-TE0",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 425662,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Rebecca_f",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 131199,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:TheGertz",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 73373,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:sofajoe",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 425904,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:NatalieTre",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 352421,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:joseph.larralde",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 398885,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:PHetish",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 263079,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:SoundProject123456789",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 30216,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Erdie",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 113173,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Fasolt",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 121943,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:hantorio",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 210314,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:Soundscape_Leuphana",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
+  },
+  {
+    "id": 217800,
+    "source_split": "eval",
+    "split": "acoustic-final",
+    "category": "background",
+    "group": "uploader:minian89",
+    "rationale": "Recorded traffic/horns, doors, hammering, speech/laughter, dogs, wind, rain, thunder or chimes; no target annotation. Not a claim of harmlessness."
   }
 ]
