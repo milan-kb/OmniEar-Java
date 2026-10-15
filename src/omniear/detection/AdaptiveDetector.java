@@ -3,7 +3,7 @@ package omniear.detection;
 import java.util.ArrayDeque;
 import omniear.audio.AudioSamples;
 
-/** Single-worker detector. Current block enters the baseline AFTER thresholding. */
+/** Single-worker onset hint; calibration estimates noise but never disables analysis. */
 public final class AdaptiveDetector {
     public record Config(int baselineBlocks, int warmupBlocks, double multiplier, double floor, double cooldownSeconds) {
         public Config {
@@ -20,7 +20,6 @@ public final class AdaptiveDetector {
     public record Reading(double rms, double baseline, double threshold, boolean calibrated, boolean triggered) { }
     private final Config config;
     private final ArrayDeque<Double> history = new ArrayDeque<>();
-    private double sum;
     private double lastTrigger = Double.NEGATIVE_INFINITY;
     private double lastTime = Double.NEGATIVE_INFINITY;
 
@@ -32,14 +31,16 @@ public final class AdaptiveDetector {
         }
         lastTime = audioSeconds;
         double energy = AudioSamples.rms(samples);
-        double baseline = history.isEmpty() ? 0 : Math.max(0, sum / history.size());
+        // Lower quantile resists isolated foreground energy; sustained events still
+        // need the pipeline's periodic path, not an ever-more-sensitive RMS gate.
+        double[] levels = history.stream().mapToDouble(Double::doubleValue).sorted().toArray();
+        double baseline = levels.length == 0 ? 0 : levels[(levels.length - 1) / 5];
         double threshold = Math.max(baseline * config.multiplier(), config.floor());
         boolean calibrated = history.size() >= config.warmupBlocks();
-        boolean triggered = calibrated && energy > threshold && audioSeconds - lastTrigger > config.cooldownSeconds();
+        boolean triggered = energy > threshold && audioSeconds - lastTrigger > config.cooldownSeconds();
         if (triggered) lastTrigger = audioSeconds;
-        if (history.size() == config.baselineBlocks()) sum -= history.removeFirst();
+        if (history.size() == config.baselineBlocks()) history.removeFirst();
         history.addLast(energy);
-        sum += energy;
         return new Reading(energy, baseline, threshold, calibrated, triggered);
     }
 }

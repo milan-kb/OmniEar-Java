@@ -61,6 +61,7 @@ public final class Main {
         if (mode.equals("mic-test")) System.out.println("Input diagnostic only: no classifier, audio files or events are saved.");
         else {
             System.out.println(report.summary());
+            System.out.println("Evidence gates were developed with the 217-file bundle; existing/custom training is preserved and needs separate evaluation.");
             for (Category category : Category.values()) System.out.println("  " + category.id() + ": " + report.counts().getOrDefault(category, 0));
             report.problems().forEach(System.err::println);
         }
@@ -99,6 +100,6 @@ public final class Main {
                 + "  java -cp build/classes omniear.Main --classify FILE.wav [--training DIR] [--data DIR]\n"
                 + "  java -cp build/classes omniear.Main --evaluate HELD_OUT_ROOT --training LABELED_WAV_ROOT\n"
                 + "  java -cp build/classes omniear.Main --mic-test\n"
-                + "--analyze preserves Stage 1 calibration; --classify explicitly bypasses Stage 1.");
+                + "--analyze uses bounded onset/periodic windows from startup; --classify explicitly bypasses scheduling.");
     }
 }

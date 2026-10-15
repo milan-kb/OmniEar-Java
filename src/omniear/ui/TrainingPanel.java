@@ -113,7 +113,9 @@ public final class TrainingPanel extends JPanel implements AutoCloseable {
                     }
                     progress.setValue(ready); progress.setString(ready + " / 5 classes present · coverage only");
                     report.problems().forEach(message -> { log("ERROR · " + message); onProblem.accept(message); });
-                    log("Reload complete at " + java.time.LocalTime.now().withNano(0) + " · " + report.summary()); onReport.accept(report);
+                    log("Reload complete at " + java.time.LocalTime.now().withNano(0) + " · " + report.summary());
+                    log("Alert operating points were developed with the 217-file bundle. Existing/custom training is preserved, not auto-upgraded; evaluate it separately or use a fresh --data directory.");
+                    onReport.accept(report);
                 } catch (InterruptedException e) { Thread.currentThread().interrupt(); }
                 catch (CancellationException | ExecutionException e) {
                     summary.setText("Training unavailable — check diagnostics and reload");

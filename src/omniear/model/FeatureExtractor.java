@@ -23,6 +23,10 @@ public final class FeatureExtractor {
     public FeatureVector extract(float[] audio) {
         AudioSamples.rms(audio); // Validate once at the boundary, including NaNs.
         float[] window = AudioSamples.loudestWindow(audio, AudioSamples.WINDOW_SIZE, AudioSamples.SAMPLE_RATE);
+        // Use the same level transform for imported training, direct WAVs and streaming.
+        // It changes features only: stored WAVs and event RMS remain untouched.
+        double rms = AudioSamples.rms(window);
+        if (rms > 1e-9) for (int i = 0; i < window.length; i++) window[i] *= (float) (.1 / rms);
         double[] sum = new double[FRAME_FEATURES], squares = new double[FRAME_FEATURES], maxima = new double[FRAME_FEATURES];
         java.util.Arrays.fill(maxima, Double.NEGATIVE_INFINITY);
         double[] previous = new double[FFT / 2 + 1];

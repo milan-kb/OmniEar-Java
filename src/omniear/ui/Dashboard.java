@@ -26,7 +26,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
     private final JTabbedPane tabs = new JTabbedPane();
     private final WaveformPanel waveform = new WaveformPanel();
     private final JLabel state = new JLabel("Idle"), meter = new JLabel("RMS: —   Baseline: —   Threshold: —"), stats = new JLabel();
-    private final JLabel latestAlert = new JLabel("No alerts — background and low-vote classifications are suppressed");
+    private final JLabel latestAlert = new JLabel("No alerts — background, weak evidence and duplicate episodes are suppressed");
     private final JTextArea diagnostics = new JTextArea(3, 60);
     private final JButton start = new JButton("Start monitoring"), stop = new JButton("Stop"), wav = new JButton("Analyze WAV…"), micTest = new JButton("Test microphone · 5 s");
     private final JLabel modelState = new JLabel("Classification · loading training…");
@@ -79,13 +79,13 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         JPanel buttons = new JPanel(new FlowLayout(FlowLayout.LEADING, 8, 0));
         start.setMnemonic('S'); stop.setMnemonic('T'); wav.setMnemonic('W'); micTest.setMnemonic('M');
         for (JButton button : List.of(start, stop, micTest)) buttons.add(button);
-        buttons.add(new JLabel("First 2 s: stay quiet to calibrate"));
+        buttons.add(new JLabel("Hybrid analysis · up to 2.5 s context"));
         live.add(buttons, BorderLayout.NORTH);
         live.add(waveform, BorderLayout.CENTER);
         JPanel signalStatus = new JPanel(new GridLayout(3, 1, 0, 4)); signalStatus.add(state); signalStatus.add(meter); signalStatus.add(inputLevel);
         inputLevel.getAccessibleContext().setAccessibleName("Decoded input level and gain guidance");
         live.add(signalStatus, BorderLayout.SOUTH);
-        overview.add(DarkTheme.section("LIVE SIGNAL · RMS anomalies trigger classification when trained", live), BorderLayout.CENTER);
+        overview.add(DarkTheme.section("LIVE SIGNAL · onset hints + periodic classification when trained", live), BorderLayout.CENTER);
         JPanel calibrate = new JPanel(new FlowLayout(FlowLayout.LEADING, 8, 0));
         labeled(calibrate, "Threshold ×", multiplier); labeled(calibrate, "RMS floor", floor); labeled(calibrate, "Cooldown (s)", cooldown);
         overview.add(calibrate, BorderLayout.SOUTH);
@@ -100,7 +100,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         latestAlert.setFont(latestAlert.getFont().deriveFont(Font.BOLD));
         history.add(DarkTheme.section("LATEST ALERT · P0 critical / P1 high / P4 monitoring", latestAlert), BorderLayout.NORTH);
         history.add(eventTable(true), BorderLayout.CENTER);
-        history.add(new JLabel("Background, untrained and low-vote results appear in Dashboard; only routed alerts appear here."), BorderLayout.SOUTH);
+        history.add(new JLabel("Background, rejected evidence and duplicate episodes appear in Dashboard; only routed alerts appear here."), BorderLayout.SOUTH);
         tabs.addTab("Dashboard", dashboard); tabs.addTab("WAV Testing", testing); tabs.addTab("Training", new JScrollPane(training)); tabs.addTab("Alert History", history);
         for (int i = 0; i < 4; i++) tabs.setMnemonicAt(i, '1' + i);
         root.add(tabs, BorderLayout.CENTER);
@@ -163,7 +163,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
     }
     private void chooseWav() {
         JFileChooser chooser = new JFileChooser(); chooser.setFileFilter(new FileNameExtensionFilter("WAV audio", "wav"));
-        chooser.setDialogTitle("Analyze WAV through both stages (first 2 s calibrate)");
+        chooser.setDialogTitle("Analyze WAV through the continuous hybrid pipeline");
         if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             Path path = chooser.getSelectedFile().toPath();
             startWav(path);
@@ -189,7 +189,7 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         inputLevel.setToolTipText(level.summary());
         var reading = block.reading();
         meter.setText(String.format(java.util.Locale.ROOT, "RMS %.4f    Baseline %.4f    Threshold %.4f    Audio %.2f s    %s",
-                reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "Calibrated" : "Calibrating (stay quiet)"));
+                reading.rms(), reading.baseline(), reading.threshold(), block.seconds(), reading.calibrated() ? "Noise estimate ready" : "Estimating noise (analysis active)"));
     }
     private void updateControls() {
         boolean running = monitor.isRunning(), idle = !running && !trainingBusy && !clipBusy && !closing;

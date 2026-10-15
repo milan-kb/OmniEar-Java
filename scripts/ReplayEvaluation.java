@@ -16,7 +16,7 @@ class ReplayEvaluation {
     public static void main(String[] args) throws Exception {
         Path training = Path.of(args[0]);
         String split = args[1];
-        if (!Set.of("development", "final-test", "rejection-dev", "rejection-final").contains(split)) throw new IllegalArgumentException("Explicit split required");
+        if (!Set.of("development", "final-test", "rejection-dev", "rejection-final", "acoustic-final").contains(split)) throw new IllegalArgumentException("Explicit split required");
         SoundClassifier model = suppliedModel != null ? suppliedModel : new TrainingRepository(training).load().classifier().orElseThrow();
         SoundClassifier measured = features -> {
             long before = System.nanoTime();
@@ -32,7 +32,7 @@ class ReplayEvaluation {
                 clips.add(new Clip(cells[0], Category.fromId(cells[1]), WavSource.load(Path.of(cells[0]))));
         }
         var backgrounds = clips.stream().filter(c -> c.category == Category.BACKGROUND).toList();
-        System.out.println("kind\tscenario\tfile\ttruth\tstart\tend\temission\ttrigger\tpredicted\tvote\tdistance\talert" + extraHeader);
+        System.out.println("kind\tscenario\tfile\ttruth\tstart\tend\temission\ttrigger\tpredicted\tvote\tdistance\talert\tstatus" + extraHeader);
         for (int n = 0; n < clips.size(); n++) {
             Clip clip = clips.get(n);
             var direct = DetectionPipeline.classifyClip(clip.audio, measured, Instant.EPOCH, clip.path);
@@ -81,9 +81,9 @@ class ReplayEvaluation {
         }
     }
     static void record(String scenario, Clip clip, double start, double end) {
-        System.out.printf(LOCALE, "RECORD\t%s\t%s\t%s\t%.6f\t%.6f\t0\t0\t-\t0\t0\tfalse%n", scenario, clip.path, clip.category.id(), start, end);
+        System.out.printf(LOCALE, "RECORD\t%s\t%s\t%s\t%.6f\t%.6f\t0\t0\t-\t0\t0\tfalse\t-%n", scenario, clip.path, clip.category.id(), start, end);
     }
     static void print(String kind, String scenario, Clip clip, double start, double end, double emission, SoundEvent event) {
-        System.out.printf(LOCALE, "%s\t%s\t%s\t%s\t%.6f\t%.6f\t%.6f\t%.6f\t%s\t%.6f\t%.6f\t%b%s%n", kind, scenario, clip.path, clip.category.id(), start, end, emission, event.audioSeconds(), event.category().id(), event.voteShare(), event.nearestDistance(), event.isAlert(), extraFields);
+        System.out.printf(LOCALE, "%s\t%s\t%s\t%s\t%.6f\t%.6f\t%.6f\t%.6f\t%s\t%.6f\t%.6f\t%b\t%s%s%n", kind, scenario, clip.path, clip.category.id(), start, end, emission, event.audioSeconds(), event.category().id(), event.voteShare(), event.nearestDistance(), event.isAlert(), event.status(), extraFields);
     }
 }

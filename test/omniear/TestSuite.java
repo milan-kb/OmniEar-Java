@@ -27,6 +27,7 @@ public final class TestSuite {
         InputDiagnosticsTest.main(new String[0]);
         SubmissionDemoTest.main(new String[0]);
         featuresAndClassifier();
+        AcousticRegressionTest.main(new String[0]);
         swingComponentSearch();
         swingReadinessPolling();
         trainingAndPersistence();
@@ -157,7 +158,7 @@ public final class TestSuite {
         float[] tone = new float[40000];
         for (int i = 0; i < tone.length; i++) tone[i] = (float) (.5 * Math.sin(2 * Math.PI * 1000 * i / 16000));
         var features = extractor.extract(tone);
-        check(Math.abs(features.get(0) - .5 / Math.sqrt(2)) < .001, "frame RMS");
+        check(Math.abs(features.get(0) - .1) < .001, "feature-window RMS is normalized identically for training and inference");
         check(Math.abs(features.get(2) * 8000 - 1000) < 20, "spectral centroid");
         check(features.get(5) < .01, "tone spectral flatness");
         expect(IllegalArgumentException.class, () -> extractor.extract(new float[]{Float.NaN}), "invalid feature input");
@@ -249,13 +250,13 @@ public final class TestSuite {
             check(!background.isAlert(), "background suppression");
             for (Category category : Category.values()) {
                 if (category == Category.BACKGROUND) continue;
-                var event = policy.event(Instant.now(), "mic", 2, reading, new SoundClassifier.Prediction(category, category.alertGate(), 0));
-                check(event.isAlert() && event.priority() == category.priority(), "priority and inclusive vote gate");
+                var event = policy.event(Instant.now(), "mic", 2, reading, new SoundClassifier.Prediction(category, .1, 0));
+                check(event.isAlert() && event.priority() == category.priority(), "priority follows geometric support, not a raw vote probability");
                 check(!policy.event(Instant.now(), "mic", 2, reading,
-                        new SoundClassifier.Prediction(category, category.alertGate() - .001, 0)).isAlert(), "low vote suppression");
+                        new SoundClassifier.Prediction(category, 1, 10)).isAlert(), "unanimous but distant neighbors cannot alert");
             }
             var event = policy.event(Instant.parse("2026-01-01T00:00:00Z"), "a,\"quoted\"\nname.wav", 2, reading,
-                    new SoundClassifier.Prediction(Category.SCREAM_DISTRESS, .9, .2));
+                     new SoundClassifier.Prediction(Category.SCREAM_DISTRESS, .9, .2, .2, .5));
             Path csv = root.resolve("events.csv");
             try (var store = new EventStore(csv)) {
                 store.append(event);
@@ -278,7 +279,7 @@ public final class TestSuite {
         var pipeline = new DetectionPipeline(config, null, Instant.parse("2026-01-01T00:00:00Z"), "fixture");
         for (int i = 0; i < 20; i++) check(pipeline.accept(new float[1600]).isEmpty(), "pipeline warmup");
         check(pipeline.accept(constant(1600, .5f)).isEmpty(), "post-trigger capture not immediate");
-        for (int i = 0; i < 12; i++) check(pipeline.accept(new float[1600]).isEmpty(), "post-trigger wait");
+        for (int i = 0; i < 23; i++) check(pipeline.accept(new float[1600]).isEmpty(), "full post-onset training-length wait");
         var event = pipeline.accept(new float[1600]).orElseThrow();
         check(event.status() == SoundEvent.Status.UNTRAINED && event.category() == null, "no invented prediction");
         check(event.audioSeconds() == 2 && event.timestamp().equals(Instant.parse("2026-01-01T00:00:02Z")), "trigger timestamp, not inference time");

@@ -21,11 +21,12 @@ public class Build {
         if (compiler == null) throw new IllegalStateException("A full JDK 21 is required, not a JRE.");
         if (compiler.run(null, System.out, System.err, options.toArray(String[]::new)) != 0) System.exit(1);
         // Package only curated training WAVs; held-out recordings never enter the runtime model.
-        Path training = Path.of("datasets/training");
         try (var zip = new java.util.zip.ZipOutputStream(Files.newOutputStream(output.resolve("omniear/bundled-training.zip")))) {
             for (String row : Files.readAllLines(Path.of("datasets/groups.tsv"))) {
                 String name = row.split("\t")[0];
-                if (!name.startsWith("datasets/training/")) continue;
+                Path training = name.startsWith("datasets/training/") ? Path.of("datasets/training")
+                        : name.startsWith("datasets/additional-training/") ? Path.of("datasets/additional-training") : null;
+                if (training == null) continue;
                 Path path = Path.of(name).normalize();
                 if (!path.startsWith(training) || !name.endsWith(".wav")) throw new IllegalArgumentException("Invalid training asset: " + name);
                 var entry = new java.util.zip.ZipEntry(training.relativize(path).toString().replace('\\', '/'));

@@ -43,7 +43,7 @@ public final class WavTestingPanel extends JPanel implements AutoCloseable {
         buttons.add(classify); buttons.add(evaluate); direct.add(buttons, BorderLayout.SOUTH);
         routes.add(DarkTheme.section("SOUND CLASSIFICATION · Stage 2", direct));
         JPanel gated = new JPanel(new BorderLayout(8, 12));
-        gated.add(new JLabel("<html>Continuous WAV replay: same detector as microphone.<br>First 2 seconds calibrate; missed events are expected.</html>"), BorderLayout.CENTER);
+        gated.add(new JLabel("<html>Continuous WAV replay: same detector as microphone.<br>Onset + periodic windows; no startup calibration blind spot.</html>"), BorderLayout.CENTER);
         gated.add(analyze, BorderLayout.SOUTH);
         routes.add(DarkTheme.section("ANOMALY DETECTION · Stage 1 → 2", gated));
         JPanel top = new JPanel(new BorderLayout(8, 12)); top.add(routes, BorderLayout.CENTER);
@@ -99,7 +99,7 @@ public final class WavTestingPanel extends JPanel implements AutoCloseable {
         if (busy || closed || !classify.isEnabled()) return;
         SoundClassifier model = classifier.get();
         String source = sample == null ? path.toString() : "Bundled demo: " + sample.fileName();
-        begin("Reading WAV; converting sample rate/channels without gain normalization; extracting FFT / MFCC…");
+        begin("Reading WAV; converting sample rate/channels; level-normalizing the feature window; extracting FFT / MFCC…");
         task = new SwingWorker<SoundEvent, float[]>() {
             private double duration;
             @Override protected SoundEvent doInBackground() throws Exception {
@@ -119,9 +119,10 @@ public final class WavTestingPanel extends JPanel implements AutoCloseable {
                     result.setText(String.format(java.util.Locale.ROOT,
                             "%s%nWAV CLASSIFICATION · Stage 1 bypassed · not live microphone detection%n%s%nPrediction: %s%nVote share: %.3f   |   Nearest standardized distance: %.3f%nOutcome: %s   |   Priority: %s%nDuration: %.3f s · converted to 16 kHz mono (no gain normalization)%n%n%s%n%s",
                             source, comparison, event.category(), event.voteShare(), event.nearestDistance(), event.status(), event.priority(), duration,
-                            duration < 2.5 ? "Short clip: centered zero-padding to 2.5 s; limited acoustic context." : "Uses the loudest 2.5-second feature window.",
+                             (duration < 2.5 ? "Short clip: centered zero-padding to 2.5 s; limited acoustic context." : "Uses the loudest 2.5-second feature window.")
+                                     + " Features use RMS 0.1 normalization; WAV and displayed input levels are unchanged.",
                             event.nearestDistance() < 1e-9 ? "Exact feature match: this may be training audio. Do not count it as unseen evaluation." : "One prediction is not an accuracy estimate. Use the held-out folder for labeled testing."));
-                    if (sample != null) result.append("\n\n" + sample.note()
+                    if (sample != null) result.append("\n\nHistorical submission observation (not a current prediction): " + sample.note()
                             + "\nSelected demonstration examples are not an accuracy benchmark; custom training may change predictions.");
                     result.setCaretPosition(0);
                 } catch (InterruptedException e) { Thread.currentThread().interrupt(); }

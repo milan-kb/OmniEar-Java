@@ -47,7 +47,7 @@ public final class HeldOutEvaluation {
                     if (calibratedEvents.stream().anyMatch(e -> e.isAlert() && e.category() == expected)) calibratedRouted[expected.ordinal()]++;
                     if (expected == Category.BACKGROUND) {
                         if (calibratedEvents.stream().anyMatch(SoundEvent::isAlert)) calibratedBackgroundAlerts++;
-                        if (prediction.category() != Category.BACKGROUND && prediction.voteShare() >= prediction.category().alertGate()) directBackgroundAlerts++;
+                        if (DetectionPipeline.classifyClip(audio, model, Instant.EPOCH, "evaluation").isAlert()) directBackgroundAlerts++;
                     }
                     int column = events.isEmpty() ? Category.values().length : events.getFirst().category().ordinal();
                     gated[expected.ordinal()][column]++;
@@ -76,7 +76,7 @@ public final class HeldOutEvaluation {
         if (total > 0) output.append(String.format(Locale.ROOT, "Observed accuracy on these files only: %.2f%%%n", 100.0 * correct / total));
         else output.append("No eligible unseen recordings. No accuracy calculated.\n");
         output.append("\nStage 1 → Stage 2: original WAVs, default detector, no added silence or gain changes.\n")
-                .append("Each recording starts a fresh 2 s calibration; first emitted event supplies the matrix label. NO_EVENT is an abstention.\n");
+                .append("Each recording starts a fresh hybrid scheduler (no calibration blind spot); first emitted event supplies the matrix label. NO_EVENT is an abstention.\n");
         appendMetrics(output, gated, "Raw gated Confusion matrix");
         int gatedCorrect = 0;
         for (Category category : Category.values()) {

@@ -51,7 +51,7 @@ public final class MonitorService implements AutoCloseable {
             input.open();
             var pipeline = new DetectionPipeline(config, classifier, Instant.now(), input.description());
             listener.onState(true, testOnly ? "Microphone test · speak normally for 5 seconds · no events saved"
-                    : (input instanceof WavSource ? "WAV replay (no playback)" : "Microphone monitoring") + " — calibrating for the first 2 seconds");
+                    : (input instanceof WavSource ? "WAV replay (no playback)" : "Microphone monitoring") + " — hybrid analysis from startup; up to 2.5 s context");
             float[] buffer = new float[AudioSamples.BLOCK_SIZE];
             var levels = new InputDiagnostics();
             while (!stopping) {
@@ -77,6 +77,7 @@ public final class MonitorService implements AutoCloseable {
                     }
                 }
             }
+            if (!testOnly) completion += " · " + pipeline.diagnostics();
         } catch (Exception e) {
             if (!stopping) { completion = "Audio failed — see diagnostics"; listener.onError(input instanceof MicrophoneSource
                     ? "Microphone failed: select the OS default recording input, check permission/mute/gain and close competing apps; use WAV Testing if unavailable"

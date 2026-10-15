@@ -8,7 +8,8 @@ import omniear.alerts.Priority;
 public record SoundEvent(UUID id, Instant timestamp, String source, double audioSeconds,
         double rms, double baseline, double threshold, Category category, double voteShare,
         double nearestDistance, Priority priority, Status status) {
-    public enum Status { ALERT, BACKGROUND_SUPPRESSED, LOW_VOTE_SUPPRESSED, UNTRAINED }
+    public enum Status { ALERT, BACKGROUND_SUPPRESSED, LOW_VOTE_SUPPRESSED, UNTRAINED,
+        DUPLICATE_SUPPRESSED, DISTANCE_SUPPRESSED, BACKGROUND_CONFLICT_SUPPRESSED }
     public SoundEvent {
         Objects.requireNonNull(id); Objects.requireNonNull(timestamp); Objects.requireNonNull(source);
         Objects.requireNonNull(priority); Objects.requireNonNull(status);
@@ -17,10 +18,12 @@ public record SoundEvent(UUID id, Instant timestamp, String source, double audio
             if (!Double.isFinite(value) || value < 0) throw new IllegalArgumentException("Invalid event number");
         }
         if (voteShare > 1 || (status == Status.UNTRAINED) != (category == null)
-                || (status == Status.ALERT && (category == null || category == Category.BACKGROUND || priority != category.priority() || voteShare < category.alertGate()))
+                || (status == Status.ALERT && (category == null || category == Category.BACKGROUND || priority != category.priority()))
                 || (status != Status.ALERT && priority != Priority.NONE)
                 || (status == Status.BACKGROUND_SUPPRESSED && category != Category.BACKGROUND)
-                || (status == Status.LOW_VOTE_SUPPRESSED && (category == Category.BACKGROUND || voteShare >= category.alertGate()))) {
+                || (status == Status.LOW_VOTE_SUPPRESSED && (category == Category.BACKGROUND || voteShare >= category.alertGate()))
+                || ((status == Status.DUPLICATE_SUPPRESSED || status == Status.DISTANCE_SUPPRESSED
+                    || status == Status.BACKGROUND_CONFLICT_SUPPRESSED) && (category == null || category == Category.BACKGROUND))) {
             throw new IllegalArgumentException("Inconsistent event category/status/priority");
         }
     }

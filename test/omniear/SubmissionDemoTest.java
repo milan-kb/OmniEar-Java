@@ -15,9 +15,9 @@ public final class SubmissionDemoTest {
             TrainingRepository.installBundled(root.resolve("training"));
             var model = new TrainingRepository(root.resolve("training")).load().classifier().orElseThrow();
             var samples = DemoSample.all();
-            TestSuite.check(samples.size() == 10 && model.size() == 170, "ten separate demo resources, 170 training recordings");
+            TestSuite.check(samples.size() == 10 && model.size() == 217, "ten separate demo resources, 217 training recordings");
             Map<Category, Integer> matches = new EnumMap<>(Category.class), misses = new EnumMap<>(Category.class);
-            String[] observed = {"scream_distress", "siren_traffic", "explosion", "background", "impact_crash", "explosion", "siren_traffic", "background", "background", "scream_distress"};
+            String[] observed = {"scream_distress", "siren_traffic", "explosion", "explosion", "impact_crash", "explosion", "siren_traffic", "siren_traffic", "background", "scream_distress"};
             System.out.println("file\tlabel\tdirect_prediction\tvote\tdistance\tstatus\traw_first_prediction\traw_alerts");
             for (int i = 0; i < samples.size(); i++) {
                 var sample = samples.get(i); float[] audio = sample.load();
@@ -34,9 +34,10 @@ public final class SubmissionDemoTest {
                         direct.category().id(), direct.voteShare(), direct.nearestDistance(), direct.status(),
                         events.isEmpty() ? "NO_EVENT" : events.getFirst().category().id(), events.stream().filter(SoundEvent::isAlert).count());
             }
-            for (Category category : Category.values()) TestSuite.check(matches.getOrDefault(category, 0) == 1 && misses.getOrDefault(category, 0) == 1,
-                    "demo includes a direct success and failure for " + category.id());
-            System.err.println("PASS: selected examples include five direct matches and five mismatches; this is not a representative accuracy estimate. Raw replay is simulated, not a microphone test.");
+            for (Category category : Category.values()) TestSuite.check(matches.getOrDefault(category, 0) + misses.getOrDefault(category, 0) == 2,
+                    "both historical demo recordings retained for " + category.id());
+            TestSuite.check(matches.values().stream().mapToInt(Integer::intValue).sum() == 7, "seven direct demo regressions match, three known confusions remain");
+            System.err.println("PASS: seven matches on historical selected examples; not an accuracy estimate. Raw replay is simulated, not a microphone test.");
         } finally { TestSuite.deleteTree(root); }
     }
 }

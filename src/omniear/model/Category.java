@@ -21,6 +21,7 @@ public enum Category {
     }
     public String id() { return id; }
     public Priority priority() { return priority; }
+    /** Historical vote gates retained for validating old CSV statuses, not current routing. */
     public double alertGate() { return alertGate; }
     @Override public String toString() { return displayName; }
     public static Category fromId(String id) {
