@@ -1,5 +1,7 @@
 # UML class diagram
 
+[START HERE](../README.md) · [Architecture explanation](ARCHITECTURE.md) · [Project report](PROJECT_REPORT.md)
+
 Solid triangles denote inheritance; dashed triangles denote interface realization.
 Diamonds denote ownership/composition; plain arrows denote use. Method lists are
 selected, not exhaustive. Names correspond to `src/omniear/`; Swing/JDK types are
@@ -146,3 +148,8 @@ classDiagram
 `AudioSource`, which extends `AutoCloseable`; monitor, store and worker panels
 also implement `AutoCloseable`. `DarkTheme` and `AudioSamples` are static utility
 classes used by presentation/DSP respectively. They are omitted above for clarity.
+
+The integrated cleanup does not change these production relationships:
+`KnnClassifier` retains `scale`, not its constructor-only mean array.
+`test/omniear/SwingTestSupport` is a shared test helper, deliberately outside this
+production diagram. See [Testing](TESTING.md) for its regression coverage.
