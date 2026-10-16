@@ -39,6 +39,19 @@ isolation only.
   `OmniEar.jar` copied outside the repository started `--demo` with a relative
   `--data` root and created exactly one isolated session with 170 bundled training
   WAVs and one append-only CSV; `--help` lists the demo entry point.
+- Portable sound-testing package: `scripts/PackageSoundset.java` stages
+  `demo/soundset/` into `OmniEar-Demo-Soundset.zip` (13 entries, 2.07 MB) after
+  re-checking every WAV SHA-256 against `demo/soundset/manifest.tsv`.
+  `scripts/verify_soundset.py` then extracted the built ZIP and classified all
+  ten recordings with the packaged JAR: every predicted category, priority,
+  status, alert flag and 3-decimal vote/distance matched the ZIP manifest,
+  `demo/CLASSROOM_RESULTS.tsv` and `demo/VERIFIED_RESULTS.tsv` (PASS). Licenses
+  were re-checked per file (CC0 1.0 / CC BY 3.0, authors in the manifest); the
+  five intentionally challenging recordings remain outside the app's five-button
+  flow. A fresh clone rebuilt a byte-identical ZIP
+  (SHA-256 `299f56967c5f8f3a02fe9905aaa6e300d913f8d8439897f3f73ba7b5eee10072`),
+  and the reported artifact was re-verified after that rebuild. Soundset only
+  adds packaging/docs; no model, training or pipeline change.
 
 ## Conservative code cleanup — 2026-10-14
 

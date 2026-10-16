@@ -100,6 +100,18 @@ wind → false scream. Their original [verified outcomes](../demo/VERIFIED_RESUL
 are preserved. Classroom Demo's one selected background stays suppressed; that
 does **not** mean arbitrary background recordings are safe from false alerts.
 
+## Portable sound-testing package
+
+`OmniEar-Demo-Soundset.zip` packages the ten audited recordings — the five
+verified above in `wav/` and the five known-limitation examples in
+`known-limitations/` — with a beginner [testing guide](../demo/soundset/TESTING_GUIDE.md),
+a [checklist](../demo/soundset/CHECKLIST.md) and a full
+[manifest](../demo/soundset/manifest.tsv) of labels, licenses, expected
+predictions, severity, alert behavior and SHA-256. Rebuild it from the repository
+root with `java scripts/PackageSoundset.java`; re-verify the built ZIP against
+the packaged JAR with `python3 scripts/verify_soundset.py` (the verifier, unlike
+the app itself, needs Python 3). Both pass on the recorded evidence.
+
 ## Screenshots from actual Swing runs
 
 ![Real explosion prediction and waveform](classroom-alert.png)
