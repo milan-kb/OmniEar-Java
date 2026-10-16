@@ -115,11 +115,13 @@ public final class ClassroomUiTest {
         }
     }
     private static void open(AtomicReference<ClassroomDemo> reference, Path root) throws Exception {
-        SwingUtilities.invokeAndWait(() -> {
-            DarkTheme.install();
-            try { var frame = new ClassroomDemo(root); reference.set(frame); frame.setVisible(true); }
-            catch (java.io.IOException e) { throw new IllegalStateException(e); }
-        });
+        Main.main(new String[]{"--demo", "--data", root.toString()});
+        TestSuite.check(awaitOnEdt(() -> {
+            for (Frame window : Frame.getFrames()) if (window instanceof ClassroomDemo demo && demo.isShowing()) {
+                reference.set(demo); return true;
+            }
+            return false;
+        }, 10, 25), "--demo CLI launches classroom window");
         TestSuite.check(awaitOnEdt(() -> reference.get().isReady() && !reference.get().isBusy(), 30, 25), "fresh classroom startup loads bundled model");
     }
     private static void waitIdle(ClassroomDemo frame, int seconds) throws Exception {

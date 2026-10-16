@@ -1,5 +1,38 @@
 # Verification results
 
+## Classroom demo extension — 2026-10-16
+
+Baseline: stable `main` `48da665`; branch `feat/classroom-demo`; implementation
+`f263a85`. FFT/MFCC features, k-NN, detector, alert gates, bundled training and
+all normal runtime paths are unchanged; this adds presentation and runtime-data
+isolation only.
+
+- `java Build.java test` passes **308 checks** (261 prior + 47 classroom) and the
+  packaged `omniear.TestSuite` reports the same count. New checks cover five
+  genuine bundled recordings x two complete runs, real alert routing and
+  background suppression, reset rotation, CSV reopen and startup isolation.
+- Recorded repeat-run outcomes are byte-identical across both runs; all five
+  selected recordings are non-training files with nonzero nearest distances.
+  `demo/CLASSROOM_RESULTS.tsv` records run, actual prediction (never the catalog
+  label), priority, status, vote share and distance. This is a curated teaching
+  selection, not an accuracy estimate; five other bundled examples still show
+  their original mismatches in normal WAV Testing.
+- `java Build.java ui-test`, packaged `omniear.UiSmokeTest` and
+  `omniear.TrainedSmokeTest --ui` pass on isolated rootful Xwayland `:9`.
+  `omniear.ClassroomUiTest` (source and JAR classpath) drives the real `--demo`
+  entry point: five actual Java Sound playbacks completed, exactly one persisted
+  event per click, overlapping/double clicks were blocked, a native Robot
+  **Reset Demo** click rotated the CSV, Alt+A silent classification produced a
+  real P0 result, **Stop playback** released output without losing the result,
+  and close/restart reopened durable CSVs with a fresh empty session.
+- With audio output made unavailable (process-local ALSA configuration with no
+  device), the window reported the output failure explicitly while retaining the
+  persisted real prediction, and silent classification still worked.
+- Renders were inspected at the 1000x900 minimum: waveform, result and history
+  stay visible. `docs/DEMO.md` records the exact five-minute sequence, credits,
+  verified outcomes and recovery steps. Earlier known demo failures, the
+  unmodified unreliable live microphone and all historical results below stand.
+
 ## Conservative code cleanup — 2026-10-14
 
 Baseline: `86d850a`; refactor branch: `refactor/code-cleanup`.

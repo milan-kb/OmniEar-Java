@@ -1,5 +1,26 @@
 # Testing and interpreting results
 
+## Classroom Demo checks
+
+Current `java Build.java test` and packaged `omniear.TestSuite` pass **308 checks**
+(261 original + 47 classroom checks). The new headless `ClassroomDemoTest` uses
+five genuine bundled recordings, checks two complete runs, real alert/suppression,
+CSV reopen, reset and startup isolation. No model or existing alert logic changed.
+
+After `java Build.java jar`, run:
+
+```sh
+java -cp build/OmniEar.jar omniear.ClassroomDemoTest
+java -cp build/OmniEar.jar omniear.ClassroomUiTest
+```
+
+The second opens the actual `--demo` entry point and plays all five WAVs through
+Java Sound; it requires a graphical desktop and audio output, **not a microphone**.
+It verifies native reset/keyboard controls, real outcomes, stop/replay, close,
+CSV persistence and fresh restart. A missing output fails this check rather than
+silently skipping playback. See [DEMO.md](DEMO.md) for silent presentation recovery.
+The earlier cleanup counts below remain historical where explicitly dated.
+
 [START HERE](../README.md) · [Setup](GETTING_STARTED.md) · [Demo](DEMO.md) · [Evidence](../TEST_RESULTS.md)
 
 Run commands from the repository root with JDK 21. Build helper actions compile
@@ -37,7 +58,7 @@ Optional packaged full-suite check:
 java -ea -cp build/OmniEar.jar omniear.TestSuite
 ```
 
-This also ends at 261 checks and verifies packaged resources. Run it from the
+This now ends at 308 checks and verifies packaged resources. Run it from the
 repository root because some tests use repository WAV paths. `SubmissionDemoTest`
 alone can also run from another directory when given an absolute JAR path.
 

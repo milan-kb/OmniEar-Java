@@ -1,5 +1,11 @@
 # Submission feature and claim audit
 
+Classroom extension (2026-10-16): `--demo` / Dashboard **Classroom Demo…** adds
+real Java Sound playback of five curated prerecorded WAVs, real direct inference,
+severity/waveform/history, isolated runtime data and non-destructive CSV reset.
+Playback exists **only in Classroom Demo**; the original actions audited below
+retain their semantics. See [DEMO.md](DEMO.md) and [results](../TEST_RESULTS.md).
+
 Scope: academic submission behavior after `fb5246f`, retained by the integrated
 cleanup `87ff0fb9`; no classifier/feature/detector tuning.
 Paths below are relative to `src/omniear/`. Historical evaluation reports are

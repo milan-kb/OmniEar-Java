@@ -1,5 +1,11 @@
 # Team handoff — your first session with OmniEar
 
+For the classroom presentation use `java -jar build/OmniEar.jar --demo` and the
+updated [five-minute guide](DEMO.md). Tests now pass **308 checks**. Five genuine
+recordings play/classify with the unchanged bundled 170-file model and alert
+policy; isolated Reset Demo preserves normal data. No microphone setup is needed.
+The original handoff below still describes the normal application.
+
 [START HERE](../README.md) → [Setup](GETTING_STARTED.md) → Team handoff → [Demo](DEMO.md)
 
 ## What we built and why

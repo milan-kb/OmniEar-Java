@@ -9,14 +9,20 @@ Java Sound are standard JDK components; no third-party runtime/build libraries.
 **Direct WAV classification works with a bundled real k-NN model. Continuous
 live detection remains unreliable:** it misses events and can raise false alerts.
 This is an academic prototype, not an emergency-response system. Vote share is
-neighbor agreement, not emergency probability. No sound playback, SMS, remote
+neighbor agreement, not emergency probability. No SMS, remote
 dispatch, Pi/GSM hardware, deep neural inference or network server is included.
+
+**For the five-minute OOP presentation:** launch `java -jar build/OmniEar.jar --demo`.
+The isolated **Classroom Demo** plays five genuine bundled WAVs and runs the
+unchanged real classifier/alert policy, with waveform, severity, CSV-backed
+history and **Reset Demo**. No microphone setup or external dataset is needed.
+Follow [the exact demo guide](docs/DEMO.md). Selected successes are not general accuracy.
 
 ## START HERE — for a new teammate
 
 1. **[Getting started](docs/GETTING_STARTED.md)** — clone, JDK 21, Windows/macOS/Linux setup, first launch and troubleshooting.
 2. **[Team handoff](docs/TEAM_HANDOFF.md)** — what works, known limits, code-reading route and safe first contributions.
-3. **[Five-minute demo](docs/DEMO.md)** — show all five classes and genuine failures honestly.
+3. **[Five-minute demo](docs/DEMO.md)** — reproducible five-class playback/classification, recovery and honest limitations.
 4. **[Architecture](docs/ARCHITECTURE.md)** → **[UML](docs/UML.md)** — trace audio, predictions, alerts and threads.
 5. **[Testing](docs/TESTING.md)** → **[Contributing](CONTRIBUTING.md)** — check a change and submit a reviewed GitHub PR.
 
@@ -24,6 +30,8 @@ dispatch, Pi/GSM hardware, deep neural inference or network server is included.
 
 - Four Swing tabs: **Dashboard**, **WAV Testing**, **Training**, **Alert History**;
   readiness/mode warnings, real waveforms, scores and local P0/P1/P4 priorities.
+- **Classroom Demo… / `--demo`:** one-click playback and real classification of
+  five curated successes, isolated training/CSV, repeatable results and non-destructive reset.
 - **Classify WAV / Classify example:** loudest 2.5 s → Java FFT/MFCC features →
   k-NN; bypasses the continuous detector. Ten licensed examples include one
   direct-label match and one known mismatch for each class.
@@ -59,8 +67,8 @@ java Build.java jar
 java -jar build/OmniEar.jar --data data/team-demo
 ```
 
-Both Java versions should be **21**; tests end with **`PASS: 261 checks`** at the
-cleanup baseline. Wait for **Classification ready · 170 WAVs / 5 classes**.
+Both Java versions should be **21**; tests end with **`PASS: 308 checks`**
+(261 at the cleanup baseline). Wait for **Classification ready · 170 WAVs / 5 classes**.
 Open **WAV Testing → Example label → Classify example**. Labels/credits are
 shown as provenance; actual inference determines prediction and match/mismatch.
 
@@ -79,6 +87,7 @@ relative to your current folder. Close a session before reusing its CSV.
 | `java Build.java ui-test` | Real-display Swing/Robot checks; needs desktop focus. |
 | `java Build.java jar` | Create portable `build/OmniEar.jar`. |
 | `java -jar build/OmniEar.jar --help` | List supported paths/actions. |
+| `java -jar build/OmniEar.jar --demo` | Isolated classroom playback/classification; no microphone. |
 
 Try a genuine example after closing the GUI:
 
@@ -101,7 +110,7 @@ and result interpretation; see [Setup](docs/GETTING_STARTED.md) for JDK help.
 | [Verification results](TEST_RESULTS.md) | Dated tests, platform scope, behavior comparisons and historical acoustic results. |
 | [Datasets](DATASETS.md) | Real-recording selection, split limits, licensing and rationale. |
 | [Attribution](datasets/ATTRIBUTION.md), [manifest](datasets/manifest.json), [dataset license](datasets/LICENSE-DATASET) | Per-recording authors, sources, licenses and hashes; preserve when sharing assets. |
-| [Demo catalog](demo/samples.tsv) / [actual results](demo/VERIFIED_RESULTS.tsv) | Ten separately packaged, already-inspected demonstration files. |
+| [Demo catalog](demo/samples.tsv) / [actual results](demo/VERIFIED_RESULTS.tsv) / [classroom runs](demo/CLASSROOM_RESULTS.tsv) | Ten separately packaged, already-inspected demonstration files; five rehearsal repeat outcomes. |
 | [Upstream inspection](INSPECTION.md) | What the Java implementation preserves/replaces; upstream repository is untouched. |
 | [Evaluation guide](evaluation/README.md) / [rejection decision](evaluation/REJECTION_DECISION.md) | Frozen historical experiments; rejected candidates were not promoted. |
 

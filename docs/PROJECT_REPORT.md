@@ -1,5 +1,11 @@
 # OmniEar: Java OOP acoustic-monitoring project
 
+Classroom extension (2026-10-16): the project now includes an isolated `--demo`
+window with real prerecorded playback, unchanged Java inference/alert policy,
+waveform/history/CSV and reset. This is a presentation feature, not improved
+acoustic detection. The original submission narrative below predates playback;
+use [DEMO.md](DEMO.md) for current classroom instructions.
+
 [START HERE](../README.md) · [Setup](GETTING_STARTED.md) · [Architecture](ARCHITECTURE.md) · [Testing](TESTING.md) · [Team handoff](TEAM_HANDOFF.md)
 
 ## Objective and scope
