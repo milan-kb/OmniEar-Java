@@ -30,6 +30,17 @@ It does not fetch libraries. Tests are ordinary Java `main` programs, not JUnit.
 
 ## Two routes, not two equally reliable demonstrations
 
+**Classroom Demo** adds a guided presentation of the existing **direct** route:
+`Main --demo` (or Dashboard launcher) → `ClassroomDemo` → `DemoSample.load()` →
+`ClassroomSession.classify()` → unchanged `DetectionPipeline.classifyClip()` /
+`AlertPolicy` → `EventStore` → Swing result/history. `WavPlayback` writes the same
+decoded recording to a Java Sound `SourceDataLine`; speaker gain applies only
+to those output bytes. Playback does not feed a microphone or generate alerts.
+A single worker owns model loading, inference, CSV and playback; EDT owns widgets.
+Stop closes output, while the already persisted result remains. Reset rotates
+to a fresh append-only CSV in an isolated session; old CSVs and normal user data
+are retained. No new classifier, training or acoustic gates are introduced.
+
 ```text
 MicrophoneSource OR WavSource
           |

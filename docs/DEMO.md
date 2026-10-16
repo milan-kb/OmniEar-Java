@@ -1,143 +1,160 @@
-# Five-minute demonstration and viva
+# Five-minute classroom demo
 
-[START HERE](../README.md) · [First-time setup](GETTING_STARTED.md) · [Tests](TESTING.md) · [Team handoff](TEAM_HANDOFF.md)
+[START HERE](../README.md) · [Architecture](ARCHITECTURE.md) · [UML](UML.md) · [Tests](../TEST_RESULTS.md)
 
-## Rehearsal / submission setup
+**Demonstrate five selected genuine recordings with the existing Java classifier.**
+Classroom Demo plays the prerecorded WAV, computes its prediction, applies the
+existing alert policy and saves the actual result. It does not listen to the
+microphone, fake an alert or use the dataset label to make a prediction.
+These deliberately selected successes **are not general model accuracy**.
 
-Inside a fresh checkout of `OmniEar-Java`, with a full JDK 21:
+## Clone, build, launch
+
+Full JDK **21**, Git and a graphical desktop are required. A speaker/headphone
+output is needed for sound; no microphone setup, external datasets, Python,
+Maven, network model download or third-party Java dependencies are needed.
+
+```sh
+git clone --branch feat/classroom-demo https://github.com/milan-kb/OmniEar-Java.git
+cd OmniEar-Java
+java -version
+javac -version
+java Build.java test
+java Build.java jar
+java -jar build/OmniEar.jar --demo
+```
+
+Tests end with **`PASS: 308 checks`**. Wait for **Ready · choose recording 1 to
+begin**. The demo loads the unchanged **170-WAV** bundled model. Select a modest
+OS speaker volume; the demo's speaker slider defaults to 25% and affects only
+playback, never the waveform, classifier input or saved RMS.
+
+You can also use **Classroom Demo…** in the existing Dashboard (Alt+5). The
+ordinary application and its four original tabs remain available without
+`--demo`. Close/stop ordinary microphone monitoring before presenting; the
+classroom window itself never opens a recording input.
+
+### Portable JAR only
+
+Copy just `build/OmniEar.jar` to another folder or a teammate's machine with Java
+21 and run:
+
+```sh
+java -jar OmniEar.jar --demo
+```
+
+All five demonstration WAVs, original training, and licenses are inside the JAR.
+No repository-relative audio path is used. To choose a writable data location:
+
+```sh
+java -jar OmniEar.jar --demo --data classroom-data
+```
+
+Do not supply `--training`: Classroom Demo intentionally uses its own fresh
+bundled training to avoid old/custom-model changes during a presentation.
+
+## Five-minute sequence
+
+| Time | Action | Explain/show |
+|---|---|---|
+| 0:00–0:30 | Launch `--demo`, wait for Ready. | “These are prerecorded, selected WAVs. Java computes every prediction now; this is not live detection.” |
+| 0:30–1:00 | Click **1 · Scream** (Alt+1). | Hear the 9.52 s recording; show **Distress scream**, **P0 / Critical**, waveform and first CSV-backed event. |
+| 1:00–1:20 | Click **2 · Explosion** (Alt+2). | 5.44 s recording; **Explosion**, **P0 / Critical**. |
+| 1:20–1:40 | Click **3 · Impact** (Alt+3). | 2.71 s glass breakage; **Impact / crash**, **P1 / High**. Do not call it a vehicle collision. |
+| 1:40–2:15 | Click **4 · Siren** (Alt+4). | 26.69 s recording; **Traffic siren**, **P4 / Monitoring**. |
+| 2:15–2:40 | Click **5 · Background** (Alt+5). | 10.73 s rain; **Background noise**, **No threat alert / BACKGROUND_SUPPRESSED**. The suppressed event still enters history/CSV. |
+| 2:40–3:10 | Repeat **3 · Impact**. | A fresh computation and exactly one additional event. Controls prevent overlapping/double-click runs. |
+| 3:10–3:45 | Show history and copy the CSV path at the bottom. Click **Reset Demo** (Alt+R), then Background again. | Empty new history/CSV, then one real suppressed background result. Earlier CSVs remain intact. |
+| 3:45–4:30 | Open **Guide & credits** (Alt+G). | Show source author/license. Explain real FFT/MFCC → k-NN → AlertPolicy → EventStore; weighted votes are not probabilities. |
+| 4:30–5:00 | Show [UML](UML.md) and [architecture](ARCHITECTURE.md). | `AudioSource` abstraction / `PcmSource` inheritance, `SoundClassifier` polymorphism, immutable records, composition, worker vs EDT and `AutoCloseable` resources. State limitations. |
+
+You can keep speaking during playback. Inference and durable CSV append finish
+first; the displayed result remains visible while the actual WAV plays. Alerts
+are local categories/severity metadata, not a separate alarm sound or dispatch.
+The waveform is the actual complete decoded recording, not a generated animation
+or microphone trace.
+
+## Verified clip outcomes — unchanged stable-main classifier
+
+Audited all ten previously bundled samples. Selected the five correctly
+classified recordings already licensed and packaged independently of training;
+no audio was cropped, synthesized, relabeled or added to training.
+
+| Button / source | Actual prediction | Existing routing | Vote share | Distance | License / author |
+|---|---|---|---:|---:|---|
+| [264918](https://freesound.org/s/264918/) | Distress scream | P0 / Critical / ALERT | .716172 | .980568 | CC BY 3.0 · AderuMoro |
+| [256296](https://freesound.org/s/256296/) | Explosion | P0 / Critical / ALERT | .764136 | .477744 | CC BY 3.0 · YleArkisto |
+| [320167](https://freesound.org/s/320167/) | Impact / crash | P1 / High / ALERT | 1.000000 | .465799 | CC0 · joshs |
+| [238228](https://freesound.org/s/238228/) | Traffic siren | P4 / Monitoring / ALERT | .899236 | .612103 | CC0 · eaglechopper |
+| [110612](https://freesound.org/s/110612/) | Background noise | NONE / BACKGROUND_SUPPRESSED | .824735 | .391419 | CC BY 3.0 · soundscalpel.com |
+
+Exact authors/licenses for all clips, original metadata and SHA-256 hashes:
+[catalog](../demo/samples.tsv), [attribution](../datasets/ATTRIBUTION.md),
+[manifest](../datasets/manifest.json). Credits are also shown inside the app/JAR.
+Recorded repeat-run outcomes: [CLASSROOM_RESULTS.tsv](../demo/CLASSROOM_RESULTS.tsv).
+All five source recordings are separate from training and have nonzero nearest
+distances. This is a curated reproducibility demonstration, not a blind test.
+
+The other five bundled examples remain in normal **WAV Testing**, including
+wind → false scream. Their original [verified outcomes](../demo/VERIFIED_RESULTS.tsv)
+are preserved. Classroom Demo's one selected background stays suppressed; that
+does **not** mean arbitrary background recordings are safe from false alerts.
+
+## Screenshots from actual Swing runs
+
+![Real explosion prediction and waveform](classroom-alert.png)
+
+![Five computed results including suppressed background](classroom-history.png)
+
+The minimum demo window is 1000×900; use a desktop/projector that accommodates it,
+or reduce OS display scaling. Panes scroll and the result/history divider moves.
+Use Tab and Alt+1…5 / Alt+A / Alt+S / Alt+R for keyboard operation. Severity is
+shown as text as well as color. No assistive-technology certification is claimed.
+
+## Reset, persistence and recovery
+
+- **Reset Demo** is available when idle. It starts a new empty CSV and clears
+  the waveform/result/history without retraining. It never truncates earlier
+  CSVs or deletes normal user data. Stop playback first if a clip is playing.
+- Each launch makes a fresh `data/classroom-demo/session-…/` containing its own
+  170-file training copy and `events-….csv`. Earlier rehearsal files remain for
+  inspection, including after closing/restarting. A new window starts empty
+  deliberately; it does not silently import previous demo history. The exact
+  current CSV path is selectable/copyable at the bottom. Normal `data/events.csv`
+  and custom training are never modified by this mode.
+- **No sound:** choose/unmute the OS playback device, check speaker level and
+  retry. An unavailable output is explicitly reported; the real prediction and
+  saved result remain. Uncheck **Play audio** (Alt+A) for silent classification.
+  Java Sound delivery cannot establish that the room's speakers are audible.
+- **Stop playback** (Alt+S) releases output; the already computed/saved result
+  stays. It does not rerun inference or add a fake cancellation event. Repeat
+  a button after completion to generate a new genuine result.
+- **Startup/CSV error:** the app reports failure rather than calling it saved.
+  Close and relaunch with a writable `--data` directory. A reset creates another
+  CSV; original files remain. No microphone permission is relevant to this mode.
+- **Unexpected label:** show the actual mismatch, not the catalog label as the
+  prediction. Use a freshly built stable classroom JAR; do not use experimental
+  acoustic branches or custom model data to reproduce these outcomes.
+
+## Rehearsal checks
 
 ```sh
 java Build.java test
+java Build.java ui-test
 java Build.java jar
-java -jar build/OmniEar.jar --data data/demo-session
+java -ea -cp build/OmniEar.jar omniear.TestSuite
+java -cp build/OmniEar.jar omniear.ClassroomDemoTest
+java -cp build/OmniEar.jar omniear.ClassroomUiTest
 ```
 
-The first launch installs 170 bundled training WAVs into a **missing**
-`data/demo-session/training`; restart reuses them and reloads `data/demo-session/events.csv`.
-Use a new directory for a clean rehearsal rather than deleting anyone's data.
-Custom existing training folders are preserved and can produce different results.
-No network, Python, extra libraries or audio download is required. A portable
-copy of the JAR also includes all ten demonstration WAVs and attribution.
+The last command **plays the five WAVs** and needs a graphical desktop and output
+device. It checks actual playback completion, real inference, severity, no
+background alert, native Reset Demo click, keyboard control, repeat/stop/close,
+startup isolation and durable CSV reopen. It never opens the microphone. On
+KDE/Wayland a compositor may refuse Robot focus; use the existing rootful Xwayland
+procedure in [TEST_RESULTS.md](../TEST_RESULTS.md) rather than skipping assertions.
 
-Optional preflight (do not open two instances on the same CSV):
-
-```sh
-java -cp build/OmniEar.jar omniear.SubmissionDemoTest
-java -jar build/OmniEar.jar --mic-test
-```
-
-The first command installs an isolated temporary model, computes direct and raw
-pipeline results, checks the observed demo outcomes, then deletes its temporary
-files. It does not save events to your demonstration CSV. Output is recorded in
-`demo/VERIFIED_RESULTS.tsv`. These are selected **already-inspected** examples,
-not an independent accuracy test.
-
-## Timed walkthrough
-
-| Time | Action and explanation |
-|---|---|
-| 0:00–0:35 | Show Dashboard readiness: 170 WAVs / five classes. “Ready means the model can run, not that it is reliable.” Open Training to show 40/18/40/32/40 counts; do not import demo audio into training. |
-| 0:35–1:20 | Open WAV Testing (Alt+2, or click). Select scream `fsd-264918.wav`, press **Classify example** (Alt+D). Show the actual label match, P0, vote ≈0.716, distance ≈0.981 and source/license. Explain that classification bypasses calibration and neither uses the microphone nor plays audio. |
-| 1:20–2:00 | Choose background `fsd-381853.wav` (wind), classify. It actually predicts scream/P0, vote ≈0.562. Show **LABEL MISMATCH**, not a hidden “success.” The dataset label is context; it is not supplied to the classifier. |
-| 2:00–2:35 | Complete all five classes: select matching explosion 256296, impact 320167, siren 238228 and background 110612, clicking **Classify example** after each. Show P0/P1/P4 or suppression; scores are neighbor agreement, not certainty. Scroll/drag the divider for provenance/results. |
-| 2:35–3:15 | Click **Analyze WAV…**, select `datasets/held-out/explosion/fsd-256296.wav`. It completes with no event under default raw calibration, although direct classification identifies explosion. Explain warmup, capture and quiet/sustained-event failures. In a JAR-only presentation, use the raw replay column from the executable demo check instead. |
-| 3:15–4:00 | Dashboard → **Test microphone · 5 s**. Speak normally; show RMS/dBFS, peak, near-full-scale percentage. Adjust input/mute/gain in OS settings and rerun if needed. This proves input operation, not threat recognition. If appropriate, Start monitoring, stay quiet for two seconds, show the live waveform, then Stop. Do not promise any alert. |
-| 4:00–4:30 | Open Alert History; the actual false wind alert is visible too. Dashboard includes suppressed/untrained events. Close and reopen using the same `--data data/demo-session` to demonstrate CSV persistence. |
-| 4:30–5:00 | Show UML and explain the `AudioSource` interface, shared `PcmSource`, and SwingWorker/audio executor versus EDT. Conclude with limitations and preserved evaluation reports. |
-
-No explosives, breakage or distress enactment is needed for the presentation.
-The GUI does not play audio; any external playback is a separate action and must
-not be described as an application feature or a validated microphone test.
-
-## Verified examples (bundled model)
-
-Each category has a real direct-label match and a real mismatch:
-
-| Dataset category | Match: source ID → prediction | Failure: source ID → actual prediction/status |
-|---|---|---|
-| Scream | 264918 → scream / P0 | 249745 → siren / low-vote suppressed |
-| Explosion | 256296 → explosion / P0 | 426167 → background / suppressed |
-| Impact/crash | 320167 → impact / P1 | 367624 → explosion / low-vote suppressed |
-| Traffic siren | 238228 → siren / P4 | 378257 → background / suppressed |
-| Background | 110612 → background / suppressed | 381853 → scream / P0 false alert |
-
-All ten original raw WAV replays emit **no event** with a fresh default pipeline.
-Do not silently add quiet audio, change gains or tune controls to make the demo
-appear more successful. Scream examples are acted; impacts are glass breakages,
-not vehicle collisions. Five matches out of a deliberately chosen ten is not an
-accuracy claim. Full licenses, authors and original metadata are in
-the [demo catalog](../demo/samples.tsv), [attribution](../datasets/ATTRIBUTION.md)
-and [manifest](../datasets/manifest.json).
-
-## Copy-paste five-class CLI fallback
-
-After building the JAR, close any GUI sharing this session. Run from the
-repository root; use a new data-folder name if this one contains existing work:
-
-```sh
-java -jar build/OmniEar.jar --classify datasets/held-out/scream_distress/fsd-264918.wav --data data/five-class-demo
-java -jar build/OmniEar.jar --classify datasets/held-out/explosion/fsd-256296.wav --data data/five-class-demo
-java -jar build/OmniEar.jar --classify datasets/held-out/impact_crash/fsd-320167.wav --data data/five-class-demo
-java -jar build/OmniEar.jar --classify datasets/held-out/siren_traffic/fsd-238228.wav --data data/five-class-demo
-java -jar build/OmniEar.jar --classify datasets/held-out/background/fsd-110612.wav --data data/five-class-demo
-```
-
-Expect the matching categories in the table above, four routed alerts and one
-background-suppressed event in a fresh CSV. A sixth command exposes the real failure:
-
-```sh
-java -jar build/OmniEar.jar --classify datasets/held-out/background/fsd-381853.wav --data data/five-class-demo
-```
-
-That wind recording predicts scream/P0/ALERT; do not relabel it to hide the false
-alert. The GUI supplies label comparison/credits; CLI prints actual inference
-and saves metadata only. For a JAR-only demo without repository WAV paths, use
-the bundled GUI selector or `omniear.SubmissionDemoTest`, not these filesystem paths.
-
-## Recovery cues
-
-- **Untrained:** supply usable WAVs for all five categories or relaunch with a
-  new `--data` folder to install the bundle. Anomaly monitoring still works;
-  direct classification/demo buttons are disabled. Existing folders are not
-  overwritten automatically.
-- **Microphone unavailable:** select the correct OS default recording device,
-  grant permission, unmute, close competing apps, then retry. Use the WAV demo
-  when hardware is unavailable; say explicitly that microphone capture was not
-  demonstrated.
-- **Very quiet / possible clipping:** speak normally during the five-second
-  diagnostic; adjust OS input gain. dBFS is not dB SPL. Levels are measured after
-  decoding/downmix/resampling; absence of near-full-scale samples cannot rule out
-  upstream distortion, channel cancellation or hardware clipping.
-- **CSV unavailable:** visible memory-only mode is not persistent success. Close
-  any other instance; choose another data folder or repair/back up the file.
-- **Keyboard focus:** click the window/tab before shortcuts. KDE/Wayland can
-  deny synthetic Robot focus during automated tests; mouse controls still work.
-
-## Likely viva questions
-
-- **Why two WAV actions?** Direct inspection always extracts one clip window;
-  continuous replay only classifies energy-triggered captures after warmup.
-- **Where is polymorphism?** One `MonitorService` consumes either `AudioSource`;
-  one pipeline uses the `SoundClassifier` interface. GUI and CLI use listeners.
-- **Why not run everything on the EDT?** Audio reads, DSP and disk I/O can block.
-  SwingWorker/executor jobs do that work; the EDT updates widgets.
-- **What is encapsulated?** Private detector history/ring/channel state and
-  defensively copied feature arrays; immutable prediction/event records.
-- **What survives restart?** Training WAV copies and CSV event metadata. The
-  classifier is rebuilt from recordings; raw microphone audio is never saved.
-- **Why is the false alert important?** It shows actual inference and limits.
-  Good mechanics and a few correct clips do not establish emergency reliability.
-- **What do RMS, FFT and MFCC do?** RMS measures decoded signal energy; FFT
-  gives a short-frame frequency spectrum; MFCCs compactly describe its shape.
-  `AudioSamples` and `FeatureExtractor` implement them; none establishes intent.
-- **What is k-NN "training" here?** `TrainingRepository` extracts WAV features
-  and constructs `KnnClassifier` with training-only scales. It compares up to
-  seven neighbors, not neural weights; WAVs persist, features are rebuilt.
-- **Is a vote of 0.8 an 80% chance of danger?** No: it is a weighted share of
-  neighbor votes. Alert gates are routing rules, not calibrated probabilities.
-- **Why can direct and replay disagree?** Replay must pass warmup/RMS/capture
-  before classification; direct mode skips those steps. `NO_EVENT` is no emitted
-  classification, not background. Calibration can hide the actual event.
-- **How are files protected?** `EventStore` owns an exclusive CSV lock, validates
-  history and forces appends. Invalid history is preserved; imports validate
-  copies rather than altering original recordings. See [Architecture](ARCHITECTURE.md).
+Verified on Linux/JDK 21, including a fresh clone and JAR-only execution outside
+the repository. Windows/macOS output devices need a local rehearsal. Live
+microphone detection remains unreliable; its original calibration and all
+classifier/alert semantics were deliberately left unchanged on this branch.

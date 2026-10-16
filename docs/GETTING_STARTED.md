@@ -113,7 +113,7 @@ java Build.java run
 
 The build compiles source **and tests** into `build/classes` with
 `--release 21 -Xlint:all -Werror`. Success may print nothing. The suite ends with
-`PASS: 261 checks`; it is not an accuracy score. `run` builds and opens Swing;
+`PASS: 308 checks`; it is not an accuracy score. `run` builds and opens Swing;
 wait for **Classification ready · 170 WAVs / 5 classes**. First startup installs
 training into a **missing** `data/training` folder, then loads it in a worker.
 Existing folders are deliberately not overwritten. No separate training step
