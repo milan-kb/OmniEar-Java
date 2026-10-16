@@ -32,6 +32,13 @@ isolation only.
   stay visible. `docs/DEMO.md` records the exact five-minute sequence, credits,
   verified outcomes and recovery steps. Earlier known demo failures, the
   unmodified unreliable live microphone and all historical results below stand.
+- Fresh-clone rehearsal of the committed branch: `git clone -b feat/classroom-demo`,
+  then `java Build.java test`, `java Build.java jar`, packaged `omniear.TestSuite`
+  (308 checks), packaged `omniear.ClassroomDemoTest` and packaged
+  `omniear.ClassroomUiTest` on Xwayland `:9` all passed from a clean checkout.
+  `OmniEar.jar` copied outside the repository started `--demo` with a relative
+  `--data` root and created exactly one isolated session with 170 bundled training
+  WAVs and one append-only CSV; `--help` lists the demo entry point.
 
 ## Conservative code cleanup — 2026-10-14
 
