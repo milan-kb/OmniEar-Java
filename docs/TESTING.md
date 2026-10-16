@@ -18,9 +18,10 @@ java -jar build/OmniEar.jar --help
 java -cp build/OmniEar.jar omniear.SubmissionDemoTest
 ```
 
-- **`test` → `PASS: 261 checks`** at the integrated cleanup baseline: all 249
-  original checks plus twelve traversal/EDT-polling checks. Future intentional
-  test additions can raise this count. Tests include PCM conversions, detector
+- **`test` → `PASS: 560 checks`** for the acoustic repair (261 at the prior cleanup
+  baseline). Additions cover gain invariance, startup/sustained/short/EOF behavior,
+  bounded inference, deduplication, independent DFT/MFCC reference, exact aligned
+  samples and geometric rejection/CSV round-trips. Tests include PCM conversions, detector
   boundaries, FFT/MFCC/k-NN, imports, CSV corruption/locking, EOF/Stop, workers,
   CLI startup/restart and actual licensed demo outcomes. Temporary mechanical
   tones/vectors exercise plumbing, **not acoustic accuracy**.
@@ -29,7 +30,8 @@ java -cp build/OmniEar.jar omniear.SubmissionDemoTest
 - **`SubmissionDemoTest`** prints ten TSV rows plus a pass message. It loads an
   isolated temporary bundled model, checks actual successes **and failures**,
   replays raw clips, and cleans up. It does not append to your session CSV.
-  Compare with [`demo/VERIFIED_RESULTS.tsv`](../demo/VERIFIED_RESULTS.tsv).
+  Current trace: [`acoustic-candidate-demo.tsv`](../evaluation/acoustic-candidate-demo.tsv).
+  [`demo/VERIFIED_RESULTS.tsv`](../demo/VERIFIED_RESULTS.tsv) preserves historical observations.
 
 Optional packaged full-suite check:
 
@@ -37,7 +39,7 @@ Optional packaged full-suite check:
 java -ea -cp build/OmniEar.jar omniear.TestSuite
 ```
 
-This also ends at 261 checks and verifies packaged resources. Run it from the
+This also ends at 560 checks and verifies packaged resources. Run it from the
 repository root because some tests use repository WAV paths. `SubmissionDemoTest`
 alone can also run from another directory when given an absolute JAR path.
 
@@ -53,8 +55,9 @@ Expect `PASS: real-display Swing smoke test...` and
 the desktop available while Robot clicks/types. The first covers four tabs,
 error recovery, Alt+2 navigation, CSV persistence/lock release and untrained
 controls; renders go to `build/ui-tab-0.png` through `build/ui-tab-3.png`.
-The second loads 170 real training files, predicts the real development scream,
-clicks the guided wind example and checks the visible false scream/P0 mismatch.
+The second loads 217 real training files, predicts the real development scream,
+clicks the guided wind example and checks the visible scream-label mismatch
+(now suppressed rather than a routed P0 false alert).
 It writes `build/submission-demo.png`. Neither test opens the microphone.
 
 For packaged Swing checks, after `jar`, replace `build/classes` with
@@ -73,12 +76,12 @@ java -jar build/OmniEar.jar --classify datasets/held-out/explosion/fsd-256296.wa
 java -jar build/OmniEar.jar --analyze datasets/held-out/explosion/fsd-256296.wav --data data/testing-session
 ```
 
-With fresh bundled training: direct mode reports explosion/P0/ALERT, vote about
-0.764 and distance about 0.478. Raw analysis completes with **no emitted event**
-under default calibration. This is expected, not a successful background prediction.
-All ten raw demos emit `NO_EVENT`; see [Demo](DEMO.md) for every class and known
-failure. Direct classification produces CSV events, including suppressed results.
-Gated analysis writes only emitted events; no trigger means no event row.
+With fresh bundled training: direct mode predicts explosion, vote about .616 and
+distance .411, but reports `DISTANCE_SUPPRESSED`. Raw analysis now emits decisions
+instead of silently losing the startup event, but still routes no alert for this
+recording. All ten demos have raw decisions; only scream 264918 and siren 238228
+route alerts. See [Demo](DEMO.md) and the actual trace. Suppressed decisions also
+persist in CSV; silence-skipped windows do not. A label match is not an alert.
 
 To reproduce the original inspected 50-file evaluation:
 
@@ -86,8 +89,9 @@ To reproduce the original inspected 50-file evaluation:
 java -jar build/OmniEar.jar --evaluate datasets/held-out --data data/testing-session
 ```
 
-Expect 50 evaluated, 36 direct labels correct, zero skipped with unchanged
-bundled training. The report separates direct and raw replay matrices, routing,
+This is a historical inspected regression set, not a fresh final. The old 170-file
+runtime gave 36/50; that number is not the expected output of the repaired model.
+The report separates direct and raw replay matrices, routing,
 false positives, and a **three-second digital-silence** diagnostic. That diagnostic
 is artificial context, not live detection or new training data. Rows are true
 labels; columns are predictions. Recall describes missed labeled examples;

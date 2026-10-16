@@ -25,13 +25,13 @@ dispatch, Pi/GSM hardware, deep neural inference or network server is included.
 - Four Swing tabs: **Dashboard**, **WAV Testing**, **Training**, **Alert History**;
   readiness/mode warnings, real waveforms, scores and local P0/P1/P4 priorities.
 - **Classify WAV / Classify example:** loudest 2.5 s → Java FFT/MFCC features →
-  k-NN; bypasses the continuous detector. Ten licensed examples include one
-  direct-label match and one known mismatch for each class.
-- **Start monitoring / Analyze WAV:** same RMS gate, calibration and capture
-  pipeline, with explicit missed-event limitations. WAV analysis has no playback.
+  k-NN; bypasses the continuous scheduler. Ten preserved licensed examples now
+  give seven direct-label matches and three known mismatches, not an accuracy estimate.
+- **Start monitoring / Analyze WAV:** same bounded onset/periodic window pipeline,
+  active from startup, with explicit missed-event limitations. No playback.
 - Five-second microphone input diagnostic: RMS/dBFS, peak, near-full-scale
   percentage and OS gain guidance; no audio/events saved by that diagnostic.
-- Bundled **170 real training WAVs**; explicit validated imports/reload, duplicate
+- Bundled **217 real training WAVs**; explicit validated imports/reload, duplicate
   and conflicting-label checks, and labeled-folder evaluation.
 - Durable quoted UTF-8 CSV, reopen/history, process locking, error recovery and
   explicit memory-only warnings. Monitoring audio is never saved or transmitted;
@@ -59,13 +59,15 @@ java Build.java jar
 java -jar build/OmniEar.jar --data data/team-demo
 ```
 
-Both Java versions should be **21**; tests end with **`PASS: 261 checks`** at the
-cleanup baseline. Wait for **Classification ready · 170 WAVs / 5 classes**.
+Both Java versions should be **21**; tests end with **`PASS: 560 checks`**.
+Wait for **Classification ready · 217 WAVs / 5 classes** in a fresh data directory.
 Open **WAV Testing → Example label → Classify example**. Labels/credits are
 shown as provenance; actual inference determines prediction and match/mismatch.
 
 Startup installs the bundle only into an **absent** default training directory.
-It preserves existing/custom training. Use a new `--data` name for a fresh demo;
+It preserves existing/custom training, including old 170-file installations.
+The new evidence gates were evaluated with the 217-file bundle, not custom models.
+Use a new `--data` name for a fresh demo;
 never delete someone else's data to reset readiness. Offline runtime files are
 relative to your current folder. Close a session before reusing its CSV.
 
@@ -87,9 +89,10 @@ java -jar build/OmniEar.jar --classify datasets/held-out/explosion/fsd-256296.wa
 java -cp build/OmniEar.jar omniear.SubmissionDemoTest
 ```
 
-With the unchanged bundled model the first predicts explosion/P0/ALERT, vote
-about 0.764, distance about 0.478. The second checks all ten packaged demos,
-including failures; all ten raw gated replays emit `NO_EVENT`. Follow
+With fresh bundled training the first predicts explosion but is **distance
+suppressed**, vote about 0.616, distance about 0.411. Correct identification does
+not guarantee an alert. The second checks all ten preserved demos, including
+failures; raw replay now emits decisions, but only two demos route alerts. Follow
 [Testing](docs/TESTING.md) for `--analyze`, `--evaluate`, `--mic-test`, CSV checks
 and result interpretation; see [Setup](docs/GETTING_STARTED.md) for JDK help.
 
@@ -104,11 +107,16 @@ and result interpretation; see [Setup](docs/GETTING_STARTED.md) for JDK help.
 | [Demo catalog](demo/samples.tsv) / [actual results](demo/VERIFIED_RESULTS.tsv) | Ten separately packaged, already-inspected demonstration files. |
 | [Upstream inspection](INSPECTION.md) | What the Java implementation preserves/replaces; upstream repository is untouched. |
 | [Evaluation guide](evaluation/README.md) / [rejection decision](evaluation/REJECTION_DECISION.md) | Frozen historical experiments; rejected candidates were not promoted. |
+| [Acoustic repair decision](evaluation/ACOUSTIC_DECISION.md) / [replacement path](evaluation/ACOUSTIC_REPLACEMENT.md) | Current development/fresh-final results, conservative routing tradeoffs and unresolved recognition failures. |
 
 Historical original direct result: **36/50** on an inspected subset; later final
 direct result: **25/48**, with raw routed recall **1/18**. These are different
-curated sets, not live reliability. The five selected matches among ten demos
-are not an accuracy estimate. All existing test sets are inspected and need
+curated sets, not live reliability. Current 42-file source-disjoint final:
+direct labels **23/42 → 25/42**, raw routed targets **2/18 → 7/18**, raw false
+alerts/hour **48.23 → 12.06** over only 298.59 s of background. Continuous routed
+recall **falls 9/18 → 2/18** as false alerts fall 11 → 2. Reliable recognition
+is **not achieved**, particularly screams/explosions; new final has no siren or
+explosion positives. All existing test sets are now inspected and need
 replacement before new tuning/final evaluation. Verification so far is on
 Linux/JDK 21; Windows/macOS, assistive technology and long-duration microphone
 behavior require testing on the actual machine.

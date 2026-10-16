@@ -1,5 +1,11 @@
 # OmniEar: Java OOP acoustic-monitoring project
 
+> Historical submission narrative below. The 2026-10-16 acoustic repair now uses
+> 217 bundled WAVs, RMS-normalized feature windows, onset/periodic scheduling from
+> startup, geometric rejection and episode deduplication. It does **not** solve
+> reliable recognition. See the current [architecture](ARCHITECTURE.md),
+> [tests](../TEST_RESULTS.md) and [decision](../evaluation/ACOUSTIC_DECISION.md).
+
 [START HERE](../README.md) · [Setup](GETTING_STARTED.md) · [Architecture](ARCHITECTURE.md) · [Testing](TESTING.md) · [Team handoff](TEAM_HANDOFF.md)
 
 ## Objective and scope

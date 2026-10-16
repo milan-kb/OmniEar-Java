@@ -1,0 +1,43 @@
+file	truth	baseline_direct	candidate_direct	baseline_raw_correct_alert	candidate_raw_correct_alert	candidate_raw_diagnosis
+datasets/acoustic-final/scream_distress/fsd-360465.wav	scream_distress	scream_distress	scream_distress	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-338049.wav	scream_distress	siren_traffic	siren_traffic	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED,DISTANCE_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-104028.wav	scream_distress	siren_traffic	siren_traffic	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-399675.wav	scream_distress	siren_traffic	siren_traffic	False	True	correct alert emitted
+datasets/acoustic-final/scream_distress/fsd-149825.wav	scream_distress	siren_traffic	siren_traffic	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-257691.wav	scream_distress	scream_distress	scream_distress	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-398007.wav	scream_distress	scream_distress	scream_distress	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/scream_distress/fsd-21323.wav	scream_distress	siren_traffic	siren_traffic	False	False	classification: all windows preferred siren_traffic
+datasets/acoustic-final/impact_crash/fsd-315647.wav	impact_crash	background	background	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/impact_crash/fsd-356312.wav	impact_crash	impact_crash	impact_crash	False	False	truth predicted but rejected: BACKGROUND_CONFLICT_SUPPRESSED
+datasets/acoustic-final/impact_crash/fsd-404923.wav	impact_crash	impact_crash	impact_crash	False	True	correct alert emitted
+datasets/acoustic-final/impact_crash/fsd-209996.wav	impact_crash	impact_crash	impact_crash	False	True	correct alert emitted
+datasets/acoustic-final/impact_crash/fsd-346173.wav	impact_crash	impact_crash	impact_crash	False	False	classification: all windows preferred explosion
+datasets/acoustic-final/impact_crash/fsd-367448.wav	impact_crash	impact_crash	background	False	False	classification: all windows preferred background,explosion
+datasets/acoustic-final/impact_crash/fsd-422240.wav	impact_crash	impact_crash	impact_crash	True	True	correct alert emitted
+datasets/acoustic-final/impact_crash/fsd-231297.wav	impact_crash	impact_crash	impact_crash	True	True	correct alert emitted
+datasets/acoustic-final/impact_crash/fsd-369070.wav	impact_crash	impact_crash	impact_crash	False	True	correct alert emitted
+datasets/acoustic-final/impact_crash/fsd-391327.wav	impact_crash	impact_crash	impact_crash	False	True	correct alert emitted
+datasets/acoustic-final/background/fsd-34865.wav	background	explosion	siren_traffic	False	False	no background alert
+datasets/acoustic-final/background/fsd-198844.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-347964.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-380772.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-156091.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-52286.wav	background	explosion	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-31569.wav	background	explosion	explosion	False	False	no background alert
+datasets/acoustic-final/background/fsd-62327.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-249490.wav	background	explosion	explosion	False	False	no background alert
+datasets/acoustic-final/background/fsd-397034.wav	background	siren_traffic	siren_traffic	False	False	no background alert
+datasets/acoustic-final/background/fsd-128896.wav	background	impact_crash	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-401794.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-425662.wav	background	scream_distress	scream_distress	False	False	no background alert
+datasets/acoustic-final/background/fsd-131199.wav	background	impact_crash	impact_crash	False	False	no background alert
+datasets/acoustic-final/background/fsd-73373.wav	background	explosion	explosion	False	False	no background alert
+datasets/acoustic-final/background/fsd-425904.wav	background	siren_traffic	siren_traffic	False	False	no background alert
+datasets/acoustic-final/background/fsd-352421.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-398885.wav	background	scream_distress	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-263079.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-30216.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-113173.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-121943.wav	background	explosion	explosion	False	False	no background alert
+datasets/acoustic-final/background/fsd-210314.wav	background	background	background	False	False	no background alert
+datasets/acoustic-final/background/fsd-217800.wav	background	siren_traffic	siren_traffic	False	False	false alert: siren_traffic

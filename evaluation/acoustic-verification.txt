@@ -1,0 +1,196 @@
+Acoustic repair verification — Linux / Java 21 / 2026-10-16
+Only sections marked EXPECTED RED are deliberate negative checks.
+
+## Baseline 48da665: java Build.java test
+file	label	direct_prediction	vote	distance	status	raw_first_prediction	raw_alerts
+fsd-264918.wav	scream_distress	scream_distress	0.716172	0.980568	ALERT	NO_EVENT	0
+fsd-249745.wav	scream_distress	siren_traffic	0.637200	1.395464	LOW_VOTE_SUPPRESSED	NO_EVENT	0
+fsd-256296.wav	explosion	explosion	0.764136	0.477744	ALERT	NO_EVENT	0
+fsd-426167.wav	explosion	background	0.500338	1.058435	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-320167.wav	impact_crash	impact_crash	1.000000	0.465799	ALERT	NO_EVENT	0
+fsd-367624.wav	impact_crash	explosion	0.629467	0.566095	LOW_VOTE_SUPPRESSED	NO_EVENT	0
+fsd-238228.wav	siren_traffic	siren_traffic	0.899236	0.612103	ALERT	NO_EVENT	0
+fsd-378257.wav	siren_traffic	background	0.682705	0.408854	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-110612.wav	background	background	0.824735	0.391419	BACKGROUND_SUPPRESSED	NO_EVENT	0
+fsd-381853.wav	background	scream_distress	0.561604	0.773047	ALERT	NO_EVENT	0
+PASS: selected examples include five direct matches and five mismatches; this is not a representative accuracy estimate. Raw replay is simulated, not a microphone test.
+PASS: trained fresh-start smoke test (170 accepted real training WAVs; real development inference)
+PASS: 261 checks
+
+## Baseline 48da665: java Build.java ui-test
+PASS: real-display Swing smoke test; four tabs, unseen clip, error recovery, keyboard navigation, persistence; build/ui-tab-*.png
+
+## EXPECTED RED: gain invariance before normalization
+Exception in thread "main" java.lang.AssertionError: gain-invariant training/inference feature 0
+	at omniear.TestSuite.check(TestSuite.java:456)
+	at omniear.AcousticRegressionTest.main(AcousticRegressionTest.java:18)
+
+## EXPECTED RED: startup before scheduler repair
+Exception in thread "main" java.lang.AssertionError: startup onset is not blinded by calibration
+	at omniear.TestSuite.check(TestSuite.java:456)
+	at omniear.AcousticRegressionTest.startupAndSustained(AcousticRegressionTest.java:27)
+	at omniear.AcousticRegressionTest.main(AcousticRegressionTest.java:22)
+
+## EXPECTED RED: read straddling alignment deadline before extra-block fix
+Exception in thread "main" java.lang.AssertionError: read straddling onset deadline retains exactly the aligned 40000 samples
+	at omniear.TestSuite.check(TestSuite.java:457)
+	at omniear.AcousticRegressionTest.straddledWindow(AcousticRegressionTest.java:136)
+	at omniear.AcousticRegressionTest.main(AcousticRegressionTest.java:25)
+
+## EXPECTED RED: temporary inverted radius gate, repository source not mutated
+Exception in thread "main" java.lang.AssertionError: one supported episode does not repeat alerts
+	at omniear.TestSuite.check(TestSuite.java:457)
+	at omniear.AcousticRegressionTest.startupAndSustained(AcousticRegressionTest.java:39)
+	at omniear.AcousticRegressionTest.main(AcousticRegressionTest.java:24)
+
+## Candidate: java Build.java test
+file	label	direct_prediction	vote	distance	status	raw_first_prediction	raw_alerts
+fsd-264918.wav	scream_distress	scream_distress	0.773553	0.960106	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	1
+fsd-249745.wav	scream_distress	siren_traffic	0.717868	1.344036	DISTANCE_SUPPRESSED	siren_traffic	0
+fsd-256296.wav	explosion	explosion	0.615822	0.411073	DISTANCE_SUPPRESSED	explosion	0
+fsd-426167.wav	explosion	explosion	0.596873	1.181043	DISTANCE_SUPPRESSED	explosion	0
+fsd-320167.wav	impact_crash	impact_crash	0.834953	0.461466	BACKGROUND_CONFLICT_SUPPRESSED	impact_crash	0
+fsd-367624.wav	impact_crash	explosion	0.720652	0.436752	DISTANCE_SUPPRESSED	explosion	0
+fsd-238228.wav	siren_traffic	siren_traffic	0.799939	0.548902	ALERT	siren_traffic	1
+fsd-378257.wav	siren_traffic	siren_traffic	0.641153	0.437548	BACKGROUND_CONFLICT_SUPPRESSED	siren_traffic	0
+fsd-110612.wav	background	background	0.735948	0.353277	BACKGROUND_SUPPRESSED	background	0
+fsd-381853.wav	background	scream_distress	0.733164	0.725039	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	0
+PASS: seven matches on historical selected examples; not an accuracy estimate. Raw replay is simulated, not a microphone test.
+PASS: trained fresh-start smoke test (217 accepted real training WAVs; real development inference)
+PASS: 560 checks
+
+## Candidate: java Build.java jar (empty output is success)
+
+## Candidate: java -ea -cp build/OmniEar.jar omniear.TestSuite
+file	label	direct_prediction	vote	distance	status	raw_first_prediction	raw_alerts
+fsd-264918.wav	scream_distress	scream_distress	0.773553	0.960106	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	1
+fsd-249745.wav	scream_distress	siren_traffic	0.717868	1.344036	DISTANCE_SUPPRESSED	siren_traffic	0
+fsd-256296.wav	explosion	explosion	0.615822	0.411073	DISTANCE_SUPPRESSED	explosion	0
+fsd-426167.wav	explosion	explosion	0.596873	1.181043	DISTANCE_SUPPRESSED	explosion	0
+fsd-320167.wav	impact_crash	impact_crash	0.834953	0.461466	BACKGROUND_CONFLICT_SUPPRESSED	impact_crash	0
+fsd-367624.wav	impact_crash	explosion	0.720652	0.436752	DISTANCE_SUPPRESSED	explosion	0
+fsd-238228.wav	siren_traffic	siren_traffic	0.799939	0.548902	ALERT	siren_traffic	1
+fsd-378257.wav	siren_traffic	siren_traffic	0.641153	0.437548	BACKGROUND_CONFLICT_SUPPRESSED	siren_traffic	0
+fsd-110612.wav	background	background	0.735948	0.353277	BACKGROUND_SUPPRESSED	background	0
+fsd-381853.wav	background	scream_distress	0.733164	0.725039	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	0
+PASS: seven matches on historical selected examples; not an accuracy estimate. Raw replay is simulated, not a microphone test.
+PASS: trained fresh-start smoke test (217 accepted real training WAVs; real development inference)
+PASS: 560 checks
+
+## Candidate: java Build.java ui-test
+PASS: real-display Swing smoke test; four tabs, unseen clip, error recovery, keyboard navigation, persistence; build/ui-tab-*.png
+
+## Candidate: java -cp build/OmniEar.jar omniear.TrainedSmokeTest --ui
+/home/milan/Projects/javaOE/OmniEar-Java/datasets/held-out/scream_distress/fsd-264918.wav
+WAV CLASSIFICATION · Stage 1 bypassed · not live microphone detection
+
+Prediction: Distress scream
+Vote share: 0.774   |   Nearest standardized distance: 0.960
+Outcome: BACKGROUND_CONFLICT_SUPPRESSED   |   Priority: NONE
+Duration: 9.520 s · converted to 16 kHz mono (no gain normalization)
+
+Uses the loudest 2.5-second feature window. Features use RMS 0.1 normalization; WAV and displayed input levels are unchanged.
+One prediction is not an accuracy estimate. Use the held-out folder for labeled testing.
+Bundled demo: fsd-381853.wav
+WAV CLASSIFICATION · Stage 1 bypassed · not live microphone detection
+Dataset label: Background noise · LABEL MISMATCH
+
+Prediction: Distress scream
+Vote share: 0.733   |   Nearest standardized distance: 0.725
+Outcome: BACKGROUND_CONFLICT_SUPPRESSED   |   Priority: NONE
+Duration: 2.084 s · converted to 16 kHz mono (no gain normalization)
+
+Short clip: centered zero-padding to 2.5 s; limited acoustic context. Features use RMS 0.1 normalization; WAV and displayed input levels are unchanged.
+One prediction is not an accuracy estimate. Use the held-out folder for labeled testing.
+
+Historical submission observation (not a current prediction): Wind; known false threat alert with bundled model
+Selected demonstration examples are not an accuracy benchmark; custom training may change predictions.
+PASS: trained fresh-start smoke test (217 accepted real training WAVs; real development inference)
+
+## Candidate: java -jar build/OmniEar.jar --help
+OmniEar Java 21 (standard JDK only)
+  java -cp build/classes omniear.Main [--data DIR] [--training DIR]
+  java -cp build/classes omniear.Main --train LABELED_WAV_ROOT
+  java -cp build/classes omniear.Main --analyze FILE.wav [--training DIR] [--data DIR]
+  java -cp build/classes omniear.Main --classify FILE.wav [--training DIR] [--data DIR]
+  java -cp build/classes omniear.Main --evaluate HELD_OUT_ROOT --training LABELED_WAV_ROOT
+  java -cp build/classes omniear.Main --mic-test
+--analyze uses bounded onset/periodic windows from startup; --classify explicitly bypasses scheduling.
+
+## Candidate: jdeps -s build/OmniEar.jar
+OmniEar.jar -> java.base
+OmniEar.jar -> java.desktop
+
+## Candidate: python3 scripts/prepare_data.py --verify-only
+scream_distress {'training': 40, 'additional-training': 0, 'held-out': 10, 'development': 0, 'final-test': 8, 'rejection-final': 8, 'acoustic-final': 8}
+explosion {'training': 18, 'additional-training': 4, 'held-out': 10, 'development': 0, 'final-test': 2, 'rejection-final': 0, 'acoustic-final': 0}
+impact_crash {'training': 40, 'additional-training': 0, 'held-out': 10, 'development': 0, 'final-test': 8, 'rejection-final': 8, 'acoustic-final': 10}
+siren_traffic {'training': 32, 'additional-training': 1, 'held-out': 10, 'development': 0, 'final-test': 3, 'rejection-final': 2, 'acoustic-final': 0}
+background {'training': 40, 'additional-training': 42, 'held-out': 10, 'development': 8, 'final-test': 20, 'rejection-final': 30, 'acoustic-final': 24}
+PASS: hashes, decoded-audio uniqueness, uploader and session/source-group separation
+
+## Candidate: original manifest/WAV hash and bundled-entry preservation assertions
+Bundle: 217 WAVs {'scream_distress': 40, 'explosion': 22, 'impact_crash': 40, 'siren_traffic': 33, 'background': 82}
+PASS: 364 original manifest records and 364 original WAVs unchanged; 217 training entries, no held-out bundle audio
+
+## Portable /tmp/opencode: java -cp /home/milan/Projects/javaOE/OmniEar-Java/build/OmniEar.jar omniear.SubmissionDemoTest
+file	label	direct_prediction	vote	distance	status	raw_first_prediction	raw_alerts
+fsd-264918.wav	scream_distress	scream_distress	0.773553	0.960106	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	1
+fsd-249745.wav	scream_distress	siren_traffic	0.717868	1.344036	DISTANCE_SUPPRESSED	siren_traffic	0
+fsd-256296.wav	explosion	explosion	0.615822	0.411073	DISTANCE_SUPPRESSED	explosion	0
+fsd-426167.wav	explosion	explosion	0.596873	1.181043	DISTANCE_SUPPRESSED	explosion	0
+fsd-320167.wav	impact_crash	impact_crash	0.834953	0.461466	BACKGROUND_CONFLICT_SUPPRESSED	impact_crash	0
+fsd-367624.wav	impact_crash	explosion	0.720652	0.436752	DISTANCE_SUPPRESSED	explosion	0
+fsd-238228.wav	siren_traffic	siren_traffic	0.799939	0.548902	ALERT	siren_traffic	1
+fsd-378257.wav	siren_traffic	siren_traffic	0.641153	0.437548	BACKGROUND_CONFLICT_SUPPRESSED	siren_traffic	0
+fsd-110612.wav	background	background	0.735948	0.353277	BACKGROUND_SUPPRESSED	background	0
+fsd-381853.wav	background	scream_distress	0.733164	0.725039	BACKGROUND_CONFLICT_SUPPRESSED	scream_distress	0
+PASS: seven matches on historical selected examples; not an accuracy estimate. Raw replay is simulated, not a microphone test.
+
+## Portable /tmp/opencode: java -jar /home/milan/Projects/javaOE/OmniEar-Java/build/OmniEar.jar --classify /home/milan/Projects/javaOE/OmniEar-Java/datasets/held-out/siren_traffic/fsd-238228.wav --data /tmp/opencode/acoustic-portable-session
+Java k-NN ready: 217 WAVs; vote shares are not probabilities
+Evidence gates were developed with the 217-file bundle; existing/custom training is preserved and needs separate evaluation.
+  scream_distress: 40
+  explosion: 22
+  impact_crash: 40
+  siren_traffic: 33
+  background: 82
+2026-10-16T03:32:10.841762251Z · audio 0.00s · siren_traffic · P4 · votes 0.800 · distance 0.549 · ALERT
+
+## Portable /tmp/opencode: same JAR --analyze same siren --data /tmp/opencode/acoustic-portable-session (reuses existing model/CSV)
+Java k-NN ready: 217 WAVs; vote shares are not probabilities
+Evidence gates were developed with the 217-file bundle; existing/custom training is preserved and needs separate evaluation.
+  scream_distress: 40
+  explosion: 22
+  impact_crash: 40
+  siren_traffic: 33
+  background: 82
+Opening fsd-238228.wav
+WAV replay (no playback) — hybrid analysis from startup; up to 2.5 s context
+2026-10-16T03:32:16.542650463Z · audio 0.00s · siren_traffic · NONE · votes 0.754 · distance 0.418 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:17.842650463Z · audio 1.30s · siren_traffic · NONE · votes 0.669 · distance 0.459 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:19.042650463Z · audio 2.50s · siren_traffic · NONE · votes 0.797 · distance 0.571 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:20.342650463Z · audio 3.80s · siren_traffic · NONE · votes 0.656 · distance 0.810 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:21.542650463Z · audio 5.00s · siren_traffic · NONE · votes 0.941 · distance 0.714 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:22.842650463Z · audio 6.30s · siren_traffic · NONE · votes 0.692 · distance 0.766 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:24.042650463Z · audio 7.50s · siren_traffic · P4 · votes 1.000 · distance 0.643 · ALERT
+2026-10-16T03:32:25.342650463Z · audio 8.80s · siren_traffic · NONE · votes 1.000 · distance 0.645 · DUPLICATE_SUPPRESSED
+2026-10-16T03:32:26.542650463Z · audio 10.00s · siren_traffic · NONE · votes 1.000 · distance 0.673 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:27.842650463Z · audio 11.30s · siren_traffic · NONE · votes 1.000 · distance 0.633 · DUPLICATE_SUPPRESSED
+2026-10-16T03:32:29.042650463Z · audio 12.50s · siren_traffic · NONE · votes 1.000 · distance 0.683 · DUPLICATE_SUPPRESSED
+2026-10-16T03:32:30.342650463Z · audio 13.80s · siren_traffic · NONE · votes 0.779 · distance 0.758 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:33.142650463Z · audio 16.60s · siren_traffic · NONE · votes 0.751 · distance 0.901 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:34.042650463Z · audio 17.50s · siren_traffic · NONE · votes 1.000 · distance 0.818 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:35.342650463Z · audio 18.80s · siren_traffic · NONE · votes 0.867 · distance 0.882 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:36.542650463Z · audio 20.00s · siren_traffic · NONE · votes 0.865 · distance 0.804 · DISTANCE_SUPPRESSED
+2026-10-16T03:32:37.842650463Z · audio 21.30s · siren_traffic · NONE · votes 0.779 · distance 0.632 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:39.042650463Z · audio 22.50s · siren_traffic · NONE · votes 0.674 · distance 0.498 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:40.342650463Z · audio 23.80s · siren_traffic · NONE · votes 0.755 · distance 0.596 · BACKGROUND_CONFLICT_SUPPRESSED
+2026-10-16T03:32:40.730650463Z · audio 24.19s · background · NONE · votes 0.717 · distance 0.555 · BACKGROUND_SUPPRESSED
+WAV analysis complete · Hybrid analysis: onsets=1, windows=20, silence skipped=0, outcomes={ALERT=1, BACKGROUND_SUPPRESSED=1, DUPLICATE_SUPPRESSED=3, DISTANCE_SUPPRESSED=7, BACKGROUND_CONFLICT_SUPPRESSED=8}
+
+## OS default input: java -cp build/classes omniear.Main --mic-test (input diagnostic, not labelled recognition)
+Input diagnostic only: no classifier, audio files or events are saved.
+Opening OS default recording input
+Microphone test · speak normally for 5 seconds · no events saved
+Microphone test complete · RMS 0.6824 (-3.3 dBFS) · peak 1.0000 · near full scale 0.41% · Possible clipping: lower OS input gain, then retest

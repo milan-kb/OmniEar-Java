@@ -1,0 +1,2 @@
+Classifier calls=1684 mean kNN=0.024ms (DSP and wall replay timed separately)
+accept() DSP+scheduling+kNN: blocks=28932 p95=0.107ms max=25.561ms; excludes CSV/UI and EOF

@@ -101,11 +101,11 @@ The 99-file aligned development comparison (61 target, 38 background files) is:
 | Quiet, 2x/clipping | 40 → 20 | 25 → 1 |
 | Real-background bed | 21 → 12 | 11 → 0 |
 | Continuous file intervals | 22 → 8 | 9 → 2 |
-| Continuous background gaps | — | 9 → 6 |
+| Continuous background gaps | — | 9 → 5 |
 
 Raw alert classification precision is 16/18 → 26/27; raw background exposure is
 416.27 s, giving 17.30 → 8.65 false alerts per replay hour. Continuous exposure,
-including gaps, is 713.27 s; counts fall 18 → 8, at a substantial recall cost.
+including gaps, is 713.27 s; counts fall 18 → 7, at a substantial recall cost.
 There is **no across-scenario recall dominance**, and explosive-event alerting
 is still poor. The point is an explicit safety-conscious tradeoff, not a claim
 that making a detector more sensitive solves recognition. Final comparison must
@@ -124,3 +124,62 @@ remains unclassified at this freeze, with no new explosion/siren coverage.
 scenario matrices, precision/recall, abstentions, exposure and latency are in its
 summary; all historical experiment files are untouched. The final section below
 will record both improvements and remaining failures without retuning.
+
+## Fresh-final outcome — candidate retained as a limited repair
+
+Frozen runtime/model/operating points: **`c1f0200`**, before either final replay.
+All 42 source/uploader-disjoint recordings were processed once by each runtime;
+no final outcomes were used to change features, training, gates or scheduling.
+The final is now inspected and cannot be an untouched test for later work.
+
+| Metric | Baseline | Frozen candidate |
+|---|---:|---:|
+| Direct labels correct | 23/42 (54.76%) | 25/42 (59.52%) |
+| Direct target labels correct (no background) | 12/18 | 11/18 |
+| Direct background recall | 11/24 | 14/24 |
+| Direct correctly routed targets | 9/18 | 5/18 |
+| Direct background alerts | 1/24 | 0/24 |
+| Raw correctly routed target intervals | 2/18 | 7/18 |
+| Raw alert precision | 6/10 (60%) | 7/8 (87.5%) |
+| Raw background false alerts / exposure | 4 / 298.59 s | 1 / 298.59 s |
+| Raw background false alerts/hour | 48.23 | 12.06 |
+| Raw no classification emitted | 35/42 | 0/42 |
+| Raw insertion-to-alert median / max | 5.25 / 7.1 s | 2.44 / 8.2 s |
+
+Direct class precision/recall: scream 3/5, 3/8 → 3/4, 3/8; impact 9/11,
+9/10 → 8/9, 8/10; background 11/12, 11/24 → 14/16, 14/24. Raw routed
+recall is scream 0/8 → 1/8 and impact 2/10 → 6/10. New-final explosion and
+siren recall remain **unmeasured**, not zero or perfect.
+
+| Replay scenario | Routed targets baseline → candidate (/18) | Background alerts baseline → candidate | Negative exposure | False alerts/hour baseline → candidate |
+|---|---:|---:|---:|---:|
+| Quiet | 15 → 6 | 15 → 0 | 424.59 s | 127.18 → 0 |
+| Quiet, .25x gain | 12 → 7 | 5 → 0 | 424.59 s | 42.39 → 0 |
+| Quiet, 2x/clipping | 15 → 6 | 19 → 0 | 424.59 s | 161.10 → 0 |
+| Real-background bed | 9 → 2 | 4 → 3 | 424.59 s | 33.92 → 25.44 |
+| Continuous, including gaps | 9 → 2 | 11 → 2 | 424.59 s | 93.26 → 16.96 |
+
+Continuous combined alert precision is 14/25 → 2/4; correct-alert median/max
+latency is 1.9/7.1 → 5.9/8.2 s. No classifications in continuous file intervals
+falls 13 → 4, but that is **not** improved alert recall. Zero observed false
+alerts in short quiet scenarios does not establish zero risk.
+Isolated continuous-gap false alerts actually increase 1 → 2; the combined
+continuous count improves because alerts within background files fall 10 → 0.
+
+**Decision:** retain the limited repair on the fix branch because it corrects
+startup/alignment defects, improves overall direct background specificity and raw
+routing, and reduces false-alert counts in each complete replay scenario (not
+every subinterval, as the gap regression shows). Explicitly
+accept the reduced quiet/continuous recall only as the documented conservative
+operating tradeoff, **not** as fulfillment of reliable recognition. Target-only
+direct identification did not improve; direct scream/siren confusion remains.
+The requested reliable-recognition definition of done is therefore **not met**.
+Do not deploy this as an emergency detector. Keep the best measured variant
+rather than promoting the rejected sensitive flood configuration; the concrete
+replacement path is [ACOUSTIC_REPLACEMENT.md](ACOUSTIC_REPLACEMENT.md).
+
+`acoustic-{baseline,candidate}-final.{tsv,txt}` preserves all actual predictions,
+statuses, matrices, precision/recall, abstentions, latency and false-alert counts.
+`acoustic-final-failures.tsv` explains each file's direct/raw result from those
+rows: no emitted window, no correctly labeled window, or a named gate rejection.
+These are observed stage outcomes, not invented acoustic-onset annotations.

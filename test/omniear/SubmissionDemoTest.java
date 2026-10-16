@@ -30,6 +30,10 @@ public final class SubmissionDemoTest {
                 for (int offset = 0; offset < audio.length; offset += 1600)
                     pipeline.accept(Arrays.copyOfRange(audio, offset, Math.min(audio.length, offset + 1600))).ifPresent(events::add);
                 pipeline.finish().ifPresent(events::add);
+                if (sample.fileName().equals("fsd-238228.wav")) TestSuite.check(events.stream().anyMatch(e -> e.isAlert() && e.category() == sample.label()),
+                        "real sustained siren regression routes an alert without a sixfold RMS onset");
+                if (sample.fileName().equals("fsd-381853.wav")) TestSuite.check(!direct.isAlert(),
+                        "real wind-to-scream confusion no longer routes a direct false alert");
                 System.out.printf(Locale.ROOT, "%s\t%s\t%s\t%.6f\t%.6f\t%s\t%s\t%d%n", sample.fileName(), sample.label().id(),
                         direct.category().id(), direct.voteShare(), direct.nearestDistance(), direct.status(),
                         events.isEmpty() ? "NO_EVENT" : events.getFirst().category().id(), events.stream().filter(SoundEvent::isAlert).count());
@@ -37,6 +41,7 @@ public final class SubmissionDemoTest {
             for (Category category : Category.values()) TestSuite.check(matches.getOrDefault(category, 0) + misses.getOrDefault(category, 0) == 2,
                     "both historical demo recordings retained for " + category.id());
             TestSuite.check(matches.values().stream().mapToInt(Integer::intValue).sum() == 7, "seven direct demo regressions match, three known confusions remain");
+            TestSuite.check(!DetectionPipeline.classifyClip(new float[40000], model, Instant.EPOCH, "digital silence").isAlert(), "bundled model cannot alert on direct digital silence");
             System.err.println("PASS: seven matches on historical selected examples; not an accuracy estimate. Raw replay is simulated, not a microphone test.");
         } finally { TestSuite.deleteTree(root); }
     }

@@ -1,5 +1,11 @@
 # Submission feature and claim audit
 
+> Historical audit of the submission/cleanup baseline, not the repaired acoustic
+> runtime. Current bundle has 217 files; startup/periodic windows replace the
+> trigger-only warmup path, features use RMS .1, and evidence/duplicate gates
+> replace vote cutoffs. See [architecture](ARCHITECTURE.md) and
+> [repair decision/results](../evaluation/ACOUSTIC_DECISION.md).
+
 Scope: academic submission behavior after `fb5246f`, retained by the integrated
 cleanup `87ff0fb9`; no classifier/feature/detector tuning.
 Paths below are relative to `src/omniear/`. Historical evaluation reports are

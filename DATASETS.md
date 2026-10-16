@@ -1,5 +1,26 @@
 # Real recordings and honest evaluation
 
+## Acoustic repair extension (2026-10-16) — current
+
+**406 unique licensed recordings**: original 364 preserved plus 42 source/uploader-
+disjoint `acoustic-final` files (8 screams, 10 glass/ceramic impacts, 24 backgrounds).
+The metadata-only selection froze at `102e86f`; runtime/model/gates froze at
+`c1f0200` before final inference. All sets are now inspected. New final has no
+explosion or siren positives; their independent recall remains unmeasured.
+New files: 27 CC0 and 15 CC BY 3.0; totals: 198 CC0 and 208 CC BY 3.0.
+
+The current bundle uses **217 training recordings**, the original 170 plus all
+47 existing `additional-training` files: 40/22/40/33/82 by category. No test audio
+enters training; all original WAVs and manifest entries are unchanged. The
+normalization is in shared feature extraction, not a rewrite of stored audio.
+Existing user training roots are not overwritten or silently expanded. Use a
+fresh `--data` root for the evaluated bundle. See the
+[protocol](evaluation/ACOUSTIC_PROTOCOL.md), [results/decision](evaluation/ACOUSTIC_DECISION.md)
+and [replacement path](evaluation/ACOUSTIC_REPLACEMENT.md).
+
+Sections below preserve the earlier studies' data boundaries and observations;
+their references to 170-file packaging and research-only additions are historical.
+
 ## Submission demonstration resources
 
 `demo/samples.tsv` selects ten **already-inspected** recordings from the existing

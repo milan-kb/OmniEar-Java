@@ -1,0 +1,185 @@
+
+direct: recordings=42 audio=375.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [3, 0, 0, 5, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 8, 0, 2, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 4, 1, 4, 14, 0]
+scream_distress: precision=3/4; recall=3/8
+explosion: precision=0/4; recall=0/0
+impact_crash: precision=8/9; recall=8/10
+siren_traffic: precision=0/9; recall=0/0
+background: precision=14/16; recall=14/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 5, 0, 0, 5]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 0, 0, 24]
+Correct first labels=25/42; no emitted classification=0
+Correctly routed target-recording recall=5/18; alert classification precision=5/5
+Background clips passing alert gates=0/24; no continuous-time rate or latency for direct classification.
+
+raw: recordings=42 audio=375.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [4, 0, 0, 4, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 2, 7, 0, 1, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 5, 1, 2, 15, 0]
+scream_distress: precision=4/5; recall=4/8
+explosion: precision=0/7; recall=0/0
+impact_crash: precision=7/8; recall=7/10
+siren_traffic: precision=0/6; recall=0/0
+background: precision=15/16; recall=15/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [1, 0, 0, 0, 0, 7]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 6, 0, 0, 4]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 1, 0, 23]
+Correct first labels=26/42; no emitted classification=0
+Correctly routed target-recording recall=7/18; alert classification precision=7/8
+Background false alerts (including target preludes)=1; background files with alerts=1/24; exposure=298.59s; false alerts/hour=12.06
+File-insertion-to-correct-alert latency proxy: n=7, median=2.44, max=8.2
+
+quiet: recordings=42 audio=501.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [4, 0, 0, 4, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 4, 5, 0, 1, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 10, 1, 2, 10, 0]
+scream_distress: precision=4/5; recall=4/8
+explosion: precision=0/14; recall=0/0
+impact_crash: precision=5/6; recall=5/10
+siren_traffic: precision=0/6; recall=0/0
+background: precision=10/11; recall=10/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 6, 0, 0, 4]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 0, 0, 24]
+Correct first labels=19/42; no emitted classification=0
+Correctly routed target-recording recall=6/18; alert classification precision=6/6
+Background false alerts (including target preludes)=0; background files with alerts=0/24; exposure=424.59s; false alerts/hour=0.00
+File-insertion-to-correct-alert latency proxy: n=6, median=2.4006875, max=8.2
+
+low: recordings=42 audio=501.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [3, 1, 0, 4, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 5, 4, 0, 1, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 17, 0, 2, 4, 0]
+scream_distress: precision=3/4; recall=3/8
+explosion: precision=0/23; recall=0/0
+impact_crash: precision=4/4; recall=4/10
+siren_traffic: precision=0/6; recall=0/0
+background: precision=4/5; recall=4/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 7, 0, 0, 3]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 0, 0, 24]
+Correct first labels=11/42; no emitted classification=0
+Correctly routed target-recording recall=7/18; alert classification precision=7/7
+Background false alerts (including target preludes)=0; background files with alerts=0/24; exposure=424.59s; false alerts/hour=0.00
+File-insertion-to-correct-alert latency proxy: n=7, median=2.361375, max=7.0
+
+high: recordings=42 audio=501.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [4, 0, 0, 4, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 2, 6, 0, 2, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 8, 2, 2, 11, 0]
+scream_distress: precision=4/5; recall=4/8
+explosion: precision=0/10; recall=0/0
+impact_crash: precision=6/8; recall=6/10
+siren_traffic: precision=0/6; recall=0/0
+background: precision=11/13; recall=11/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 6, 0, 0, 4]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 0, 0, 24]
+Correct first labels=21/42; no emitted classification=0
+Correctly routed target-recording recall=6/18; alert classification precision=6/6
+Background false alerts (including target preludes)=0; background files with alerts=0/24; exposure=424.59s; false alerts/hour=0.00
+File-insertion-to-correct-alert latency proxy: n=6, median=2.4006875, max=7.0
+
+bed: recordings=42 audio=501.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [2, 0, 1, 3, 2, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 2, 6, 1, 1, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 6, 3, 4, 10, 0]
+scream_distress: precision=2/3; recall=2/8
+explosion: precision=0/8; recall=0/0
+impact_crash: precision=6/10; recall=6/10
+siren_traffic: precision=0/8; recall=0/0
+background: precision=10/13; recall=10/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 2, 0, 0, 8]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 0, 0, 2, 0, 21]
+Correct first labels=18/42; no emitted classification=0
+Correctly routed target-recording recall=2/18; alert classification precision=2/5
+Background false alerts (including target preludes)=3; background files with alerts=3/24; exposure=424.59s; false alerts/hour=25.44
+File-insertion-to-correct-alert latency proxy: n=2, median=2.2830625, max=2.5
+
+multi: recordings=42 audio=375.38s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [3, 1, 0, 2, 0, 2]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 6, 1, 1, 2]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [2, 7, 3, 2, 10, 0]
+scream_distress: precision=3/5; recall=3/8
+explosion: precision=0/8; recall=0/0
+impact_crash: precision=6/9; recall=6/10
+siren_traffic: precision=0/5; recall=0/0
+background: precision=10/11; recall=10/24
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 8]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 2, 0, 0, 8]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [0, 0, 0, 0, 0, 24]
+Correct first labels=19/42; no emitted classification=4
+Correctly routed target-recording recall=2/18; alert classification precision=2/2
+Background false alerts (including target preludes)=0; background files with alerts=0/24; exposure=298.59s; false alerts/hour=0.00
+File-insertion-to-correct-alert latency proxy: n=2, median=5.900000000000006, max=8.200000000000003
+
+multi-gap: recordings=42 audio=126.00s
+First emitted classification matrix; columns=scream_distress,explosion,impact_crash,siren_traffic,background,NO_EVENT
+scream_distress [0, 0, 0, 0, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 0, 0, 0, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [6, 10, 7, 0, 18, 1]
+scream_distress: precision=0/6; recall=0/0
+explosion: precision=0/10; recall=0/0
+impact_crash: precision=0/7; recall=0/0
+siren_traffic: precision=0/0; recall=0/0
+background: precision=18/18; recall=18/42
+First routed alert matrix (no alert includes rejection/duplicate suppression):
+scream_distress [0, 0, 0, 0, 0, 0]
+explosion [0, 0, 0, 0, 0, 0]
+impact_crash [0, 0, 0, 0, 0, 0]
+siren_traffic [0, 0, 0, 0, 0, 0]
+background [1, 0, 1, 0, 0, 40]
+Correct first labels=18/42; no emitted classification=1
+Correctly routed target-recording recall=0/0; alert classification precision=0/2
+Background false alerts (including target preludes)=2; background files with alerts=2/42; exposure=126.00s; false alerts/hour=57.14
+File-insertion-to-correct-alert latency proxy: n=0, median=None, max=None
+
+Simulated replay, not physical microphone event validation. Weak labels cannot establish actual acoustic onset or event-instance recall.

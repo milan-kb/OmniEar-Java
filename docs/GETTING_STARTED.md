@@ -113,10 +113,12 @@ java Build.java run
 
 The build compiles source **and tests** into `build/classes` with
 `--release 21 -Xlint:all -Werror`. Success may print nothing. The suite ends with
-`PASS: 261 checks`; it is not an accuracy score. `run` builds and opens Swing;
-wait for **Classification ready · 170 WAVs / 5 classes**. First startup installs
+`PASS: 560 checks`; it is not an accuracy score. `run` builds and opens Swing;
+wait for **Classification ready · 217 WAVs / 5 classes** in a fresh data directory. First startup installs
 training into a **missing** `data/training` folder, then loads it in a worker.
-Existing folders are deliberately not overwritten. No separate training step
+Existing folders (including old 170-file installations) are deliberately not
+overwritten. Use a fresh `--data` root for the evaluated 217-file model; custom
+training needs separate evaluation of the evidence gates. No separate training step
 or downloaded model weights are required.
 
 For a portable executable:

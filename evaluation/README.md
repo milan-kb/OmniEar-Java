@@ -1,6 +1,43 @@
 # Reproduce the detection experiments
 
-## Latest: false-alert rejection study
+## Current: acoustic repair (2026-10-16)
+
+See [ACOUSTIC_PROTOCOL.md](ACOUSTIC_PROTOCOL.md),
+[ACOUSTIC_DECISION.md](ACOUSTIC_DECISION.md) and
+[ACOUSTIC_REPLACEMENT.md](ACOUSTIC_REPLACEMENT.md). Fresh-final identification
+improves 23/42 → 25/42 and raw routed recall 2/18 → 7/18, but continuous routed
+recall falls 9/18 → 2/18; this is not reliable emergency recognition.
+
+The candidate was frozen at `c1f0200` before fresh-final inference. Results are
+committed under `acoustic-{baseline,candidate}-{dev,final}.{tsv,txt}`. All test
+sets are now inspected; reproducing a final is not permission to tune on it.
+
+```sh
+java Build.java test
+java Build.java jar
+python3 scripts/prepare_data.py --verify-only
+python3 scripts/test_replay_metrics.py
+# Installs 217 training files only if this data directory's training root is absent:
+java -jar build/OmniEar.jar --classify datasets/held-out/siren_traffic/fsd-238228.wav --data build/acoustic-reproduce
+java -Xmx512m -cp build/classes scripts/ReplayEvaluation.java build/acoustic-reproduce/training rejection-dev > build/acoustic-dev.tsv
+python3 scripts/summarize_replay.py build/acoustic-dev.tsv
+java -Xmx512m -cp build/classes scripts/ReplayEvaluation.java build/acoustic-reproduce/training acoustic-final > build/acoustic-final.tsv
+python3 scripts/summarize_replay.py build/acoustic-final.tsv
+```
+
+For the paired baseline, build `48da665` in a separate detached worktree and
+execute **the current** `scripts/ReplayEvaluation.java` from this repository,
+with that worktree's `build/classes` and this repository's `datasets/training`.
+Do not use current normalized features or the 217-file model as baseline.
+`AcousticStudy.java` emits additional geometric evidence only on development;
+`calibrate_acoustic.py` refuses final paths. Preserve the rejected permissive
+candidate's development TSV rather than substituting it for the frozen runtime.
+
+The older instructions below describe historical commits. Current runtime
+predictions intentionally differ; use the stated historical runtime worktree
+to reproduce an older study, not today's `build/classes`.
+
+## Historical: false-alert rejection study
 
 The background-conflict candidate at `4e4e17f` was frozen before the 48-file
 `rejection-final` set was evaluated. It produced identical final predictions

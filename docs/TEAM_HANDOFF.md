@@ -1,5 +1,13 @@
 # Team handoff — your first session with OmniEar
 
+> Acoustic-repair update (2026-10-16): fresh installations now bundle **217 WAVs**;
+> tests pass **560 checks**. Hybrid analysis starts immediately with 2.5 s context,
+> periodic coverage, geometric rejection and episode deduplication. The original
+> handoff observations below describe the 170-file baseline where they differ.
+> Use the updated [demo](DEMO.md) and [repair decision](../evaluation/ACOUSTIC_DECISION.md).
+> Reliable recognition is still not achieved; continuous recall regressed while
+> false alerts fell. Existing training/history is preserved, not auto-upgraded.
+
 [START HERE](../README.md) → [Setup](GETTING_STARTED.md) → Team handoff → [Demo](DEMO.md)
 
 ## What we built and why

@@ -16,7 +16,7 @@ Names below live under [`src/omniear/`](../src/omniear/); filenames match class 
 | `omniear` | `Main` | Parses CLI flags; starts headless actions or schedules `Dashboard` on the EDT. |
 | `audio` | `AudioSource`, `PcmSource`, `MicrophoneSource`, `WavSource` | Acquire, decode, downmix and resample input; manage stream/device lifetimes. |
 | `audio` | `AudioSamples`, `InputDiagnostics` | RMS/window selection; read-only decoded input-level measurements. |
-| `detection` | `AdaptiveDetector`, `DetectionPipeline`, `MonitorService` | Energy gate, sample-clock capture ring, single audio worker and callbacks. |
+| `detection` | `AdaptiveDetector`, `DetectionPipeline`, `MonitorService` | Onset hints, sample-clock hybrid capture ring, single audio worker and callbacks. |
 | `model` | `FeatureExtractor`, `FeatureVector`, `TrainingExample`, `SoundClassifier`, `KnnClassifier` | Turn PCM into numeric features and a neighbor-based prediction. |
 | `model` | `TrainingRepository`, `Category`, `SoundEvent` | Install/load/import training; define class rules and immutable event data. |
 | `model` | `DemoSample`, `HeldOutEvaluation` | Licensed demo resources; separate labeled direct/replay evaluation. |
@@ -37,9 +37,9 @@ PcmSource: decoded mono samples at 16,000 Hz
           |
 MonitorService: read up to 1,600 samples (100 ms)
           |
-DetectionPipeline -> AdaptiveDetector: warmup + RMS threshold
-          | trigger only
-3.5 s ring + post-trigger wait -> FeatureExtractor -> KnnClassifier
+DetectionPipeline -> AdaptiveDetector: RMS onset hints (no warmup veto)
+          | onset-tail OR periodic coverage, EOF flush
+2.5 s aligned window -> FeatureExtractor -> KnnClassifier
           |
 AlertPolicy -> SoundEvent -> EventStore CSV + listener -> Dashboard / CLI
 
@@ -65,8 +65,9 @@ and uses an anti-aliasing sinc resampler for non-16-kHz input. This is sample-ra
 and channel conversion, **not per-clip volume/gain normalization**.
 
 `AudioSamples.rms()` measures block energy: `sqrt(sum(sample²) / count)`.
-`AdaptiveDetector` uses the mean of the previous up to 50 block RMS values as
-its baseline. Defaults require 20 warmup blocks (2 s), then:
+`AdaptiveDetector` uses the lower quartile of the previous up to 50 block RMS
+values as its baseline. The first 20 blocks estimate noise but do not veto onset
+triggers or periodic classification:
 
 ```text
 trigger = RMS > max(6 × baseline, 0.02)
@@ -76,22 +77,27 @@ trigger = RMS > max(6 × baseline, 0.02)
 Both comparisons are strict. The current block enters the baseline **after**
 comparison, including when it triggered. Audio time comes from samples, not
 worker speed. The detector finds energy anomalies, not semantic emergencies;
-quiet events can be missed and sustained noise can lift the baseline.
+quiet events can miss the onset hint and sustained noise can lift the baseline.
 
-`DetectionPipeline` keeps 56,000 samples (3.5 s). After a trigger it waits at
-least 20,000 more samples (1.25 s, normally 1.3 s at block boundaries), then
-classifies captured audio. WAV EOF flushes pending capture; manual Stop discards
-unfinished capture. The event timestamp is based on the trigger's audio offset.
+`DetectionPipeline` retains a 2.5 s window plus one PCM block for alignment.
+Periodic analysis starts after 2.5 s, stepping 1.25 s without an energy veto;
+onset hints instead schedule a full 2.5 s tail. Later hints cannot indefinitely
+postpone a pending onset. Inference is spaced at least .5 s, except EOF flushes
+an unanalyzed tail of at least .25 s. Windows below RMS .0001 skip inference.
+Manual Stop discards unfinished capture. Event audio time is the window start,
+not an annotated acoustic onset. Same-class support within 5 s is one episode;
+duplicate decisions are retained but cannot repeatedly route alerts.
 
 ## 2. FFT and MFCC: representing the sound with 60 numbers
 
 `FeatureExtractor.extract()` uses `AudioSamples.loudestWindow()` to select
 2.5 s by rolling sums of 100 ms RMS frames; shorter clips are centered/zero-padded.
-Training and inference use this same extractor.
+Training and inference use this same extractor. The selected feature window is
+normalized to RMS .1; source WAVs and displayed/persisted input RMS are unchanged.
 
 Each window is divided into **25 ms frames**, stepping **10 ms** at a time:
 
-1. Measure raw RMS and zero-crossing rate (how often the sign changes).
+1. Measure feature-window RMS and zero-crossing rate (how often the sign changes).
 2. Remove the frame's DC mean for the spectrum, apply a Hann window, then run
    the **512-point FFT**. FFT expresses a short waveform as frequency components.
 3. Compute spectral centroid, bandwidth, 85% rolloff, flatness and positive flux:
@@ -108,7 +114,7 @@ semantic embeddings; upstream neural weights cannot be used with these features.
 ## 3. Training and k-NN: comparing to known recordings
 
 `TrainingRepository.installBundled()` seeds **only an absent default training
-root** with 170 real WAVs. `load()` visits sorted files under category-ID folders,
+root** with 217 real WAVs. `load()` visits sorted files under category-ID folders,
 extracts features, deduplicates byte-identical files and rejects conflicting labels.
 All five classes need at least one usable non-silent file before classification
 is enabled. That minimum establishes coverage, not quality.
@@ -132,16 +138,22 @@ The cleanup made the constructor-only mean array local without changing arithmet
 
 ## 4. Alert rules and persistence
 
-| `Category.id()` | Bundled WAVs | Gate (inclusive) | Routed priority |
+| `Category.id()` | Bundled WAVs | Max class radius / background ratio (inclusive) | Routed priority |
 |---|---:|---:|---|
-| `scream_distress` | 40 | 0.52 | P0 / Critical |
-| `explosion` | 18 | 0.65 | P0 / Critical |
-| `impact_crash` | 40 | 0.69 | P1 / High |
-| `siren_traffic` | 32 | 0.80 | P4 / Monitoring |
-| `background` | 40 | Never alerts | NONE / Suppressed |
+| `scream_distress` | 40 | 1.5 / .8 | P0 / Critical |
+| `explosion` | 22 | .3 / .7 | P0 / Critical |
+| `impact_crash` | 40 | 1 / .8 | P1 / High |
+| `siren_traffic` | 33 | .75 / .7 | P4 / Monitoring |
+| `background` | 82 | Never alerts | NONE / Suppressed |
 
 `AlertPolicy` creates `SoundEvent` with `ALERT`, `BACKGROUND_SUPPRESSED`,
-`LOW_VOTE_SUPPRESSED` or `UNTRAINED`. No model means no invented category or alert.
+`DISTANCE_SUPPRESSED`, `BACKGROUND_CONFLICT_SUPPRESSED` or `UNTRAINED`; the pipeline
+also marks `DUPLICATE_SUPPRESSED`. Old `LOW_VOTE_SUPPRESSED` CSV rows remain readable.
+Radius is nearest distance within the chosen class; ratio divides that distance
+by nearest background distance. These development-selected cutoffs are not
+probabilities and do not use raw vote gates. Existing/custom training is preserved
+but needs separate validation. See [decision and results](../evaluation/ACOUSTIC_DECISION.md).
+No model means no invented category or alert.
 Priorities are local metadata, **not SMS, sound playback or remote dispatch**.
 
 `EventStore` owns an exclusive file lock, writes quoted UTF-8 CSV, forces appends

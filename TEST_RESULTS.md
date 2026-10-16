@@ -1,5 +1,120 @@
 # Verification results
 
+## Acoustic repair — 2026-10-16
+
+Branch: `fix/acoustic-detection`; baseline `48da665`; new data freeze `102e86f`;
+runtime/model/operating-point freeze **`c1f0200`**, before fresh-final inference.
+The runtime is retained as a limited startup/specificity repair, **not a reliable
+recognition solution**. No final-set retuning occurred. Earlier sections and all
+original assets/results remain historical evidence, not today's expected output.
+
+### Reproduced failure and implemented repair
+
+Before editing, `java Build.java test` passed 261 checks and the real-display
+Swing smoke passed, yet all ten actual raw demo replays emitted **zero events**.
+`evaluation/acoustic-baseline-demo.tsv` traces startup above-threshold blocks
+ignored during warmup, foreground-contaminated mean baseline, both sustained
+sirens below the sixfold threshold, and direct classifier errors independently
+of Swing. The old 1.3 s tail/3.5 s ring was misaligned with 2.5 s training windows.
+
+The repair uses noise-resistant onset hints without a warmup veto, bounded
+periodic/onset-tail windows, exact aligned samples, EOF flushing, silence skip,
+shared RMS-.1 feature normalization, 217 existing licensed training recordings,
+development-selected class-radius/background-separation rejection and 5 s
+same-class episode suppression. Original vote shares remain diagnostics, **not
+probabilities**; CSV columns and old statuses remain readable. Rejections and
+duplicates remain visible/persisted. UI and CLI explain startup analysis and
+report bounded outcome counters. No new runtime dependency was added.
+
+Independent DFT/MFCC-reference tests find no FFT/MFCC formula defect. Sparse
+source diversity, level/ambience dependence, temporal pooling and overlapping
+class geometry still limit recognition. Full per-demo causes and per-final-file
+stage outcomes: [decision](evaluation/ACOUSTIC_DECISION.md),
+[`acoustic-final-failures.tsv`](evaluation/acoustic-final-failures.tsv).
+
+### Actual before/after evidence
+
+Development uses 99 already-inspected recordings (61 targets, 38 backgrounds).
+Fresh final uses 42 metadata-selected, distinct-uploader recordings disjoint from
+all existing sources: 8 screams, 10 glass/ceramic breaks, 24 backgrounds. No unused
+documented explosion or traffic-siren positive was available; their independent
+final recall is **unmeasured**. Weak file labels give insertion-to-alert latency
+proxies and file-interval recall, not annotated onset or event-instance recall.
+
+| Metric | Baseline | Candidate |
+|---|---:|---:|
+| Development direct labels | 64/99 | 73/99 |
+| Development raw correctly routed targets | 7/61 | 24/61 |
+| Development raw false alerts/hour (416.27 s negative exposure) | 17.30 (2 alerts) | 8.65 (1 alert) |
+| Fresh-final direct labels | 23/42 | 25/42 |
+| Fresh-final **target-only** direct labels | 12/18 | 11/18 |
+| Fresh-final direct routed targets | 9/18 | 5/18 |
+| Fresh-final raw correctly routed targets | 2/18 | 7/18 |
+| Fresh-final raw alert precision | 6/10 | 7/8 |
+| Fresh-final raw false alerts/hour (298.59 s negative exposure) | 48.23 (4 alerts) | 12.06 (1 alert) |
+| Fresh-final raw no classification | 35/42 | 0/42 |
+| Fresh-final raw latency median / max | 5.25 / 7.1 s | 2.44 / 8.2 s |
+| Fresh-final continuous routed targets | 9/18 | 2/18 |
+| Fresh-final continuous false alerts including gaps (424.59 s exposure) | 11 | 2 |
+
+Fresh-final scenario routed recall: quiet 15/18 → 6/18; .25x gain 12/18 → 7/18;
+2x/clipping 15/18 → 6/18; real-background bed 9/18 → 2/18. False alerts respectively
+15 → 0, 5 → 0, 19 → 0, 4 → 3. Continuous **gap-only** false alerts increase 1 → 2,
+while alerts in background-file intervals fall 10 → 0. Scream direct recall stays
+3/8 and five direct screams still become sirens; impact direct recall falls
+9/10 → 8/10. Raw routed recall improves scream 0/8 → 1/8, impact 2/10 → 6/10.
+This is an explicit conservative tradeoff, not across-scenario recall success.
+The permissive hybrid was rejected after **22** development raw background alerts
+(baseline 2); its evidence is preserved, not selectively omitted.
+
+Full confusion matrices, per-class precision/recall, abstentions, individual
+decisions, other latency statistics and exposures are preserved in
+`evaluation/acoustic-{baseline,candidate}-{dev,final}.{tsv,txt}`. A zero numerator
+over a few minutes is not an established zero false-alarm rate. Final recordings
+are now inspected and must not be reused as an untouched evaluation.
+
+### Checks and hardware scope
+
+- `java Build.java test`: **560 checks pass** (baseline 261). Existing mechanics
+  assertions were updated only where behavior intentionally changed; no skipped
+  tests or suppressed compiler warnings. New regression tests fail on old gain,
+  startup and read-straddling behavior; an inverted radius-gate mutation also
+  fails. Numerical references, silence, bounded calls, deduplication, geometry
+  rejection and unchanged-column CSV round-trips pass.
+- `java Build.java ui-test`: **pass**, real displayed Swing widgets, keyboard
+  navigation, recovery and persistence. Packaged `TrainedSmokeTest --ui`: **pass**,
+  217-file fresh model, real scream classification, actual wind-label mismatch
+  visibly suppressed, minimum-size controls and CSV close/reopen. No focus
+  assertion was removed or skipped.
+- `java Build.java jar`, JAR help, packaged `omniear.TestSuite` (**560 checks**),
+  packaged/portable `SubmissionDemoTest`, fresh CLI startup/restart, WAV inference
+  and continuous WAV analysis: **pass**. Real sustained siren 238228 routes one
+  P4 alert plus explicit duplicate/rejection outcomes through MonitorService/CSV.
+  Historical demo direct labels improve 5/10 → 7/10, **not** an accuracy estimate.
+- Data audit: **406** licensed unique recordings, original **364** manifest
+  records and WAVs unchanged; fresh bundle has exactly 217 training WAVs with
+  no held-out/final audio. All ten separate demo assets and attributions remain.
+  Existing training is preserved, not auto-upgraded; use a new `--data` directory
+  for the evaluated model. `jdeps -s build/OmniEar.jar`: only `java.base`, `java.desktop`.
+- Development replay `accept()` DSP/scheduler/kNN p95 **21.874 ms**, max **26.745 ms**
+  per ≤100 ms PCM block; kNN mean .031 ms over 4,026 calls. Final replay max
+  **25.561 ms**, kNN mean .024 ms. These host-specific timings exclude CSV/UI/EOF;
+  they do not establish real-time guarantees or behavior with 5,000 custom files.
+- OS-default input five-second `--mic-test`: **capture/release works**, RMS .6824
+  (-3.3 dBFS), peak 1, .41% samples near full scale; reports **possible clipping**.
+  No controlled labelled physical-microphone recognition was validated; selected
+  input could be a loopback. Do not call this a successful emergency test. See
+  [`acoustic-microphone.txt`](evaluation/acoustic-microphone.txt).
+
+Recorded command outputs: [`acoustic-verification.txt`](evaluation/acoustic-verification.txt).
+Linux/JDK 21 only; Windows/macOS, long-duration microphone behavior and assistive
+technology remain untested. The reliable-identification definition of done is
+**not met**. Keep this limited repair and do not deploy it as an emergency system.
+A concrete pretrained, Java-compatible replacement path with dependency,
+frontend, calibration and validation requirements is documented in
+[ACOUSTIC_REPLACEMENT.md](evaluation/ACOUSTIC_REPLACEMENT.md); it is not installed
+or claimed validated here. Exact replay commands are in [evaluation/README.md](evaluation/README.md).
+
 ## Conservative code cleanup — 2026-10-14
 
 Baseline: `86d850a`; refactor branch: `refactor/code-cleanup`.

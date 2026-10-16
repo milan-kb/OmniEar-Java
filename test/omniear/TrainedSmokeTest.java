@@ -53,7 +53,7 @@ public final class TrainedSmokeTest {
                         SwingUtilities.invokeAndWait(() -> {
                             JComboBox<?> examples = find(reference.get(), JComboBox.class, box -> box.getItemCount() == 10);
                             TestSuite.check(examples != null && examples.getItemCount() == 10, "all licensed demo choices visible");
-                            examples.setSelectedIndex(9); // Real wind recording: known false scream alert.
+                            examples.setSelectedIndex(9); // Real wind recording: known scream-label confusion, now suppressed.
                             find(reference.get(), JButton.class, button -> button.getText().equals("Classify example")).doClick();
                         });
                         boolean done = awaitOnEdt(() -> !reference.get().isBusy() && reference.get().eventCount() == 2, 30, 25);
