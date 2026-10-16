@@ -9,3 +9,5 @@ __pycache__/
 *.key
 # Only datasets/{training,held-out} and their provenance are redistributable.
 downloads/
+# Generated classroom sound-testing package (rebuild: java scripts/PackageSoundset.java)
+OmniEar-Demo-Soundset.zip

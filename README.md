@@ -111,6 +111,7 @@ and result interpretation; see [Setup](docs/GETTING_STARTED.md) for JDK help.
 | [Datasets](DATASETS.md) | Real-recording selection, split limits, licensing and rationale. |
 | [Attribution](datasets/ATTRIBUTION.md), [manifest](datasets/manifest.json), [dataset license](datasets/LICENSE-DATASET) | Per-recording authors, sources, licenses and hashes; preserve when sharing assets. |
 | [Demo catalog](demo/samples.tsv) / [actual results](demo/VERIFIED_RESULTS.tsv) / [classroom runs](demo/CLASSROOM_RESULTS.tsv) | Ten separately packaged, already-inspected demonstration files; five rehearsal repeat outcomes. |
+| [Soundset guide](demo/soundset/TESTING_GUIDE.md) / [manifest](demo/soundset/manifest.tsv) | Portable `OmniEar-Demo-Soundset.zip`: all ten audited WAVs with expected outcomes, checklist and licenses; rebuild with `java scripts/PackageSoundset.java`. |
 | [Upstream inspection](INSPECTION.md) | What the Java implementation preserves/replaces; upstream repository is untouched. |
 | [Evaluation guide](evaluation/README.md) / [rejection decision](evaluation/REJECTION_DECISION.md) | Frozen historical experiments; rejected candidates were not promoted. |
 
