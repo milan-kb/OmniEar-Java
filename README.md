@@ -105,6 +105,4 @@ Launch with `java -jar build/OmniEar.jar --demo`. Each recording plays through y
 
 ## Credits
 
-OmniEar-Java is a from-scratch Java 21 reimplementation inspired by the [original OmniEar](https://github.com/milan-kb/OmniEar) Python/YAMNet prototype. The Java version replaces the neural pipeline with handcrafted FFT/MFCC features and k-NN classification using only standard JDK APIs.
-
 Training and evaluation recordings are sourced from [Freesound](https://freesound.org/) (FSD50K), [SoundScalpel](https://soundscalpel.com/) and [YLE Arkisto](https://yle.fi/) under CC BY, CC0 and equivalent licenses. Full per-recording attribution is in [`datasets/ATTRIBUTION.md`](datasets/ATTRIBUTION.md).
