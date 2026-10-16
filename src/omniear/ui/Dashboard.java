@@ -65,6 +65,13 @@ public final class Dashboard extends JFrame implements MonitorService.Listener {
         JPanel header = new JPanel(new BorderLayout(8, 8));
         JLabel title = new JLabel("OmniEar   /   Acoustic monitor"); title.setFont(title.getFont().deriveFont(Font.BOLD, 26));
         header.add(title, BorderLayout.NORTH); header.add(modelState, BorderLayout.SOUTH);
+        JButton classroom = new JButton("Classroom Demo…"); classroom.setMnemonic('5');
+        classroom.setToolTipText("Open an isolated five-recording demo with playback and the bundled classifier; no microphone");
+        classroom.addActionListener(e -> {
+            try { new ClassroomDemo(store == null ? Path.of("data") : store.path().getParent()).setVisible(true); }
+            catch (java.io.IOException failure) { problem("Classroom Demo: " + failure.getMessage()); }
+        });
+        header.add(classroom, BorderLayout.EAST);
         root.add(header, BorderLayout.NORTH);
         JPanel dashboard = new JPanel(new BorderLayout(16, 16)); dashboard.setBorder(BorderFactory.createEmptyBorder(16, 0, 0, 0));
         JPanel overview = new JPanel(new BorderLayout(16, 16));

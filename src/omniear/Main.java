@@ -25,9 +25,9 @@ public final class Main {
         for (int i = 0; i < args.length; i++) {
             String flag = args[i];
             if (flag.equals("--help")) { usage(); return true; }
-            if (flag.equals("--mic-test")) {
+            if (flag.equals("--mic-test") || flag.equals("--demo")) {
                 if (!mode.equals("gui")) throw new IllegalArgumentException("Select only one action");
-                mode = "mic-test"; continue;
+                mode = flag.substring(2); continue;
             }
             if (!java.util.Set.of("--data", "--training", "--train", "--analyze", "--classify", "--evaluate").contains(flag) || i + 1 == args.length) {
                 usage(); throw new IllegalArgumentException("Unknown/incomplete option: " + flag);
@@ -39,6 +39,17 @@ public final class Main {
                 case "--train" -> { if (!mode.equals("gui")) throw new IllegalArgumentException("Select only one action"); mode = "train"; training = value; }
                 default -> { if (!mode.equals("gui")) throw new IllegalArgumentException("Select only one action"); mode = flag.substring(2); input = value; }
             }
+        }
+        if (mode.equals("demo")) {
+            if (training != null) throw new IllegalArgumentException("--demo uses isolated bundled training; omit --training");
+            if (GraphicsEnvironment.isHeadless()) throw new IOException("Classroom Demo needs a graphical desktop");
+            Path demoData = data;
+            SwingUtilities.invokeLater(() -> {
+                omniear.ui.DarkTheme.install();
+                try { new omniear.ui.ClassroomDemo(demoData).setVisible(true); }
+                catch (IOException e) { JOptionPane.showMessageDialog(null, e.getMessage(), "Cannot open Classroom Demo", JOptionPane.ERROR_MESSAGE); }
+            });
+            return true;
         }
         if (training == null) {
             training = data.resolve("training");
@@ -99,6 +110,8 @@ public final class Main {
                 + "  java -cp build/classes omniear.Main --classify FILE.wav [--training DIR] [--data DIR]\n"
                 + "  java -cp build/classes omniear.Main --evaluate HELD_OUT_ROOT --training LABELED_WAV_ROOT\n"
                 + "  java -cp build/classes omniear.Main --mic-test\n"
+                + "  java -cp build/classes omniear.Main --demo [--data DIR]\n"
+                + "--demo plays bundled prerecorded WAVs with real direct inference in isolated runtime data.\n"
                 + "--analyze preserves Stage 1 calibration; --classify explicitly bypasses Stage 1.");
     }
 }

@@ -21,6 +21,15 @@ public record DemoSample(String path, Category label, String title, String autho
         }
     }
     public String fileName() { return Path.of(path).getFileName().toString(); }
+    /** Curated source IDs, not predictions. The classroom still runs actual inference. */
+    public static List<DemoSample> classroom() throws IOException {
+        var catalog = all();
+        var selected = new ArrayList<DemoSample>();
+        for (String file : List.of("fsd-264918.wav", "fsd-256296.wav", "fsd-320167.wav", "fsd-238228.wav", "fsd-110612.wav"))
+            selected.add(catalog.stream().filter(sample -> sample.fileName().equals(file)).findFirst()
+                    .orElseThrow(() -> new IOException("Missing classroom recording: " + file)));
+        return List.copyOf(selected);
+    }
     public float[] load() throws IOException {
         try (var input = DemoSample.class.getResourceAsStream("/omniear/demo/" + fileName())) {
             if (input == null) throw new IOException("Missing demo WAV: " + fileName() + "; rebuild the application");

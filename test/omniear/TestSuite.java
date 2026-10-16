@@ -26,6 +26,7 @@ public final class TestSuite {
         audio();
         InputDiagnosticsTest.main(new String[0]);
         SubmissionDemoTest.main(new String[0]);
+        ClassroomDemoTest.main(new String[0]);
         featuresAndClassifier();
         swingComponentSearch();
         swingReadinessPolling();
